@@ -1,0 +1,19 @@
+{
+  "name": "dp-cms",
+  "description": "",
+  "main": "",
+  "authors": [
+    "lyx <44600937@qq.com>"
+  ],
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor/bower",
+    "test",
+    "tests"
+  ]
+}
