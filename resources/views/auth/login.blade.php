@@ -10,10 +10,10 @@
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <b>TianMao</b>CMF
+        <b>Admin</b>CMS
     </div>
     <div class="login-box-body">
-        <p class="login-box-msg">Happy Coding</p>
+        <p class="login-box-msg">Happy Working</p>
 
         <form action="{{URL::to('/auth/login')}}" method="post" enctype="multipart/form-data">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">

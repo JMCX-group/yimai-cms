@@ -23,10 +23,8 @@ class AuthController extends Controller
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
-    protected $redirectTo = '/';
-
     // 设置成功登录后转向的页面：
-    protected $redirectPath = '/index';
+    protected $redirectPath = '/';
 
     // 设置登录失败后转向的页面：
     protected $loginPath = 'auth/login';
@@ -36,8 +34,7 @@ class AuthController extends Controller
 
     /**
      * Create a new authentication controller instance.
-     *
-     * @return void
+     * AuthController constructor.
      */
     public function __construct()
     {

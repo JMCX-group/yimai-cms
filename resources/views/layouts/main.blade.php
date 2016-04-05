@@ -32,6 +32,8 @@
             </ol>
         </section>
         <section class="content">
+            @include('layouts.message.error')
+
             @yield('content')
         </section>
     </div>
