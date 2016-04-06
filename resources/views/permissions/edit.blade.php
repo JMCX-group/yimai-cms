@@ -11,16 +11,16 @@
                     </div>
                     <div class="box-body">
                         <div class="form-group">
-                            <label for="name" class="col-sm-3 control-label">权限名称</label>
+                            <label for="name" class="col-sm-3 control-label">权限标识</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="name" name="name" placeholder="权限名称" value="{{$permission->name}}">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="权限标识" value="{{$permission->name}}">
                                 @include('layouts.message.tips',['field'=>'name'])
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="display_name" class="col-sm-3 control-label">权限标识</label>
+                            <label for="display_name" class="col-sm-3 control-label">权限名称</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="display_name" name="display_name" placeholder="权限标识" value="{{$permission->display_name}}">
+                                <input type="text" class="form-control" id="display_name" name="display_name" placeholder="权限名称" value="{{$permission->display_name}}">
                                 @include('layouts.message.tips',['field'=>'display_name'])
                             </div>
                         </div>
