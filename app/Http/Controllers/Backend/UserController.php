@@ -19,8 +19,9 @@ class UserController extends Controller
     public function index()
     {
         $users = User::paginate(25);
+        $page_title = "用户列表";
 
-        return view('users.index', compact('users'));
+        return view('users.index', compact('users', 'page_title'));
     }
 
     /**
@@ -31,8 +32,9 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::all();
+        $page_title = "新建用户";
 
-        return view('users.create', compact('roles'));
+        return view('users.create', compact('roles', 'page_title'));
     }
 
     /**
@@ -96,8 +98,9 @@ class UserController extends Controller
         $displayNames = array_map(function ($value) {
             return $value['display_name'];
         }, $userRoles);
+        $page_title = "编辑用户";
 
-        return view('users.edit', compact('user', 'roles', 'displayNames'));
+        return view('users.edit', compact('user', 'roles', 'displayNames', 'page_title'));
     }
 
     /**

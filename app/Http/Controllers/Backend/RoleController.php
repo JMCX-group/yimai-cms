@@ -18,8 +18,9 @@ class RoleController extends Controller
     public function index()
     {
         $roles = Role::paginate(25);
+        $page_title = "角色列表";
 
-        return view('roles.index', compact('roles'));
+        return view('roles.index', compact('roles', 'page_title'));
     }
 
     /**
@@ -29,7 +30,9 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view('roles.create');
+        $page_title = "新建角色";
+
+        return view('roles.create', compact('page_title'));
     }
 
     /**
@@ -59,7 +62,9 @@ class RoleController extends Controller
      */
     public function show($id)
     {
-        return view('roles.show', compact('id'));
+        $page_title = "角色赋权";
+
+        return view('roles.show', compact('id', 'page_title'));
     }
 
     /**
@@ -72,8 +77,9 @@ class RoleController extends Controller
     public function edit($id)
     {
         $role = Role::find($id);
+        $page_title = "编辑角色";
 
-        return view('roles.edit', compact('role'));
+        return view('roles.edit', compact('role', 'page_title'));
     }
 
     /**

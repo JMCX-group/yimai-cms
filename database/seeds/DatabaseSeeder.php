@@ -27,7 +27,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PermissionRoleTableSeeder::class);
         Model::reguard();
     }
-
 }
 
 class PermissionRoleTableSeeder extends Seeder
@@ -37,7 +36,7 @@ class PermissionRoleTableSeeder extends Seeder
         DB::table('permission_role')->delete();
 
         for ($i = 1; $i < 3; $i++) {
-            for ($j = 1; $j < 11; $j++) {
+            for ($j = 1; $j <= 21; $j++) {
                 PermissionRole::create(['permission_id' => $j, 'role_id' => $i]);
             }
         }
@@ -49,6 +48,7 @@ class RoleUserTableSeeder extends Seeder
     public function run()
     {
         DB::table('role_user')->delete();
+
         RoleUser::create(['user_id' => 1, 'role_id' => 1]);
         RoleUser::create(['user_id' => 2, 'role_id' => 2]);
         RoleUser::create(['user_id' => 3, 'role_id' => 2]);
@@ -73,20 +73,42 @@ class MenuTableSeeder extends Seeder
     {
         DB::table('menus')->delete();
 
+//        Menu::create(["parent_id" => "0", "name" => "首页管理", "url" => "index", 'description' => '展示系统的各项基础数据']);
+//        Menu::create(["parent_id" => "0", "name" => "角色管理", "url" => "role.index", 'description' => '管理角色的新增、编辑、删除']);
+//        Menu::create(["parent_id" => "2", "name" => "角色列表", "url" => "role.index", 'description' => '管理角色的新增、编辑、删除']);
+//        Menu::create(["parent_id" => "2", "name" => "新增角色", "url" => "role.create", 'description' => '新增角色的页面']);
+//        Menu::create(["parent_id" => "2", "name" => "编辑角色", "url" => "role.edit", 'description' => '编辑角色的页面', 'is_hide' => 1]);
+//        Menu::create(["parent_id" => "2", "name" => "角色赋权", "url" => "role.show", 'description' => '编辑角色的页面', 'is_hide' => 1]);
+//        Menu::create(["parent_id" => "0", "name" => "权限管理", "url" => "permission.index", 'description' => '管理权限的新增、编辑、删除']);
+//        Menu::create(["parent_id" => "7", "name" => "权限列表", "url" => "permission.index", 'description' => '管理权限的新增、编辑、删除']);
+//        Menu::create(["parent_id" => "7", "name" => "新增权限", "url" => "permission.create", 'description' => '新增权限的页面']);
+//        Menu::create(["parent_id" => "7", "name" => "编辑权限", "url" => "permission.edit", 'description' => '编辑权限的页面', 'is_hide' => 1]);
+//        Menu::create(["parent_id" => "0", "name" => "用户管理", "url" => "user.index", 'description' => '管理用户的新增、编辑、删除']);
+//        Menu::create(["parent_id" => "11", "name" => "用户列表", "url" => "user.index", 'description' => '管理用户的新增、编辑、删除']);
+//        Menu::create(["parent_id" => "11", "name" => "新增用户", "url" => "user.create", 'description' => '新增用户的页面']);
+//        Menu::create(["parent_id" => "11", "name" => "编辑用户", "url" => "user.edit", 'description' => '编辑用户的页面', 'is_hide' => 1]);
+
         Menu::create(["parent_id" => "0", "name" => "首页管理", "url" => "index", 'description' => '展示系统的各项基础数据']);
-        Menu::create(["parent_id" => "0", "name" => "角色管理", "url" => "role.index", 'description' => '管理角色的新增、编辑、删除']);
+
+        Menu::create(["parent_id" => "0", "name" => "系统管理", "url" => "role.index", 'description' => '管理角色的新增、编辑、删除']);
         Menu::create(["parent_id" => "2", "name" => "角色列表", "url" => "role.index", 'description' => '管理角色的新增、编辑、删除']);
-        Menu::create(["parent_id" => "2", "name" => "新增角色", "url" => "role.create", 'description' => '新增角色的页面']);
+        Menu::create(["parent_id" => "2", "name" => "新增角色", "url" => "role.create", 'description' => '新增角色的页面', 'is_hide' => 1]);
         Menu::create(["parent_id" => "2", "name" => "编辑角色", "url" => "role.edit", 'description' => '编辑角色的页面', 'is_hide' => 1]);
         Menu::create(["parent_id" => "2", "name" => "角色赋权", "url" => "role.show", 'description' => '编辑角色的页面', 'is_hide' => 1]);
-        Menu::create(["parent_id" => "0", "name" => "权限管理", "url" => "permission.index", 'description' => '管理权限的新增、编辑、删除']);
-        Menu::create(["parent_id" => "7", "name" => "权限列表", "url" => "permission.index", 'description' => '管理权限的新增、编辑、删除']);
-        Menu::create(["parent_id" => "7", "name" => "新增权限", "url" => "permission.create", 'description' => '新增权限的页面']);
-        Menu::create(["parent_id" => "7", "name" => "编辑权限", "url" => "permission.edit", 'description' => '编辑权限的页面', 'is_hide' => 1]);
-        Menu::create(["parent_id" => "0", "name" => "用户管理", "url" => "user.index", 'description' => '管理用户的新增、编辑、删除']);
-        Menu::create(["parent_id" => "11", "name" => "用户列表", "url" => "user.index", 'description' => '管理用户的新增、编辑、删除']);
-        Menu::create(["parent_id" => "11", "name" => "新增用户", "url" => "user.create", 'description' => '新增用户的页面']);
-        Menu::create(["parent_id" => "11", "name" => "编辑用户", "url" => "user.edit", 'description' => '编辑用户的页面', 'is_hide' => 1]);
+
+        Menu::create(["parent_id" => "2", "name" => "用户列表", "url" => "user.index", 'description' => '管理用户的新增、编辑、删除']);
+        Menu::create(["parent_id" => "2", "name" => "新增用户", "url" => "user.create", 'description' => '新增用户的页面', 'is_hide' => 1]);
+        Menu::create(["parent_id" => "2", "name" => "编辑用户", "url" => "user.edit", 'description' => '编辑用户的页面', 'is_hide' => 1]);
+
+        Menu::create(["parent_id" => "0", "name" => "用户管理", "url" => "doctor.index", 'description' => '管理用户信息']); // id:10
+        Menu::create(["parent_id" => "10", "name" => "医生列表", "url" => "doctor.index", 'description' => '管理医生的新增、编辑、删除']);
+        Menu::create(["parent_id" => "10", "name" => "患者列表", "url" => "patient.index", 'description' => '管理患者的新增、编辑、删除']);
+
+        Menu::create(["parent_id" => "0", "name" => "医生认证", "url" => "verify.index", 'description' => '管理医生认证情况']); // id:13
+        Menu::create(["parent_id" => "13", "name" => "已认证", "url" => "verify.already", 'description' => '已认证的医生列表']);
+        Menu::create(["parent_id" => "13", "name" => "待认证", "url" => "verify.todo", 'description' => '待认证的医生列表']);
+        Menu::create(["parent_id" => "13", "name" => "未认证", "url" => "verify.not", 'description' => '未认证的医生列表']);
+        Menu::create(["parent_id" => "13", "name" => "待审核头像", "url" => "verify.pending", 'description' => '有待审核头像的医生列表']);
     }
 }
 
@@ -107,16 +129,31 @@ class PermissionTableSeeder extends Seeder
     {
         DB::table('permissions')->delete();
 
-        Permission::create(["display_name" => "首页管理", "name" => "index", 'description' => '展示系统的各项基础数据']);
-        Permission::create(["display_name" => "角色列表", "name" => "role.index", 'description' => '管理角色的新增、编辑、删除']);
-        Permission::create(["display_name" => "新增角色", "name" => "role.create", 'description' => '新增角色的页面']);
-        Permission::create(["display_name" => "编辑角色", "name" => "role.edit", 'description' => '编辑角色的页面']);
-        Permission::create(["display_name" => "角色赋权", "name" => "role.show", 'description' => '编辑角色的页面']);
-        Permission::create(["display_name" => "权限列表", "name" => "permission.index", 'description' => '管理权限的新增、编辑、删除']);
-        Permission::create(["display_name" => "新增权限", "name" => "permission.create", 'description' => '新增权限的页面']);
-        Permission::create(["display_name" => "编辑权限", "name" => "permission.edit", 'description' => '编辑权限的页面']);
-        Permission::create(["display_name" => "用户列表", "name" => "user.index", 'description' => '管理用户的新增、编辑、删除']);
-        Permission::create(["display_name" => "新增用户", "name" => "user.create", 'description' => '新增用户的页面']);
-        Permission::create(["display_name" => "编辑用户", "name" => "user.edit", 'description' => '编辑用户的页面']);
+        Permission::create(["display_name" => "首页管理", "name" => "index", 'description' => '访问展示系统的各项基础数据的页面']);
+
+        Permission::create(["display_name" => "角色列表", "name" => "role.index", 'description' => '访问管理角色的新增、编辑、删除的页面']);
+        Permission::create(["display_name" => "新增角色", "name" => "role.create", 'description' => '访问新增角色的页面']);
+        Permission::create(["display_name" => "编辑角色", "name" => "role.edit", 'description' => '访问编辑角色的页面']);
+        Permission::create(["display_name" => "角色赋权", "name" => "role.show", 'description' => '访问编辑角色的页面']);
+
+        Permission::create(["display_name" => "权限列表", "name" => "permission.index", 'description' => '访问管理权限的新增、编辑、删除的页面']);
+        Permission::create(["display_name" => "新增权限", "name" => "permission.create", 'description' => '访问新增权限的页面']);
+        Permission::create(["display_name" => "编辑权限", "name" => "permission.edit", 'description' => '访问编辑权限的页面']);
+        Permission::create(["display_name" => "编辑权限", "name" => "permission.store", 'description' => '编辑权限信息']);
+
+        Permission::create(["display_name" => "用户列表", "name" => "user.index", 'description' => '访问管理用户的新增、编辑、删除的页面']);
+        Permission::create(["display_name" => "新增用户", "name" => "user.create", 'description' => '访问新增用户的页面']);
+        Permission::create(["display_name" => "编辑用户", "name" => "user.edit", 'description' => '访问编辑用户的页面']);
+        Permission::create(["display_name" => "编辑用户", "name" => "user.store", 'description' => '编辑用户信息']);
+
+        Permission::create(["display_name" => "医生列表", "name" => "doctor.index", 'description' => '访问医生列表页面']);
+        Permission::create(["display_name" => "患者列表", "name" => "patient.index", 'description' => '访问患者列表页面']);
+
+        Permission::create(["display_name" => "医生认证", "name" => "verify.index", 'description' => '管理医生认证情况']);
+        Permission::create(["display_name" => "已认证", "name" => "verify.already", 'description' => '访问已认证的医生列表页面']);
+        Permission::create(["display_name" => "待认证", "name" => "verify.todo", 'description' => '访问待认证的医生列表页面']);
+        Permission::create(["display_name" => "未认证", "name" => "verify.not", 'description' => '访问未认证的医生列表页面']);
+        Permission::create(["display_name" => "待审核头像", "name" => "verify.pending", 'description' => '访问有待审核头像的医生列表页面']);
+
     }
 }

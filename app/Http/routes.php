@@ -15,9 +15,11 @@ Route::group(['namespace' => 'Auth'], function () {
     Route::post('login', 'AuthController@postLogin');
     Route::get('logout', 'AuthController@getLogout');
 
-    Route::get('auth/login', 'AuthController@getLogin');
-    Route::post('auth/login', 'AuthController@postLogin');
-    Route::get('auth/logout', 'AuthController@getLogout');
+    Route::group(['prefix' => 'auth'], function () {
+        Route::get('login', 'AuthController@getLogin');
+        Route::post('login', 'AuthController@postLogin');
+        Route::get('logout', 'AuthController@getLogout');
+    });
 });
 
 Route::group(['namespace' => 'Backend', 'middleware' => ['auth','Entrust']], function () {
@@ -27,4 +29,17 @@ Route::group(['namespace' => 'Backend', 'middleware' => ['auth','Entrust']], fun
     Route::resource('menu', 'MenuController');
     Route::resource('role', 'RoleController');
     Route::resource('permission', 'PermissionController');
+});
+
+Route::group(['namespace' => 'Business', 'middleware' => ['auth','Entrust']], function () {
+    Route::resource('doctor', 'DoctorController');
+    Route::resource('patient', 'PatientController');
+
+    Route::group(['prefix' => 'verify'], function () {
+        Route::get('already', ['as' => 'verify.already', 'uses' => 'VerifyController@already']);
+        Route::get('todo', ['as' => 'verify.todo', 'uses' => 'VerifyController@todo']);
+        Route::get('not', ['as' => 'verify.not', 'uses' => 'VerifyController@not']);
+        Route::get('pending', ['as' => 'verify.pending', 'uses' => 'VerifyController@pending']);
+    });
+    Route::resource('verify', 'VerifyController'); // resource注册的路由需要放在自定义路由下方
 });
