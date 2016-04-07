@@ -17,7 +17,6 @@ class Entrust
      */
     public function handle($request, Closure $next)
     {
-        dd(Route::currentRouteName());
         if (!Auth::user()->hasPermission(Route::currentRouteName())) {
             return redirect()->back()->withErrors("没有操作权限");
         }
