@@ -14,53 +14,61 @@ class DataController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public $page_level = "数据管理";
+
     public function index()
     {
         $page_title = "数据管理";
 
-        return view('datas.index', compact('page_title'));
+        return view('datas.index', compact('page_title', 'page_level'));
     }
 
     public function hospital()
     {
         $page_title = "医院";
+        $page_level = $this->page_level;
 
-        return view('datas.index', compact('page_title'));
+        return view('datas.index', compact('page_title', 'page_level'));
     }
 
     public function college()
     {
         $page_title = "毕业院校";
+        $page_level = $this->page_level;
 
-        return view('datas.index', compact('page_title'));
+        return view('datas.index', compact('page_title', 'page_level'));
     }
 
     public function newCollege()
     {
         $page_title = "新建院校";
+        $page_level = $this->page_level;
 
-        return view('datas.index', compact('page_title'));
+        return view('datas.index', compact('page_title', 'page_level'));
     }
 
     public function tag()
     {
         $page_title = "特长标签";
+        $page_level = $this->page_level;
 
-        return view('datas.index', compact('page_title'));
+        return view('datas.index', compact('page_title', 'page_level'));
     }
 
     public function doctor()
     {
         $page_title = "医生数据";
+        $page_level = $this->page_level;
 
-        return view('datas.index', compact('page_title'));
+        return view('datas.index', compact('page_title', 'page_level'));
     }
 
     public function illness()
     {
         $page_title = "疾病";
+        $page_level = $this->page_level;
 
-        return view('datas.index', compact('page_title'));
+        return view('datas.index', compact('page_title', 'page_level'));
     }
 
     /**

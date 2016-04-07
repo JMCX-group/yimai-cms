@@ -14,74 +14,86 @@ class FinanceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public $page_level = "财务管理";
+
     public function index()
     {
         $page_title = "财务管理";
+        $page_level = $this->page_level;
 
-        return view('finances.index', compact('page_title'));
+        return view('finances.index', compact('page_title', 'page_level'));
     }
 
     public function setting()
     {
         $page_title = "收费设置";
+        $page_level = $this->page_level;
 
-        return view('finances.index', compact('page_title'));
+        return view('finances.index', compact('page_title', 'page_level'));
     }
 
     public function pendingSettlement()
     {
         $page_title = "待结算";
+        $page_level = $this->page_level;
 
-        return view('finances.index', compact('page_title'));
+        return view('finances.index', compact('page_title', 'page_level'));
     }
 
     public function pendingTax()
     {
         $page_title = "待报税";
+        $page_level = $this->page_level;
 
-        return view('finances.index', compact('page_title'));
+        return view('finances.index', compact('page_title', 'page_level'));
     }
 
     public function settled()
     {
         $page_title = "已结算";
+        $page_level = $this->page_level;
 
-        return view('finances.index', compact('page_title'));
+        return view('finances.index', compact('page_title', 'page_level'));
     }
 
     public function pendingWithdrawals()
     {
         $page_title = "待提现";
+        $page_level = $this->page_level;
 
-        return view('finances.index', compact('page_title'));
+        return view('finances.index', compact('page_title', 'page_level'));
     }
 
     public function completedWithdrawals()
     {
         $page_title = "已提现";
+        $page_level = $this->page_level;
 
-        return view('finances.index', compact('page_title'));
+        return view('finances.index', compact('page_title', 'page_level'));
     }
 
     public function recharge()
     {
         $page_title = "充值";
+        $page_level = $this->page_level;
 
-        return view('finances.index', compact('page_title'));
+        return view('finances.index', compact('page_title', 'page_level'));
     }
 
     public function report()
     {
         $page_title = "资金报告";
+        $page_level = $this->page_level;
 
-        return view('finances.index', compact('page_title'));
+        return view('finances.index', compact('page_title', 'page_level'));
     }
 
     public function cashRecord()
     {
         $page_title = "现金交易记录";
+        $page_level = $this->page_level;
 
-        return view('finances.index', compact('page_title'));
+        return view('finances.index', compact('page_title', 'page_level'));
     }
 
     /**

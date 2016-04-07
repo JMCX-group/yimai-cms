@@ -14,46 +14,55 @@ class TradeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public $page_level = "交易管理";
+
+
     public function index()
     {
         $page_title = "交易管理";
+        $page_level = $this->page_level;
 
-        return view('trades.index', compact('page_title'));
+        return view('trades.index', compact('page_title', 'page_level'));
     }
 
     public function pendingAppointment()
     {
         $page_title = "待处理约诊";
+        $page_level = $this->page_level;
 
-        return view('trades.index', compact('page_title'));
+        return view('trades.index', compact('page_title', 'page_level'));
     }
 
     public function faceToFace()
     {
         $page_title = "当面咨询";
+        $page_level = $this->page_level;
 
-        return view('trades.index', compact('page_title'));
+        return view('trades.index', compact('page_title', 'page_level'));
     }
 
     public function appointmentIncomplete()
     {
         $page_title = "约诊-未完成";
+        $page_level = $this->page_level;
 
-        return view('trades.index', compact('page_title'));
+        return view('trades.index', compact('page_title', 'page_level'));
     }
 
     public function appointmentCompleted()
     {
         $page_title = "约诊-已完成";
+        $page_level = $this->page_level;
 
-        return view('trades.index', compact('page_title'));
+        return view('trades.index', compact('page_title', 'page_level'));
     }
 
     public function evaluate()
     {
         $page_title = "评价";
+        $page_level = $this->page_level;
 
-        return view('trades.index', compact('page_title'));
+        return view('trades.index', compact('page_title', 'page_level'));
     }
 
     /**

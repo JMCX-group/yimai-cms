@@ -14,53 +14,63 @@ class PushController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public $page_level = "推送内容";
+
+
     public function index()
     {
         $page_title = "推送内容";
+        $page_level = $this->page_level;
 
-        return view('pushs.index', compact('page_title'));
+        return view('pushs.index', compact('page_title', 'page_level'));
     }
 
     public function banner()
     {
         $page_title = "Banner";
+        $page_level = $this->page_level;
 
-        return view('pushs.index', compact('page_title'));
+        return view('pushs.index', compact('page_title', 'page_level'));
     }
 
     public function shareFwd()
     {
         $page_title = "Share/fwd";
+        $page_level = $this->page_level;
 
-        return view('pushs.index', compact('page_title'));
+        return view('pushs.index', compact('page_title', 'page_level'));
     }
 
     public function broadcast()
     {
         $page_title = "广播站";
+        $page_level = $this->page_level;
 
-        return view('pushs.index', compact('page_title'));
+        return view('pushs.index', compact('page_title', 'page_level'));
     }
 
     public function sysMsg()
     {
         $page_title = "系统通知";
+        $page_level = $this->page_level;
 
-        return view('pushs.index', compact('page_title'));
+        return view('pushs.index', compact('page_title', 'page_level'));
     }
 
     public function serviceAgreement()
     {
         $page_title = "服务协议";
+        $page_level = $this->page_level;
 
-        return view('pushs.index', compact('page_title'));
+        return view('pushs.index', compact('page_title', 'page_level'));
     }
 
     public function manual()
     {
         $page_title = "手动推送";
+        $page_level = $this->page_level;
 
-        return view('pushs.index', compact('page_title'));
+        return view('pushs.index', compact('page_title', 'page_level'));
     }
 
     /**

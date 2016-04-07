@@ -16,12 +16,15 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public $page_level = "系统管理";
+
     public function index()
     {
         $users = User::paginate(25);
         $page_title = "用户列表";
+        $page_level = $this->page_level;
 
-        return view('users.index', compact('users', 'page_title'));
+        return view('users.index', compact('users', 'page_title', 'page_level'));
     }
 
     /**
@@ -33,8 +36,9 @@ class UserController extends Controller
     {
         $roles = Role::all();
         $page_title = "新建用户";
+        $page_level = $this->page_level;
 
-        return view('users.create', compact('roles', 'page_title'));
+        return view('users.create', compact('roles', 'page_title', 'page_level'));
     }
 
     /**
@@ -99,8 +103,9 @@ class UserController extends Controller
             return $value['display_name'];
         }, $userRoles);
         $page_title = "编辑用户";
+        $page_level = $this->page_level;
 
-        return view('users.edit', compact('user', 'roles', 'displayNames', 'page_title'));
+        return view('users.edit', compact('user', 'roles', 'displayNames', 'page_title', 'page_level'));
     }
 
     /**

@@ -14,11 +14,14 @@ class PatientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public $page_level = "用户管理";
+    
     public function index()
     {
         $page_title = "患者列表";
+        $page_level = $this->page_level;
 
-        return view('patients.index', compact('page_title'));
+        return view('patients.index', compact('page_title', 'page_level'));
     }
 
     /**

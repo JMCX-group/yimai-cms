@@ -15,12 +15,15 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public $page_level = "系统管理";
+
     public function index()
     {
         $roles = Role::paginate(25);
         $page_title = "角色列表";
+        $page_level = $this->page_level;
 
-        return view('roles.index', compact('roles', 'page_title'));
+        return view('roles.index', compact('roles', 'page_title', 'page_level'));
     }
 
     /**
@@ -31,8 +34,9 @@ class RoleController extends Controller
     public function create()
     {
         $page_title = "新建角色";
+        $page_level = $this->page_level;
 
-        return view('roles.create', compact('page_title'));
+        return view('roles.create', compact('page_title', 'page_level'));
     }
 
     /**
@@ -63,8 +67,9 @@ class RoleController extends Controller
     public function show($id)
     {
         $page_title = "角色赋权";
+        $page_level = $this->page_level;
 
-        return view('roles.show', compact('id', 'page_title'));
+        return view('roles.show', compact('id', 'page_title', 'page_level'));
     }
 
     /**
@@ -78,8 +83,9 @@ class RoleController extends Controller
     {
         $role = Role::find($id);
         $page_title = "编辑角色";
+        $page_level = $this->page_level;
 
-        return view('roles.edit', compact('role', 'page_title'));
+        return view('roles.edit', compact('role', 'page_title', 'page_level'));
     }
 
     /**

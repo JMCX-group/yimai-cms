@@ -14,25 +14,31 @@ class FeedbackController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public $page_level = "用户反馈";
+
+
     public function index()
     {
         $page_title = "用户反馈";
+        $page_level = $this->page_level;
 
-        return view('feedbacks.index', compact('page_title'));
+        return view('feedbacks.index', compact('page_title', 'page_level'));
     }
 
     public function orderComplaint()
     {
         $page_title = "订单投诉";
+        $page_level = $this->page_level;
 
-        return view('feedbacks.index', compact('page_title'));
+        return view('feedbacks.index', compact('page_title', 'page_level'));
     }
 
     public function appUse()
     {
         $page_title = "使用反馈";
+        $page_level = $this->page_level;
 
-        return view('feedbacks.index', compact('page_title'));
+        return view('feedbacks.index', compact('page_title', 'page_level'));
     }
 
     /**

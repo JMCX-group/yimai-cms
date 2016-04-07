@@ -14,39 +14,47 @@ class VerifyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public $page_level = "医生认证";
+
+
     public function index()
     {
         $page_title = "医生认证";
+        $page_level = $this->page_level;
 
-        return view('verifys.index', compact('page_title'));
+        return view('verifys.index', compact('page_title', 'page_level'));
     }
 
     public function already()
     {
         $page_title = "已认证医生";
+        $page_level = $this->page_level;
 
-        return view('verifys.already', compact('page_title'));
+        return view('verifys.already', compact('page_title', 'page_level'));
     }
 
     public function todo()
     {
         $page_title = "待认证医生";
+        $page_level = $this->page_level;
 
-        return view('verifys.todo', compact('page_title'));
+        return view('verifys.todo', compact('page_title', 'page_level'));
     }
 
     public function not()
     {
         $page_title = "未认证医生";
+        $page_level = $this->page_level;
 
-        return view('verifys.not', compact('page_title'));
+        return view('verifys.not', compact('page_title', 'page_level'));
     }
 
     public function pending()
     {
         $page_title = "待审核头像";
+        $page_level = $this->page_level;
 
-        return view('verifys.pending', compact('page_title'));
+        return view('verifys.pending', compact('page_title', 'page_level'));
     }
 
     /**
