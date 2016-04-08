@@ -28,8 +28,17 @@ class DataController extends Controller
         $page_title = "医院";
         $page_level = $this->page_level;
 
-        return view('datas.index', compact('page_title', 'page_level'));
+        return view('datas.hospital', compact('page_title', 'page_level'));
     }
+
+    public function newHospital()
+    {
+        $page_title = "新建院校";
+        $page_level = $this->page_level;
+
+        return view('datas.new-hospital', compact('page_title', 'page_level'));
+    }
+
 
     public function college()
     {

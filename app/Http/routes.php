@@ -60,10 +60,10 @@ Route::group(['namespace' => 'Business', 'middleware' => ['auth','Entrust']], fu
     Route::resource('verify', 'VerifyController'); // resource注册的路由需要放在自定义路由下方
 
     /**
-     * 数据管理 : 医院 | 毕业院校 | 新建院校 | 特长标签 | 医生数据 | 疾病
+     * 数据管理 : 医院 | 新建医院 | 毕业院校 | 新建院校 | 特长标签 | 医生数据 | 疾病
      */
+    Route::resource('hospital', 'HospitalController');
     Route::group(['prefix' => 'data'], function () {
-        Route::get('hospital', ['as' => 'data.hospital', 'uses' => 'DataController@hospital']);
         Route::get('college', ['as' => 'data.college', 'uses' => 'DataController@college']);
         Route::get('new-college', ['as' => 'data.new-college', 'uses' => 'DataController@newCollege']);
         Route::get('tag', ['as' => 'data.tag', 'uses' => 'DataController@tag']);
