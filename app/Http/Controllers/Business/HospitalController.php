@@ -48,6 +48,7 @@ class HospitalController extends Controller
      * Store a newly created resource in storage.
      *
      * @param HospitalForm $request
+     * @return mixed
      */
     public function store(HospitalForm $request)
     {
@@ -110,19 +111,61 @@ class HospitalController extends Controller
      */
     public function edit($id)
     {
-        //
+        $hospital = Hospital::find($id);
+        $dept_standards = DeptStandard::all();
+        $hospital_top_dept = HospitalTopDept::where('hospital_id', $id)->lists('dept_standard_id')->toArray();
+        $page_title = "编辑医院";
+        $page_level = $this->page_level;
+
+        return view('hospitals.edit', compact('hospital', 'dept_standards', 'hospital_top_dept', 'page_title', 'page_level'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param HospitalForm $request
+     * @param $id
+     * @return mixed
      */
-    public function update(Request $request, $id)
+    public function update(HospitalForm $request, $id)
     {
-        //
+        $hospital = Hospital::find($id);
+        $hospital->city = $request['city'];
+        $hospital->name = $request['name'];
+
+        $deptStandardIds = $request->get('dept_standard_id');
+
+        if ($request['three_a'] == 'N') {
+            $hospital->three_a = ''; // 是否三甲医院,是为Y,否为空
+        }
+        $hospital->top_dept_num = count($deptStandardIds); // 顶级科室数量
+
+        try {
+            if ($deptStandardIds) {
+                $deptStandards = DeptStandard::whereIn('id', $deptStandardIds)->get();
+
+                if (empty($deptStandards->toArray())) {
+                    return redirect()->back()->withErrors("科室不存在,请刷新页面并选择其他科室")->withInput();
+                }
+            }
+
+            if ($hospital->save() && $deptStandardIds) {
+                HospitalTopDept::where('hospital_id', '=', $hospital->id)->delete();
+
+                foreach ($request->get('dept_standard_id') as $deptStandardId) {
+                    $relationData = [
+                        'hospital_id' => $hospital->id,
+                        'dept_standard_id' => $deptStandardId,
+                    ];
+
+                    HospitalTopDept::create($relationData);
+                }
+            }
+
+            return redirect()->route('hospital.index')->withSuccess('编辑医院成功');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(array('error' => $e->getMessage()))->withInput();
+        }
     }
 
     /**

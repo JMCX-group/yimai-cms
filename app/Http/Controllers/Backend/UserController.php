@@ -126,7 +126,6 @@ class UserController extends Controller
         try {
             $roles = Role::whereIn('id', $request->get('role_id'))->get();
             if (empty($roles->toArray())) {
-
                 return redirect()->back()->withErrors("用户角色不存在,请刷新页面并选择其他用户角色")->withInput();
             } else {
                 if ($user->save()) {

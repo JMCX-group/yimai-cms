@@ -12,58 +12,55 @@
     <div class="row">
         <div class="col-md-6">
             <div class="box box-info">
-                <form class="form-horizontal" action="{{URL::to('user/'.$user->id)}}" method="post" enctype="multipart/form-data">
+                <form class="form-horizontal" action="{{URL::to('hospital/'.$hospital->id)}}" method="post" enctype="multipart/form-data">
                     <div class="box-header with-border">
-                        <h3 class="box-title">{{$page_title or "Page_title"}}</h3>
+                        <h3 class="box-title">{{$page_title or "page_title"}}</h3>
                         <input type="hidden" name="_token" value="{{csrf_token()}}">
                         <input type="hidden" name="_method" value="put">
                     </div>
                     <div class="box-body">
-                        <input type="hidden" name="id" value="{{$user->id}}">
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">用户角色</label>
+                            <label for="city" class="col-sm-3 control-label">所属城市</label>
                             <div class="col-sm-9">
-                                <select class="form-control select2" multiple="multiple" name="role_id[]" style="width: 100%">
-                                    @foreach($roles as $role)
-                                        <option value="{{$role->id}}" @if(in_array($role->display_name,$displayNames)) selected @endif>{{$role->display_name}}</option>
-                                    @endforeach
-                                </select>
-                                @include('layouts.message.tips',['field'=>'role_id'])
+                                <input type="text" class="form-control" id="city" name="city" placeholder="所属城市" value="{{$hospital->city}}">
+                                @include('layouts.message.tips',['field'=>'city'])
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="name" class="col-sm-3 control-label">用户名称</label>
+                            <label for="name" class="col-sm-3 control-label">医院名称</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="name" name="name" placeholder="用户名称" value="{{$user->name}}">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="医院名称" value="{{$hospital->name}}">
                                 @include('layouts.message.tips',['field'=>'name'])
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="email" class="col-sm-3 control-label">用户邮箱</label>
+                            <label class="col-sm-3 control-label">是否三甲</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="email" name="email" placeholder="用户邮箱" value="{{$user->email}}">
-                                @include('layouts.message.tips',['field'=>'email'])
+                                <select class="form-control select2" name="three_a">
+                                    <option value="Y" @if($hospital->three_a=="Y") selected @endif>Y</option>
+                                    <option value="N" @if($hospital->three_a=="") selected @endif>N</option>
+                                </select>
+                                @include('layouts.message.tips',['field'=>'three_a'])
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="password" class="col-sm-3 control-label">用户密码</label>
+                            <label class="col-sm-3 control-label">顶级科室</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="password" name="password" placeholder="用户密码">
-                                @include('layouts.message.tips',['field'=>'password'])
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="password_confirmation" class="col-sm-3 control-label">确认密码</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="确认密码" value="{{$user->password_confirmation}}">
-                                @include('layouts.message.tips',['field'=>'password_confirmation'])
+                                <select class="form-control select2" multiple="multiple" name="dept_standard_id[]" style="min-height: 480px;">
+                                    @foreach($dept_standards as $dept_standard)
+                                        @if($dept_standard->dept_id == 0)
+                                            <option value="{{$dept_standard->id}}" @if(in_array($dept_standard->id,$hospital_top_dept)) selected @endif>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{$dept_standard->name}}</option>
+                                        @else
+                                            <option value="{{$dept_standard->id}}" @if(in_array($dept_standard->id,$hospital_top_dept)) selected @endif>{{$dept_standard->name}}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                                @include('layouts.message.tips',['field'=>'dept_standard_id'])
                             </div>
                         </div>
                     </div>
                     <div class="box-footer">
-                        <button type="button" class="btn btn-default" onclick="javascript:history.back('{{route('user.index')}}');return false;">
-                            返回
-                        </button>
+                        <a class="btn btn-default" href="{{route('hospital.index')}}">返回</a>
                         <button type="submit" class="btn btn-danger pull-right">确 定</button>
                     </div>
                 </form>

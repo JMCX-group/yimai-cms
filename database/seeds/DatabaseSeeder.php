@@ -188,5 +188,6 @@ class PermissionTableSeeder extends Seeder
         Permission::create(["display_name" => "新建医院", "name" => "hospital.create", 'description' => '新建医院']);
         Permission::create(["display_name" => "新建医院", "name" => "hospital.store", 'description' => '新建医院信息']);
         Permission::create(["display_name" => "删除医院", "name" => "hospital.destroy", 'description' => '删除医院']);
+        Permission::create(["display_name" => "编辑医院", "name" => "hospital.edit", 'description' => '编辑医院']);
     }
 }
