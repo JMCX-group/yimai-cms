@@ -38,6 +38,16 @@ Route::group(['namespace' => 'Backend', 'middleware' => ['auth','Entrust']], fun
     Route::resource('permission', 'PermissionController');
 });
 
+
+
+/**
+ * 数据管理 : 医院 | 毕业院校 | 特长标签 | 医生数据 | 疾病
+ */
+Route::group(['namespace' => 'Data', 'middleware' => ['auth','Entrust']], function () {
+    Route::resource('hospital', 'HospitalController');
+});
+
+
 /**
  * 业务分组
  */
@@ -62,7 +72,6 @@ Route::group(['namespace' => 'Business', 'middleware' => ['auth','Entrust']], fu
     /**
      * 数据管理 : 医院 | 新建医院 | 毕业院校 | 新建院校 | 特长标签 | 医生数据 | 疾病
      */
-    Route::resource('hospital', 'HospitalController');
     Route::group(['prefix' => 'data'], function () {
         Route::get('college', ['as' => 'data.college', 'uses' => 'DataController@college']);
         Route::get('new-college', ['as' => 'data.new-college', 'uses' => 'DataController@newCollege']);
