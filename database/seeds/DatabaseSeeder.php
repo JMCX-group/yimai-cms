@@ -184,10 +184,19 @@ class PermissionTableSeeder extends Seeder
         Permission::create(["display_name" => "患者列表", "name" => "patient.index", 'description' => '访问患者列表页面']);
 
         Permission::create(["display_name" => "数据管理", "name" => "data.index", 'description' => '数据管理']);
+
         Permission::create(["display_name" => "医院", "name" => "hospital.index", 'description' => '医院数据']);
         Permission::create(["display_name" => "新建医院", "name" => "hospital.create", 'description' => '新建医院']);
         Permission::create(["display_name" => "新建医院", "name" => "hospital.store", 'description' => '新建医院信息']);
         Permission::create(["display_name" => "删除医院", "name" => "hospital.destroy", 'description' => '删除医院']);
-        Permission::create(["display_name" => "编辑医院", "name" => "hospital.edit", 'description' => '编辑医院']);
+        Permission::create(["display_name" => "编辑医院", "name" => "hospital.edit", 'description' => '访问编辑医院的页面']);
+        Permission::create(["display_name" => "编辑医院", "name" => "hospital.update", 'description' => '编辑医院信息']);
+
+        Permission::create(["display_name" => "毕业校园", "name" => "college.index", 'description' => '学校数据']);
+        Permission::create(["display_name" => "新建校园页面", "name" => "college.create", 'description' => '新建学校']);
+        Permission::create(["display_name" => "新建校园信息", "name" => "college.store", 'description' => '新建学校信息']);
+        Permission::create(["display_name" => "删除校园信息", "name" => "college.destroy", 'description' => '删除学校']);
+        Permission::create(["display_name" => "编辑校园页面", "name" => "college.edit", 'description' => '访问编辑学校的页面']);
+        Permission::create(["display_name" => "编辑校园信息", "name" => "college.update", 'description' => '编辑学校信息']);
     }
 }
