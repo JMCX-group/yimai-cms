@@ -47,6 +47,7 @@
                             <label class="col-sm-3 control-label">顶级科室</label>
                             <div class="col-sm-9">
                                 <select class="form-control select2" multiple="multiple" name="dept_standard_id[]" style="min-height: 480px;">
+                                    <option value="0">无</option>
                                     @foreach($dept_standards as $dept_standard)
                                         @if($dept_standard->dept_id == 0)
                                             <option value="{{$dept_standard->id}}" @if(in_array($dept_standard->id,$hospital_top_dept)) selected @endif>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{$dept_standard->name}}</option>

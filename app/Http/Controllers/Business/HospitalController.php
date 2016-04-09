@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Business;
 
-use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -58,13 +56,11 @@ class HospitalController extends Controller
             'three_a' => $request['three_a']
         ];
 
-        $deptStandardIds = $request->get('dept_standard_id');
-
-        if ($data['three_a'] == 'N') {
-            $data['three_a'] = ''; // 是否三甲医院,是为Y,否为空
-        }
-        $data['top_dept_num'] = count($deptStandardIds); // 顶级科室数量
-
+        $deptStandardIds = $this->getDeptStandardIds($request->get('dept_standard_id'));
+        $data['three_a'] = $this->getThreeA($data['three_a']);
+        $data['top_dept_num'] = count($deptStandardIds);
+        $data['status'] = "已核实";
+        
         try {
             if ($deptStandardIds) {
                 $deptStandards = DeptStandard::whereIn('id', $deptStandardIds)->get();
@@ -76,7 +72,7 @@ class HospitalController extends Controller
 
             $hospital = Hospital::create($data);
             if ($hospital && $deptStandardIds) {
-                foreach ($request->get('dept_standard_id') as $deptStandardId) {
+                foreach ($deptStandardIds as $deptStandardId) {
                     $relationData = [
                         'hospital_id' => $hospital->id,
                         'dept_standard_id' => $deptStandardId,
@@ -133,12 +129,10 @@ class HospitalController extends Controller
         $hospital->city = $request['city'];
         $hospital->name = $request['name'];
 
-        $deptStandardIds = $request->get('dept_standard_id');
-
-        if ($request['three_a'] == 'N') {
-            $hospital->three_a = ''; // 是否三甲医院,是为Y,否为空
-        }
-        $hospital->top_dept_num = count($deptStandardIds); // 顶级科室数量
+        $deptStandardIds = $this->getDeptStandardIds($request->get('dept_standard_id'));
+        $hospital->three_a = $this->getThreeA($request['three_a']);
+        $hospital->top_dept_num = count($deptStandardIds);
+        $hospital->status = "已核实";
 
         try {
             if ($deptStandardIds) {
@@ -149,16 +143,18 @@ class HospitalController extends Controller
                 }
             }
 
-            if ($hospital->save() && $deptStandardIds) {
+            if ($hospital->save()) {
                 HospitalTopDept::where('hospital_id', '=', $hospital->id)->delete();
 
-                foreach ($request->get('dept_standard_id') as $deptStandardId) {
-                    $relationData = [
-                        'hospital_id' => $hospital->id,
-                        'dept_standard_id' => $deptStandardId,
-                    ];
+                if($deptStandardIds){
+                    foreach ($request->get('dept_standard_id') as $deptStandardId) {
+                        $relationData = [
+                            'hospital_id' => $hospital->id,
+                            'dept_standard_id' => $deptStandardId,
+                        ];
 
-                    HospitalTopDept::create($relationData);
+                        HospitalTopDept::create($relationData);
+                    }
                 }
             }
 
@@ -183,5 +179,39 @@ class HospitalController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(array('error' => $e->getMessage()));
         }
+    }
+
+    /**
+     * 处理顶级科室
+     *
+     * @param $deptStandardIds
+     * @return mixed
+     */
+    public function getDeptStandardIds($deptStandardIds)
+    {
+        if($deptStandardIds){
+            foreach ($deptStandardIds as $key=>$deptStandardId) {
+                if($deptStandardId == '0'){
+                    array_splice($deptStandardIds, $key, 1);
+                }
+            }
+        }
+
+        return $deptStandardIds;
+    }
+
+    /**
+     * 处理是否三甲医院
+     *
+     * @param $data
+     * @return string
+     */
+    public function getThreeA($data)
+    {
+        if ($data == 'N') {
+            $data = ''; // 是否三甲医院,是为Y,否为空
+        }
+
+        return $data;
     }
 }
