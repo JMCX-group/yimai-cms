@@ -7,7 +7,7 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
-        "barryvdh/laravel-ide-helper": "dev-master",
+        "barryvdh/laravel-ide-helper": "2.1.*",
         "zizaco/entrust": "dev-laravel-5"
     },
     "require-dev": {
@@ -39,6 +39,7 @@
         ],
         "post-update-cmd": [
             "php artisan clear-compiled",
+            "php artisan ide-helper:generate",
             "php artisan optimize"
         ],
         "post-root-package-install": [

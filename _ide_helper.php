@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.1.32 (LTS) on 2016-04-04.
+ * Generated for Laravel 5.1.34 (LTS) on 2016-04-09.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -2678,6 +2678,685 @@ namespace {
          */
         public static function getConnections(){
             return \Illuminate\Database\DatabaseManager::getConnections();
+        }
+        
+        /**
+         * Get a schema builder instance for the connection.
+         *
+         * @return \Illuminate\Database\Schema\MySqlBuilder 
+         * @static 
+         */
+        public static function getSchemaBuilder(){
+            return \Illuminate\Database\MySqlConnection::getSchemaBuilder();
+        }
+        
+        /**
+         * Set the query grammar to the default implementation.
+         *
+         * @return void 
+         * @static 
+         */
+        public static function useDefaultQueryGrammar(){
+            //Method inherited from \Illuminate\Database\Connection            
+            \Illuminate\Database\MySqlConnection::useDefaultQueryGrammar();
+        }
+        
+        /**
+         * Set the schema grammar to the default implementation.
+         *
+         * @return void 
+         * @static 
+         */
+        public static function useDefaultSchemaGrammar(){
+            //Method inherited from \Illuminate\Database\Connection            
+            \Illuminate\Database\MySqlConnection::useDefaultSchemaGrammar();
+        }
+        
+        /**
+         * Set the query post processor to the default implementation.
+         *
+         * @return void 
+         * @static 
+         */
+        public static function useDefaultPostProcessor(){
+            //Method inherited from \Illuminate\Database\Connection            
+            \Illuminate\Database\MySqlConnection::useDefaultPostProcessor();
+        }
+        
+        /**
+         * Begin a fluent query against a database table.
+         *
+         * @param string $table
+         * @return \Illuminate\Database\Query\Builder 
+         * @static 
+         */
+        public static function table($table){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::table($table);
+        }
+        
+        /**
+         * Get a new query builder instance.
+         *
+         * @return \Illuminate\Database\Query\Builder 
+         * @static 
+         */
+        public static function query(){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::query();
+        }
+        
+        /**
+         * Get a new raw query expression.
+         *
+         * @param mixed $value
+         * @return \Illuminate\Database\Query\Expression 
+         * @static 
+         */
+        public static function raw($value){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::raw($value);
+        }
+        
+        /**
+         * Run a select statement and return a single result.
+         *
+         * @param string $query
+         * @param array $bindings
+         * @return mixed 
+         * @static 
+         */
+        public static function selectOne($query, $bindings = array()){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::selectOne($query, $bindings);
+        }
+        
+        /**
+         * Run a select statement against the database.
+         *
+         * @param string $query
+         * @param array $bindings
+         * @return array 
+         * @static 
+         */
+        public static function selectFromWriteConnection($query, $bindings = array()){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::selectFromWriteConnection($query, $bindings);
+        }
+        
+        /**
+         * Run a select statement against the database.
+         *
+         * @param string $query
+         * @param array $bindings
+         * @param bool $useReadPdo
+         * @return array 
+         * @static 
+         */
+        public static function select($query, $bindings = array(), $useReadPdo = true){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::select($query, $bindings, $useReadPdo);
+        }
+        
+        /**
+         * Run an insert statement against the database.
+         *
+         * @param string $query
+         * @param array $bindings
+         * @return bool 
+         * @static 
+         */
+        public static function insert($query, $bindings = array()){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::insert($query, $bindings);
+        }
+        
+        /**
+         * Run an update statement against the database.
+         *
+         * @param string $query
+         * @param array $bindings
+         * @return int 
+         * @static 
+         */
+        public static function update($query, $bindings = array()){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::update($query, $bindings);
+        }
+        
+        /**
+         * Run a delete statement against the database.
+         *
+         * @param string $query
+         * @param array $bindings
+         * @return int 
+         * @static 
+         */
+        public static function delete($query, $bindings = array()){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::delete($query, $bindings);
+        }
+        
+        /**
+         * Execute an SQL statement and return the boolean result.
+         *
+         * @param string $query
+         * @param array $bindings
+         * @return bool 
+         * @static 
+         */
+        public static function statement($query, $bindings = array()){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::statement($query, $bindings);
+        }
+        
+        /**
+         * Run an SQL statement and get the number of rows affected.
+         *
+         * @param string $query
+         * @param array $bindings
+         * @return int 
+         * @static 
+         */
+        public static function affectingStatement($query, $bindings = array()){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::affectingStatement($query, $bindings);
+        }
+        
+        /**
+         * Run a raw, unprepared query against the PDO connection.
+         *
+         * @param string $query
+         * @return bool 
+         * @static 
+         */
+        public static function unprepared($query){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::unprepared($query);
+        }
+        
+        /**
+         * Prepare the query bindings for execution.
+         *
+         * @param array $bindings
+         * @return array 
+         * @static 
+         */
+        public static function prepareBindings($bindings){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::prepareBindings($bindings);
+        }
+        
+        /**
+         * Execute a Closure within a transaction.
+         *
+         * @param \Closure $callback
+         * @return mixed 
+         * @throws \Throwable
+         * @static 
+         */
+        public static function transaction($callback){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::transaction($callback);
+        }
+        
+        /**
+         * Start a new database transaction.
+         *
+         * @return void 
+         * @static 
+         */
+        public static function beginTransaction(){
+            //Method inherited from \Illuminate\Database\Connection            
+            \Illuminate\Database\MySqlConnection::beginTransaction();
+        }
+        
+        /**
+         * Commit the active database transaction.
+         *
+         * @return void 
+         * @static 
+         */
+        public static function commit(){
+            //Method inherited from \Illuminate\Database\Connection            
+            \Illuminate\Database\MySqlConnection::commit();
+        }
+        
+        /**
+         * Rollback the active database transaction.
+         *
+         * @return void 
+         * @static 
+         */
+        public static function rollBack(){
+            //Method inherited from \Illuminate\Database\Connection            
+            \Illuminate\Database\MySqlConnection::rollBack();
+        }
+        
+        /**
+         * Get the number of active transactions.
+         *
+         * @return int 
+         * @static 
+         */
+        public static function transactionLevel(){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::transactionLevel();
+        }
+        
+        /**
+         * Execute the given callback in "dry run" mode.
+         *
+         * @param \Closure $callback
+         * @return array 
+         * @static 
+         */
+        public static function pretend($callback){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::pretend($callback);
+        }
+        
+        /**
+         * Log a query in the connection's query log.
+         *
+         * @param string $query
+         * @param array $bindings
+         * @param float|null $time
+         * @return void 
+         * @static 
+         */
+        public static function logQuery($query, $bindings, $time = null){
+            //Method inherited from \Illuminate\Database\Connection            
+            \Illuminate\Database\MySqlConnection::logQuery($query, $bindings, $time);
+        }
+        
+        /**
+         * Register a database query listener with the connection.
+         *
+         * @param \Closure $callback
+         * @return void 
+         * @static 
+         */
+        public static function listen($callback){
+            //Method inherited from \Illuminate\Database\Connection            
+            \Illuminate\Database\MySqlConnection::listen($callback);
+        }
+        
+        /**
+         * Is Doctrine available?
+         *
+         * @return bool 
+         * @static 
+         */
+        public static function isDoctrineAvailable(){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::isDoctrineAvailable();
+        }
+        
+        /**
+         * Get a Doctrine Schema Column instance.
+         *
+         * @param string $table
+         * @param string $column
+         * @return \Doctrine\DBAL\Schema\Column 
+         * @static 
+         */
+        public static function getDoctrineColumn($table, $column){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::getDoctrineColumn($table, $column);
+        }
+        
+        /**
+         * Get the Doctrine DBAL schema manager for the connection.
+         *
+         * @return \Doctrine\DBAL\Schema\AbstractSchemaManager 
+         * @static 
+         */
+        public static function getDoctrineSchemaManager(){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::getDoctrineSchemaManager();
+        }
+        
+        /**
+         * Get the Doctrine DBAL database connection instance.
+         *
+         * @return \Doctrine\DBAL\Connection 
+         * @static 
+         */
+        public static function getDoctrineConnection(){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::getDoctrineConnection();
+        }
+        
+        /**
+         * Get the current PDO connection.
+         *
+         * @return \PDO 
+         * @static 
+         */
+        public static function getPdo(){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::getPdo();
+        }
+        
+        /**
+         * Get the current PDO connection used for reading.
+         *
+         * @return \PDO 
+         * @static 
+         */
+        public static function getReadPdo(){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::getReadPdo();
+        }
+        
+        /**
+         * Set the PDO connection.
+         *
+         * @param \PDO|null $pdo
+         * @return $this 
+         * @static 
+         */
+        public static function setPdo($pdo){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::setPdo($pdo);
+        }
+        
+        /**
+         * Set the PDO connection used for reading.
+         *
+         * @param \PDO|null $pdo
+         * @return $this 
+         * @static 
+         */
+        public static function setReadPdo($pdo){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::setReadPdo($pdo);
+        }
+        
+        /**
+         * Set the reconnect instance on the connection.
+         *
+         * @param callable $reconnector
+         * @return $this 
+         * @static 
+         */
+        public static function setReconnector($reconnector){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::setReconnector($reconnector);
+        }
+        
+        /**
+         * Get the database connection name.
+         *
+         * @return string|null 
+         * @static 
+         */
+        public static function getName(){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::getName();
+        }
+        
+        /**
+         * Get an option from the configuration options.
+         *
+         * @param string $option
+         * @return mixed 
+         * @static 
+         */
+        public static function getConfig($option){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::getConfig($option);
+        }
+        
+        /**
+         * Get the PDO driver name.
+         *
+         * @return string 
+         * @static 
+         */
+        public static function getDriverName(){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::getDriverName();
+        }
+        
+        /**
+         * Get the query grammar used by the connection.
+         *
+         * @return \Illuminate\Database\Query\Grammars\Grammar 
+         * @static 
+         */
+        public static function getQueryGrammar(){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::getQueryGrammar();
+        }
+        
+        /**
+         * Set the query grammar used by the connection.
+         *
+         * @param \Illuminate\Database\Query\Grammars\Grammar $grammar
+         * @return void 
+         * @static 
+         */
+        public static function setQueryGrammar($grammar){
+            //Method inherited from \Illuminate\Database\Connection            
+            \Illuminate\Database\MySqlConnection::setQueryGrammar($grammar);
+        }
+        
+        /**
+         * Get the schema grammar used by the connection.
+         *
+         * @return \Illuminate\Database\Schema\Grammars\Grammar 
+         * @static 
+         */
+        public static function getSchemaGrammar(){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::getSchemaGrammar();
+        }
+        
+        /**
+         * Set the schema grammar used by the connection.
+         *
+         * @param \Illuminate\Database\Schema\Grammars\Grammar $grammar
+         * @return void 
+         * @static 
+         */
+        public static function setSchemaGrammar($grammar){
+            //Method inherited from \Illuminate\Database\Connection            
+            \Illuminate\Database\MySqlConnection::setSchemaGrammar($grammar);
+        }
+        
+        /**
+         * Get the query post processor used by the connection.
+         *
+         * @return \Illuminate\Database\Query\Processors\Processor 
+         * @static 
+         */
+        public static function getPostProcessor(){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::getPostProcessor();
+        }
+        
+        /**
+         * Set the query post processor used by the connection.
+         *
+         * @param \Illuminate\Database\Query\Processors\Processor $processor
+         * @return void 
+         * @static 
+         */
+        public static function setPostProcessor($processor){
+            //Method inherited from \Illuminate\Database\Connection            
+            \Illuminate\Database\MySqlConnection::setPostProcessor($processor);
+        }
+        
+        /**
+         * Get the event dispatcher used by the connection.
+         *
+         * @return \Illuminate\Contracts\Events\Dispatcher 
+         * @static 
+         */
+        public static function getEventDispatcher(){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::getEventDispatcher();
+        }
+        
+        /**
+         * Set the event dispatcher instance on the connection.
+         *
+         * @param \Illuminate\Contracts\Events\Dispatcher $events
+         * @return void 
+         * @static 
+         */
+        public static function setEventDispatcher($events){
+            //Method inherited from \Illuminate\Database\Connection            
+            \Illuminate\Database\MySqlConnection::setEventDispatcher($events);
+        }
+        
+        /**
+         * Determine if the connection in a "dry run".
+         *
+         * @return bool 
+         * @static 
+         */
+        public static function pretending(){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::pretending();
+        }
+        
+        /**
+         * Get the default fetch mode for the connection.
+         *
+         * @return int 
+         * @static 
+         */
+        public static function getFetchMode(){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::getFetchMode();
+        }
+        
+        /**
+         * Set the default fetch mode for the connection.
+         *
+         * @param int $fetchMode
+         * @return int 
+         * @static 
+         */
+        public static function setFetchMode($fetchMode){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::setFetchMode($fetchMode);
+        }
+        
+        /**
+         * Get the connection query log.
+         *
+         * @return array 
+         * @static 
+         */
+        public static function getQueryLog(){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::getQueryLog();
+        }
+        
+        /**
+         * Clear the query log.
+         *
+         * @return void 
+         * @static 
+         */
+        public static function flushQueryLog(){
+            //Method inherited from \Illuminate\Database\Connection            
+            \Illuminate\Database\MySqlConnection::flushQueryLog();
+        }
+        
+        /**
+         * Enable the query log on the connection.
+         *
+         * @return void 
+         * @static 
+         */
+        public static function enableQueryLog(){
+            //Method inherited from \Illuminate\Database\Connection            
+            \Illuminate\Database\MySqlConnection::enableQueryLog();
+        }
+        
+        /**
+         * Disable the query log on the connection.
+         *
+         * @return void 
+         * @static 
+         */
+        public static function disableQueryLog(){
+            //Method inherited from \Illuminate\Database\Connection            
+            \Illuminate\Database\MySqlConnection::disableQueryLog();
+        }
+        
+        /**
+         * Determine whether we're logging queries.
+         *
+         * @return bool 
+         * @static 
+         */
+        public static function logging(){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::logging();
+        }
+        
+        /**
+         * Get the name of the connected database.
+         *
+         * @return string 
+         * @static 
+         */
+        public static function getDatabaseName(){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::getDatabaseName();
+        }
+        
+        /**
+         * Set the name of the connected database.
+         *
+         * @param string $database
+         * @return string 
+         * @static 
+         */
+        public static function setDatabaseName($database){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::setDatabaseName($database);
+        }
+        
+        /**
+         * Get the table prefix for the connection.
+         *
+         * @return string 
+         * @static 
+         */
+        public static function getTablePrefix(){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::getTablePrefix();
+        }
+        
+        /**
+         * Set the table prefix in use by the connection.
+         *
+         * @param string $prefix
+         * @return void 
+         * @static 
+         */
+        public static function setTablePrefix($prefix){
+            //Method inherited from \Illuminate\Database\Connection            
+            \Illuminate\Database\MySqlConnection::setTablePrefix($prefix);
+        }
+        
+        /**
+         * Set the table prefix and return the grammar.
+         *
+         * @param \Illuminate\Database\Grammar $grammar
+         * @return \Illuminate\Database\Grammar 
+         * @static 
+         */
+        public static function withTablePrefix($grammar){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::withTablePrefix($grammar);
         }
         
     }
@@ -7011,6 +7690,82 @@ namespace {
     }
 
 
+    class Password extends \Illuminate\Support\Facades\Password{
+        
+        /**
+         * Send a password reset link to a user.
+         *
+         * @param array $credentials
+         * @param \Closure|null $callback
+         * @return string 
+         * @static 
+         */
+        public static function sendResetLink($credentials, $callback = null){
+            return \Illuminate\Auth\Passwords\PasswordBroker::sendResetLink($credentials, $callback);
+        }
+        
+        /**
+         * Send the password reset link via e-mail.
+         *
+         * @param \Illuminate\Contracts\Auth\CanResetPassword $user
+         * @param string $token
+         * @param \Closure|null $callback
+         * @return int 
+         * @static 
+         */
+        public static function emailResetLink($user, $token, $callback = null){
+            return \Illuminate\Auth\Passwords\PasswordBroker::emailResetLink($user, $token, $callback);
+        }
+        
+        /**
+         * Reset the password for the given token.
+         *
+         * @param array $credentials
+         * @param \Closure $callback
+         * @return mixed 
+         * @static 
+         */
+        public static function reset($credentials, $callback){
+            return \Illuminate\Auth\Passwords\PasswordBroker::reset($credentials, $callback);
+        }
+        
+        /**
+         * Set a custom password validator.
+         *
+         * @param \Closure $callback
+         * @return void 
+         * @static 
+         */
+        public static function validator($callback){
+            \Illuminate\Auth\Passwords\PasswordBroker::validator($callback);
+        }
+        
+        /**
+         * Determine if the passwords match for the request.
+         *
+         * @param array $credentials
+         * @return bool 
+         * @static 
+         */
+        public static function validateNewPassword($credentials){
+            return \Illuminate\Auth\Passwords\PasswordBroker::validateNewPassword($credentials);
+        }
+        
+        /**
+         * Get the user for the given credentials.
+         *
+         * @param array $credentials
+         * @return \Illuminate\Contracts\Auth\CanResetPassword 
+         * @throws \UnexpectedValueException
+         * @static 
+         */
+        public static function getUser($credentials){
+            return \Illuminate\Auth\Passwords\PasswordBroker::getUser($credentials);
+        }
+        
+    }
+
+
     class Queue extends \Illuminate\Support\Facades\Queue{
         
         /**
@@ -9790,6 +10545,157 @@ namespace {
     }
 
 
+    class Schema extends \Illuminate\Support\Facades\Schema{
+        
+        /**
+         * Determine if the given table exists.
+         *
+         * @param string $table
+         * @return bool 
+         * @static 
+         */
+        public static function hasTable($table){
+            return \Illuminate\Database\Schema\MySqlBuilder::hasTable($table);
+        }
+        
+        /**
+         * Get the column listing for a given table.
+         *
+         * @param string $table
+         * @return array 
+         * @static 
+         */
+        public static function getColumnListing($table){
+            return \Illuminate\Database\Schema\MySqlBuilder::getColumnListing($table);
+        }
+        
+        /**
+         * Determine if the given table has a given column.
+         *
+         * @param string $table
+         * @param string $column
+         * @return bool 
+         * @static 
+         */
+        public static function hasColumn($table, $column){
+            //Method inherited from \Illuminate\Database\Schema\Builder            
+            return \Illuminate\Database\Schema\MySqlBuilder::hasColumn($table, $column);
+        }
+        
+        /**
+         * Determine if the given table has given columns.
+         *
+         * @param string $table
+         * @param array $columns
+         * @return bool 
+         * @static 
+         */
+        public static function hasColumns($table, $columns){
+            //Method inherited from \Illuminate\Database\Schema\Builder            
+            return \Illuminate\Database\Schema\MySqlBuilder::hasColumns($table, $columns);
+        }
+        
+        /**
+         * Modify a table on the schema.
+         *
+         * @param string $table
+         * @param \Closure $callback
+         * @return \Illuminate\Database\Schema\Blueprint 
+         * @static 
+         */
+        public static function table($table, $callback){
+            //Method inherited from \Illuminate\Database\Schema\Builder            
+            return \Illuminate\Database\Schema\MySqlBuilder::table($table, $callback);
+        }
+        
+        /**
+         * Create a new table on the schema.
+         *
+         * @param string $table
+         * @param \Closure $callback
+         * @return \Illuminate\Database\Schema\Blueprint 
+         * @static 
+         */
+        public static function create($table, $callback){
+            //Method inherited from \Illuminate\Database\Schema\Builder            
+            return \Illuminate\Database\Schema\MySqlBuilder::create($table, $callback);
+        }
+        
+        /**
+         * Drop a table from the schema.
+         *
+         * @param string $table
+         * @return \Illuminate\Database\Schema\Blueprint 
+         * @static 
+         */
+        public static function drop($table){
+            //Method inherited from \Illuminate\Database\Schema\Builder            
+            return \Illuminate\Database\Schema\MySqlBuilder::drop($table);
+        }
+        
+        /**
+         * Drop a table from the schema if it exists.
+         *
+         * @param string $table
+         * @return \Illuminate\Database\Schema\Blueprint 
+         * @static 
+         */
+        public static function dropIfExists($table){
+            //Method inherited from \Illuminate\Database\Schema\Builder            
+            return \Illuminate\Database\Schema\MySqlBuilder::dropIfExists($table);
+        }
+        
+        /**
+         * Rename a table on the schema.
+         *
+         * @param string $from
+         * @param string $to
+         * @return \Illuminate\Database\Schema\Blueprint 
+         * @static 
+         */
+        public static function rename($from, $to){
+            //Method inherited from \Illuminate\Database\Schema\Builder            
+            return \Illuminate\Database\Schema\MySqlBuilder::rename($from, $to);
+        }
+        
+        /**
+         * Get the database connection instance.
+         *
+         * @return \Illuminate\Database\Connection 
+         * @static 
+         */
+        public static function getConnection(){
+            //Method inherited from \Illuminate\Database\Schema\Builder            
+            return \Illuminate\Database\Schema\MySqlBuilder::getConnection();
+        }
+        
+        /**
+         * Set the database connection instance.
+         *
+         * @param \Illuminate\Database\Connection $connection
+         * @return $this 
+         * @static 
+         */
+        public static function setConnection($connection){
+            //Method inherited from \Illuminate\Database\Schema\Builder            
+            return \Illuminate\Database\Schema\MySqlBuilder::setConnection($connection);
+        }
+        
+        /**
+         * Set the Schema Blueprint resolver callback.
+         *
+         * @param \Closure $resolver
+         * @return void 
+         * @static 
+         */
+        public static function blueprintResolver($resolver){
+            //Method inherited from \Illuminate\Database\Schema\Builder            
+            \Illuminate\Database\Schema\MySqlBuilder::blueprintResolver($resolver);
+        }
+        
+    }
+
+
     class Session extends \Illuminate\Support\Facades\Session{
         
         /**
@@ -10353,7 +11259,7 @@ namespace {
          * Get a filesystem instance.
          *
          * @param string $name
-         * @return \Illuminate\Filesystem\FilesystemAdapter 
+         * @return \Illuminate\Contracts\Filesystem\Filesystem 
          * @static 
          */
         public static function drive($name = null){
@@ -10364,7 +11270,7 @@ namespace {
          * Get a filesystem instance.
          *
          * @param string $name
-         * @return \Illuminate\Filesystem\FilesystemAdapter 
+         * @return \Illuminate\Contracts\Filesystem\Filesystem 
          * @static 
          */
         public static function disk($name = null){
@@ -10375,7 +11281,7 @@ namespace {
          * Create an instance of the local driver.
          *
          * @param array $config
-         * @return \Illuminate\Filesystem\FilesystemAdapter 
+         * @return \Illuminate\Contracts\Filesystem\Filesystem 
          * @static 
          */
         public static function createLocalDriver($config){
@@ -10386,7 +11292,7 @@ namespace {
          * Create an instance of the ftp driver.
          *
          * @param array $config
-         * @return \Illuminate\Filesystem\FilesystemAdapter 
+         * @return \Illuminate\Contracts\Filesystem\Filesystem 
          * @static 
          */
         public static function createFtpDriver($config){
@@ -10435,235 +11341,6 @@ namespace {
          */
         public static function extend($driver, $callback){
             return \Illuminate\Filesystem\FilesystemManager::extend($driver, $callback);
-        }
-        
-        /**
-         * Determine if a file exists.
-         *
-         * @param string $path
-         * @return bool 
-         * @static 
-         */
-        public static function exists($path){
-            return \Illuminate\Filesystem\FilesystemAdapter::exists($path);
-        }
-        
-        /**
-         * Get the contents of a file.
-         *
-         * @param string $path
-         * @return string 
-         * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
-         * @static 
-         */
-        public static function get($path){
-            return \Illuminate\Filesystem\FilesystemAdapter::get($path);
-        }
-        
-        /**
-         * Write the contents of a file.
-         *
-         * @param string $path
-         * @param string|resource $contents
-         * @param string $visibility
-         * @return bool 
-         * @static 
-         */
-        public static function put($path, $contents, $visibility = null){
-            return \Illuminate\Filesystem\FilesystemAdapter::put($path, $contents, $visibility);
-        }
-        
-        /**
-         * Get the visibility for the given path.
-         *
-         * @param string $path
-         * @return string 
-         * @static 
-         */
-        public static function getVisibility($path){
-            return \Illuminate\Filesystem\FilesystemAdapter::getVisibility($path);
-        }
-        
-        /**
-         * Set the visibility for the given path.
-         *
-         * @param string $path
-         * @param string $visibility
-         * @return void 
-         * @static 
-         */
-        public static function setVisibility($path, $visibility){
-            \Illuminate\Filesystem\FilesystemAdapter::setVisibility($path, $visibility);
-        }
-        
-        /**
-         * Prepend to a file.
-         *
-         * @param string $path
-         * @param string $data
-         * @return int 
-         * @static 
-         */
-        public static function prepend($path, $data){
-            return \Illuminate\Filesystem\FilesystemAdapter::prepend($path, $data);
-        }
-        
-        /**
-         * Append to a file.
-         *
-         * @param string $path
-         * @param string $data
-         * @return int 
-         * @static 
-         */
-        public static function append($path, $data){
-            return \Illuminate\Filesystem\FilesystemAdapter::append($path, $data);
-        }
-        
-        /**
-         * Delete the file at a given path.
-         *
-         * @param string|array $paths
-         * @return bool 
-         * @static 
-         */
-        public static function delete($paths){
-            return \Illuminate\Filesystem\FilesystemAdapter::delete($paths);
-        }
-        
-        /**
-         * Copy a file to a new location.
-         *
-         * @param string $from
-         * @param string $to
-         * @return bool 
-         * @static 
-         */
-        public static function copy($from, $to){
-            return \Illuminate\Filesystem\FilesystemAdapter::copy($from, $to);
-        }
-        
-        /**
-         * Move a file to a new location.
-         *
-         * @param string $from
-         * @param string $to
-         * @return bool 
-         * @static 
-         */
-        public static function move($from, $to){
-            return \Illuminate\Filesystem\FilesystemAdapter::move($from, $to);
-        }
-        
-        /**
-         * Get the file size of a given file.
-         *
-         * @param string $path
-         * @return int 
-         * @static 
-         */
-        public static function size($path){
-            return \Illuminate\Filesystem\FilesystemAdapter::size($path);
-        }
-        
-        /**
-         * Get the mime-type of a given file.
-         *
-         * @param string $path
-         * @return string|false 
-         * @static 
-         */
-        public static function mimeType($path){
-            return \Illuminate\Filesystem\FilesystemAdapter::mimeType($path);
-        }
-        
-        /**
-         * Get the file's last modification time.
-         *
-         * @param string $path
-         * @return int 
-         * @static 
-         */
-        public static function lastModified($path){
-            return \Illuminate\Filesystem\FilesystemAdapter::lastModified($path);
-        }
-        
-        /**
-         * Get an array of all files in a directory.
-         *
-         * @param string|null $directory
-         * @param bool $recursive
-         * @return array 
-         * @static 
-         */
-        public static function files($directory = null, $recursive = false){
-            return \Illuminate\Filesystem\FilesystemAdapter::files($directory, $recursive);
-        }
-        
-        /**
-         * Get all of the files from the given directory (recursive).
-         *
-         * @param string|null $directory
-         * @return array 
-         * @static 
-         */
-        public static function allFiles($directory = null){
-            return \Illuminate\Filesystem\FilesystemAdapter::allFiles($directory);
-        }
-        
-        /**
-         * Get all of the directories within a given directory.
-         *
-         * @param string|null $directory
-         * @param bool $recursive
-         * @return array 
-         * @static 
-         */
-        public static function directories($directory = null, $recursive = false){
-            return \Illuminate\Filesystem\FilesystemAdapter::directories($directory, $recursive);
-        }
-        
-        /**
-         * Get all (recursive) of the directories within a given directory.
-         *
-         * @param string|null $directory
-         * @return array 
-         * @static 
-         */
-        public static function allDirectories($directory = null){
-            return \Illuminate\Filesystem\FilesystemAdapter::allDirectories($directory);
-        }
-        
-        /**
-         * Create a directory.
-         *
-         * @param string $path
-         * @return bool 
-         * @static 
-         */
-        public static function makeDirectory($path){
-            return \Illuminate\Filesystem\FilesystemAdapter::makeDirectory($path);
-        }
-        
-        /**
-         * Recursively delete a directory.
-         *
-         * @param string $directory
-         * @return bool 
-         * @static 
-         */
-        public static function deleteDirectory($directory){
-            return \Illuminate\Filesystem\FilesystemAdapter::deleteDirectory($directory);
-        }
-        
-        /**
-         * Get the Flysystem driver.
-         *
-         * @return \League\Flysystem\FilesystemInterface 
-         * @static 
-         */
-        public static function getDriver(){
-            return \Illuminate\Filesystem\FilesystemAdapter::getDriver();
         }
         
     }
@@ -11474,6 +12151,108 @@ namespace {
          */
         public static function getNames(){
             return \Illuminate\View\Factory::getNames();
+        }
+        
+    }
+
+
+    class Entrust extends \Zizaco\Entrust\EntrustFacade{
+        
+        /**
+         * Checks if the current user has a role by its name
+         *
+         * @param string $name Role name.
+         * @return bool 
+         * @static 
+         */
+        public static function hasRole($role, $requireAll = false){
+            return \Zizaco\Entrust\Entrust::hasRole($role, $requireAll);
+        }
+        
+        /**
+         * Check if the current user has a permission by its name
+         *
+         * @param string $permission Permission string.
+         * @return bool 
+         * @static 
+         */
+        public static function can($permission, $requireAll = false){
+            return \Zizaco\Entrust\Entrust::can($permission, $requireAll);
+        }
+        
+        /**
+         * Check if the current user has a role or permission by its name
+         *
+         * @param array|string $roles The role(s) needed.
+         * @param array|string $permissions The permission(s) needed.
+         * @param array $options The Options.
+         * @return bool 
+         * @static 
+         */
+        public static function ability($roles, $permissions, $options = array()){
+            return \Zizaco\Entrust\Entrust::ability($roles, $permissions, $options);
+        }
+        
+        /**
+         * Get the currently authenticated user or null.
+         *
+         * @return \Zizaco\Entrust\Illuminate\Auth\UserInterface|null 
+         * @static 
+         */
+        public static function user(){
+            return \Zizaco\Entrust\Entrust::user();
+        }
+        
+        /**
+         * Filters a route for a role or set of roles.
+         * 
+         * If the third parameter is null then abort with status code 403.
+         * Otherwise the $result is returned.
+         *
+         * @param string $route Route pattern. i.e: "admin/*"
+         * @param array|string $roles The role(s) needed
+         * @param mixed $result i.e: Redirect::to('/')
+         * @param bool $requireAll User must have all roles
+         * @return mixed 
+         * @static 
+         */
+        public static function routeNeedsRole($route, $roles, $result = null, $requireAll = true){
+            return \Zizaco\Entrust\Entrust::routeNeedsRole($route, $roles, $result, $requireAll);
+        }
+        
+        /**
+         * Filters a route for a permission or set of permissions.
+         * 
+         * If the third parameter is null then abort with status code 403.
+         * Otherwise the $result is returned.
+         *
+         * @param string $route Route pattern. i.e: "admin/*"
+         * @param array|string $permissions The permission(s) needed
+         * @param mixed $result i.e: Redirect::to('/')
+         * @param bool $requireAll User must have all permissions
+         * @return mixed 
+         * @static 
+         */
+        public static function routeNeedsPermission($route, $permissions, $result = null, $requireAll = true){
+            return \Zizaco\Entrust\Entrust::routeNeedsPermission($route, $permissions, $result, $requireAll);
+        }
+        
+        /**
+         * Filters a route for role(s) and/or permission(s).
+         * 
+         * If the third parameter is null then abort with status code 403.
+         * Otherwise the $result is returned.
+         *
+         * @param string $route Route pattern. i.e: "admin/*"
+         * @param array|string $roles The role(s) needed
+         * @param array|string $permissions The permission(s) needed
+         * @param mixed $result i.e: Redirect::to('/')
+         * @param bool $requireAll User must have all roles and permissions
+         * @return void 
+         * @static 
+         */
+        public static function routeNeedsRoleOrPermission($route, $roles, $permissions, $result = null, $requireAll = false){
+            \Zizaco\Entrust\Entrust::routeNeedsRoleOrPermission($route, $roles, $permissions, $result, $requireAll);
         }
         
     }
