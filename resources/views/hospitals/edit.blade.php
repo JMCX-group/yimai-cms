@@ -59,6 +59,18 @@
                                 @include('layouts.message.tips',['field'=>'dept_standard_id'])
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">状态</label>
+                            <div class="col-sm-9">
+                                <select class="form-control select2" name="status" title="状态">
+                                    <option value="已核实" @if($hospital->status=="已核实") selected @endif>已核实</option>
+                                    <option value="待核实" @if($hospital->status=="待核实") selected @endif>待核实</option>
+                                    <option value="已拒绝" @if($hospital->status=="已拒绝") selected @endif>已拒绝</option>
+                                    <option value="已删除" @if($hospital->status=="已删除") selected @endif>已删除</option>
+                                </select>
+                                @include('layouts.message.tips',['field'=>'status'])
+                            </div>
+                        </div>
                     </div>
                     <div class="box-footer">
                         <a class="btn btn-default" href="{{route('hospital.index')}}">返回</a>

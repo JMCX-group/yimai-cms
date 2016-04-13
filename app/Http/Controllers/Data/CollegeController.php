@@ -101,7 +101,7 @@ class CollegeController extends Controller
     {
         $college = College::find($id);
         $college->name = $request['name'];
-        $college->status = $this->getCollegeStatus($request['status']);
+        $college->status = $request['status'];
 
         try {
             if ($college->save()) {
@@ -131,34 +131,5 @@ class CollegeController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(array('error' => $e->getMessage()));
         }
-    }
-
-    /**
-     * 翻译学校状态
-     *
-     * @param $status
-     * @return string
-     */
-    public function getCollegeStatus($status)
-    {
-        switch ($status) {
-            case 'Y':
-                $ret = "已核实";
-                break;
-            case 'W':
-                $ret = "待核实";
-                break;
-            case 'N':
-                $ret = "已拒绝";
-                break;
-            case 'D':
-                $ret = "已删除";
-                break;
-            default:
-                $ret = "";
-                break;
-        }
-
-        return $ret;
     }
 }

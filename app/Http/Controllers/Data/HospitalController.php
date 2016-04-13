@@ -132,7 +132,6 @@ class HospitalController extends Controller
         $deptStandardIds = $this->getDeptStandardIds($request->get('dept_standard_id'));
         $hospital->three_a = $this->getThreeA($request['three_a']);
         $hospital->top_dept_num = count($deptStandardIds);
-        $hospital->status = "已核实";
 
         try {
             if ($deptStandardIds) {
