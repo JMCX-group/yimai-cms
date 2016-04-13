@@ -39,10 +39,11 @@ Route::group(['namespace' => 'Backend', 'middleware' => ['auth','Entrust']], fun
 });
 
 /**
- * 数据管理 : 医院 | 毕业院校 | 特长标签 | 医生数据 | 疾病
+ * 数据管理 : 医院 | 科室 | 毕业院校 | 特长标签 | 医生数据 | 疾病
  */
 Route::group(['namespace' => 'Data', 'middleware' => ['auth','Entrust']], function () {
     Route::resource('hospital', 'HospitalController');
+    Route::resource('dept', 'DeptStandardController');
     Route::resource('college', 'CollegeController');
     Route::resource('tag', 'TagController');
 });

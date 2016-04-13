@@ -35,12 +35,12 @@ class PermissionRoleTableSeeder extends Seeder
     {
         DB::table("permission_role")->delete();
 
-        for ($j = 1; $j < 31; $j++) {
+        for ($j = 1; $j < 37; $j++) {
             PermissionRole::create(["permission_id" => $j, "role_id" => 1]);
         }
 
         for ($i = 2; $i < 3; $i++) {
-            for ($j = 12; $j < 31; $j++) {
+            for ($j = 12; $j < 37; $j++) {
                 PermissionRole::create(["permission_id" => $j, "role_id" => 2]);
             }
         }
@@ -106,42 +106,41 @@ class MenuTableSeeder extends Seeder
 
         Menu::create(["parent_id" => "0", "name" => "数据管理", "url" => "data.index", "description" => "数据管理"]); // id:18
         Menu::create(["parent_id" => "18", "name" => "医院", "url" => "hospital.index", "description" => "医院数据"]);
-        Menu::create(["parent_id" => "18", "name" => "新建医院", "url" => "hospital.create", "description" => "新增医院", "is_hide" => 1]);
+        Menu::create(["parent_id" => "18", "name" => "科室", "url" => "dept.index", "description" => "科室数据"]);
         Menu::create(["parent_id" => "18", "name" => "毕业院校", "url" => "college.index", "description" => "毕业院校数据"]);
-        Menu::create(["parent_id" => "18", "name" => "新建院校", "url" => "college.create", "description" => "新增毕业院校", "is_hide" => 1]);
-        Menu::create(["parent_id" => "18", "name" => "特长标签", "url" => "data.tag", "description" => "医生的特长和标签"]);
+        Menu::create(["parent_id" => "18", "name" => "特长标签", "url" => "tag.index", "description" => "医生的特长和标签"]);
         Menu::create(["parent_id" => "18", "name" => "医生数据", "url" => "data.doctor", "description" => "此处指医生用户在医脉中点“添加”后第三方数据库返回的医生数据"]);
         Menu::create(["parent_id" => "18", "name" => "疾病", "url" => "data.illness", "description" => "疾病数据管理"]);
 
-        Menu::create(["parent_id" => "0", "name" => "推送内容", "url" => "push.index", "description" => "推送内容"]); // id:26
-        Menu::create(["parent_id" => "26", "name" => "Banner", "url" => "push.banner", "description" => "医院数据"]);
-        Menu::create(["parent_id" => "26", "name" => "Share/fwd", "url" => "push.share-fwd", "description" => "毕业院校数据"]);
-        Menu::create(["parent_id" => "26", "name" => "广播站", "url" => "push.broadcast", "description" => "新增毕业院校"]);
-        Menu::create(["parent_id" => "26", "name" => "系统通知", "url" => "push.sys-msg", "description" => "医生的特长和标签"]);
-        Menu::create(["parent_id" => "26", "name" => "服务协议", "url" => "push.service-agreement", "description" => "编辑医生端、患者端服务协议的内容，且可查历史版本内容和修改时间"]);
-        Menu::create(["parent_id" => "26", "name" => "手动推送", "url" => "push.manual", "description" => "手动推送内容"]);
+        Menu::create(["parent_id" => "0", "name" => "推送内容", "url" => "push.index", "description" => "推送内容"]); // id:25
+        Menu::create(["parent_id" => "25", "name" => "Banner", "url" => "push.banner", "description" => "医院数据"]);
+        Menu::create(["parent_id" => "25", "name" => "Share/fwd", "url" => "push.share-fwd", "description" => "毕业院校数据"]);
+        Menu::create(["parent_id" => "25", "name" => "广播站", "url" => "push.broadcast", "description" => "新增毕业院校"]);
+        Menu::create(["parent_id" => "25", "name" => "系统通知", "url" => "push.sys-msg", "description" => "医生的特长和标签"]);
+        Menu::create(["parent_id" => "25", "name" => "服务协议", "url" => "push.service-agreement", "description" => "编辑医生端、患者端服务协议的内容，且可查历史版本内容和修改时间"]);
+        Menu::create(["parent_id" => "25", "name" => "手动推送", "url" => "push.manual", "description" => "手动推送内容"]);
 
-        Menu::create(["parent_id" => "0", "name" => "交易管理", "url" => "trade.index", "description" => "交易管理"]); // id:33
-        Menu::create(["parent_id" => "33", "name" => "待处理约诊", "url" => "trade.pending-appointment", "description" => "患者通过“找专家-没找到”下的订单"]);
-        Menu::create(["parent_id" => "33", "name" => "当面咨询", "url" => "trade.face-to-face", "description" => "付费加号"]);
-        Menu::create(["parent_id" => "33", "name" => "约诊-未完成", "url" => "trade.appointment-incomplete", "description" => "未完成约诊列表"]);
-        Menu::create(["parent_id" => "33", "name" => "约诊-已完成", "url" => "trade.appointment-completed", "description" => "已完成约诊列表"]);
-        Menu::create(["parent_id" => "33", "name" => "评价", "url" => "trade.evaluate", "description" => "约诊列表评价"]);
+        Menu::create(["parent_id" => "0", "name" => "交易管理", "url" => "trade.index", "description" => "交易管理"]); // id:32
+        Menu::create(["parent_id" => "32", "name" => "待处理约诊", "url" => "trade.pending-appointment", "description" => "患者通过“找专家-没找到”下的订单"]);
+        Menu::create(["parent_id" => "32", "name" => "当面咨询", "url" => "trade.face-to-face", "description" => "付费加号"]);
+        Menu::create(["parent_id" => "32", "name" => "约诊-未完成", "url" => "trade.appointment-incomplete", "description" => "未完成约诊列表"]);
+        Menu::create(["parent_id" => "32", "name" => "约诊-已完成", "url" => "trade.appointment-completed", "description" => "已完成约诊列表"]);
+        Menu::create(["parent_id" => "32", "name" => "评价", "url" => "trade.evaluate", "description" => "约诊列表评价"]);
 
-        Menu::create(["parent_id" => "0", "name" => "财务管理", "url" => "finance.index", "description" => "财务管理"]); // id:39
-        Menu::create(["parent_id" => "39", "name" => "收费设置", "url" => "finance.setting", "description" => "交易设置收费费率"]);
-        Menu::create(["parent_id" => "39", "name" => "待结算", "url" => "finance.pending-settlement", "description" => "待结算"]);
-        Menu::create(["parent_id" => "39", "name" => "待报税", "url" => "finance.pending-tax", "description" => "待报税"]);
-        Menu::create(["parent_id" => "39", "name" => "已结算", "url" => "finance.settled", "description" => "已结算"]);
-        Menu::create(["parent_id" => "39", "name" => "待提现", "url" => "finance.pending-withdrawals", "description" => "待提现"]);
-        Menu::create(["parent_id" => "39", "name" => "已提现", "url" => "finance.completed-withdrawals", "description" => "已提现"]);
-        Menu::create(["parent_id" => "39", "name" => "充值", "url" => "finance.recharge", "description" => "直接充值给某选定用户的钱包(不发生实际银行付款)，充值时须说明事由，须Approver审批"]);
-        Menu::create(["parent_id" => "39", "name" => "资金报告", "url" => "finance.report", "description" => "本月、累计[交易金额/医生收入/医生完税/医生提现/平台收入/平台支出]"]);
-        Menu::create(["parent_id" => "39", "name" => "现金交易记录", "url" => "finance.cash-record", "description" => "每项实际发生资金往来事项（患者付款、退款、提现）的流水明细（至少包含时间、交易方、交易号、事项）"]);
+        Menu::create(["parent_id" => "0", "name" => "财务管理", "url" => "finance.index", "description" => "财务管理"]); // id:38
+        Menu::create(["parent_id" => "38", "name" => "收费设置", "url" => "finance.setting", "description" => "交易设置收费费率"]);
+        Menu::create(["parent_id" => "38", "name" => "待结算", "url" => "finance.pending-settlement", "description" => "待结算"]);
+        Menu::create(["parent_id" => "38", "name" => "待报税", "url" => "finance.pending-tax", "description" => "待报税"]);
+        Menu::create(["parent_id" => "38", "name" => "已结算", "url" => "finance.settled", "description" => "已结算"]);
+        Menu::create(["parent_id" => "38", "name" => "待提现", "url" => "finance.pending-withdrawals", "description" => "待提现"]);
+        Menu::create(["parent_id" => "38", "name" => "已提现", "url" => "finance.completed-withdrawals", "description" => "已提现"]);
+        Menu::create(["parent_id" => "38", "name" => "充值", "url" => "finance.recharge", "description" => "直接充值给某选定用户的钱包(不发生实际银行付款)，充值时须说明事由，须Approver审批"]);
+        Menu::create(["parent_id" => "38", "name" => "资金报告", "url" => "finance.report", "description" => "本月、累计[交易金额/医生收入/医生完税/医生提现/平台收入/平台支出]"]);
+        Menu::create(["parent_id" => "38", "name" => "现金交易记录", "url" => "finance.cash-record", "description" => "每项实际发生资金往来事项（患者付款、退款、提现）的流水明细（至少包含时间、交易方、交易号、事项）"]);
 
-        Menu::create(["parent_id" => "0", "name" => "用户反馈", "url" => "feedback.index", "description" => "推送内容"]); // id:49
-        Menu::create(["parent_id" => "49", "name" => "订单投诉", "url" => "feedback.order-complaint", "description" => "订单投诉"]);
-        Menu::create(["parent_id" => "49", "name" => "使用反馈", "url" => "feedback.app-use", "description" => "APP使用反馈"]);
+        Menu::create(["parent_id" => "0", "name" => "用户反馈", "url" => "feedback.index", "description" => "推送内容"]); // id:48
+        Menu::create(["parent_id" => "48", "name" => "订单投诉", "url" => "feedback.order-complaint", "description" => "订单投诉"]);
+        Menu::create(["parent_id" => "48", "name" => "使用反馈", "url" => "feedback.app-use", "description" => "APP使用反馈"]);
     }
 }
 
@@ -186,20 +185,27 @@ class PermissionTableSeeder extends Seeder
         Permission::create(["display_name" => "编辑医院", "name" => "hospital.edit"]);
         Permission::create(["display_name" => "编辑医院", "name" => "hospital.update"]);
 
-        Permission::create(["display_name" => "毕业校园", "name" => "college.index"]); // id:19
-        Permission::create(["display_name" => "新建校园页面", "name" => "college.create"]);
-        Permission::create(["display_name" => "新建校园信息", "name" => "college.store"]);
-        Permission::create(["display_name" => "删除校园信息", "name" => "college.destroy"]);
-        Permission::create(["display_name" => "编辑校园页面", "name" => "college.edit"]);
-        Permission::create(["display_name" => "编辑校园信息", "name" => "college.update"]);
+        Permission::create(["display_name" => "科室", "name" => "dept.index"]); // id:19
+        Permission::create(["display_name" => "新建科室页面", "name" => "dept.create"]);
+        Permission::create(["display_name" => "新建科室信息", "name" => "dept.store"]);
+        Permission::create(["display_name" => "删除科室信息", "name" => "dept.destroy"]);
+        Permission::create(["display_name" => "编辑科室页面", "name" => "dept.edit"]);
+        Permission::create(["display_name" => "编辑科室信息", "name" => "dept.update"]);
 
-        Permission::create(["display_name" => "特长标签", "name" => "tag.index"]); // id:25
+        Permission::create(["display_name" => "毕业院校", "name" => "college.index"]); // id:25
+        Permission::create(["display_name" => "新建院校页面", "name" => "college.create"]);
+        Permission::create(["display_name" => "新建院校信息", "name" => "college.store"]);
+        Permission::create(["display_name" => "删除院校信息", "name" => "college.destroy"]);
+        Permission::create(["display_name" => "编辑院校页面", "name" => "college.edit"]);
+        Permission::create(["display_name" => "编辑院校信息", "name" => "college.update"]);
+
+        Permission::create(["display_name" => "特长标签", "name" => "tag.index"]); // id:31
         Permission::create(["display_name" => "新建标签页面", "name" => "tag.create"]);
         Permission::create(["display_name" => "新建标签信息", "name" => "tag.store"]);
         Permission::create(["display_name" => "删除标签信息", "name" => "tag.destroy"]);
         Permission::create(["display_name" => "编辑标签页面", "name" => "tag.edit"]);
         Permission::create(["display_name" => "编辑标签信息", "name" => "tag.update"]);
         
-        // id:31
+        // id:37
     }
 }
