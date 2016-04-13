@@ -1,16 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Business;
+namespace App\Http\Controllers\Data;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class DoctorController extends Controller
+use App\Illness;
+use DB;
+
+class IllnessController extends Controller
 {
-    public $page_level = "用户管理";
-    
+    public $page_level = "数据管理";
+
     /**
      * Display a listing of the resource.
      *
@@ -18,10 +21,46 @@ class DoctorController extends Controller
      */
     public function index()
     {
-        $page_title = "医生列表";
+        $illnesss = Illness::paginate(15);
+        $this->getDeptNames($illnesss);
+        $page_title = "疾病";
         $page_level = $this->page_level;
 
-        return view('doctors.index', compact('page_title', 'page_level'));
+        return view('illnesss.index', compact('illnesss', 'page_title', 'page_level'));
+    }
+
+    /**
+     * ID转Name
+     *
+     * @param $illnesss
+     */
+    public function getDeptNames($illnesss)
+    {
+        $deptIdArr = array();
+        foreach ($illnesss as $illness) {
+            if (!in_array($illness->dept1_id, $deptIdArr)) {
+                array_push($deptIdArr, $illness->dept1_id);
+            }
+
+            if (!in_array($illness->dept2_id, $deptIdArr)) {
+                array_push($deptIdArr, $illness->dept2_id);
+            }
+        }
+
+        $deptNames = DB::table('dept_standards')
+            ->whereIn('id', $deptIdArr)->get();
+
+        foreach ($illnesss as &$illness) {
+            foreach ($deptNames as $deptName) {
+                if ($illness->dept1_id == $deptName->id) {
+                    $illness['dept1_name'] = $deptName->name;
+                }
+
+                if ($illness->dept2_id == $deptName->id) {
+                    $illness['dept2_name'] = $deptName->name;
+                }
+            }
+        }
     }
 
     /**

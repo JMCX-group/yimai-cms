@@ -46,6 +46,8 @@ Route::group(['namespace' => 'Data', 'middleware' => ['auth','Entrust']], functi
     Route::resource('dept', 'DeptStandardController');
     Route::resource('college', 'CollegeController');
     Route::resource('tag', 'TagController');
+    Route::resource('core-doctor', 'CoreDoctorController');
+    Route::resource('illness', 'IllnessController');
 });
 
 
@@ -69,14 +71,6 @@ Route::group(['namespace' => 'Business', 'middleware' => ['auth','Entrust']], fu
         Route::get('pending', ['as' => 'verify.pending', 'uses' => 'VerifyController@pending']);
     });
     Route::resource('verify', 'VerifyController'); // resource注册的路由需要放在自定义路由下方
-
-    /**
-     * 数据管理 : 医院 | 新建医院 | 毕业院校 | 新建院校 | 特长标签 | 医生数据 | 疾病
-     */
-    Route::group(['prefix' => 'data'], function () {
-        Route::get('doctor', ['as' => 'data.doctor', 'uses' => 'DataController@doctor']);
-        Route::get('illness', ['as' => 'data.illness', 'uses' => 'DataController@illness']);
-    });
 
     /**
      * 推送内容 : Banner | Share/fwd | 广播站 | 系统通知 | 服务协议 | 手动推送

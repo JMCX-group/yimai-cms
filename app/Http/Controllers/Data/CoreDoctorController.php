@@ -1,16 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Business;
+namespace App\Http\Controllers\Data;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class DoctorController extends Controller
+use App\CoreDoctor;
+
+class CoreDoctorController extends Controller
 {
-    public $page_level = "用户管理";
-    
+    public $page_level = "数据管理";
+
     /**
      * Display a listing of the resource.
      *
@@ -18,10 +20,11 @@ class DoctorController extends Controller
      */
     public function index()
     {
-        $page_title = "医生列表";
+        $core_doctors = CoreDoctor::paginate(15);
+        $page_title = "医生数据";
         $page_level = $this->page_level;
 
-        return view('doctors.index', compact('page_title', 'page_level'));
+        return view('core-doctors.index', compact('core_doctors', 'page_title', 'page_level'));
     }
 
     /**

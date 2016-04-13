@@ -109,7 +109,7 @@ class MenuTableSeeder extends Seeder
         Menu::create(["parent_id" => "18", "name" => "科室", "url" => "dept.index", "description" => "科室数据"]);
         Menu::create(["parent_id" => "18", "name" => "毕业院校", "url" => "college.index", "description" => "毕业院校数据"]);
         Menu::create(["parent_id" => "18", "name" => "特长标签", "url" => "tag.index", "description" => "医生的特长和标签"]);
-        Menu::create(["parent_id" => "18", "name" => "医生数据", "url" => "data.doctor", "description" => "此处指医生用户在医脉中点“添加”后第三方数据库返回的医生数据"]);
+        Menu::create(["parent_id" => "18", "name" => "医生数据", "url" => "core-doctor.index", "description" => "此处指医生用户在医脉中点“添加”后第三方数据库返回的医生数据"]);
         Menu::create(["parent_id" => "18", "name" => "疾病", "url" => "data.illness", "description" => "疾病数据管理"]);
 
         Menu::create(["parent_id" => "0", "name" => "推送内容", "url" => "push.index", "description" => "推送内容"]); // id:25
