@@ -48,7 +48,7 @@
                                 @else
                                     <td>女</td>
                                 @endif
-                                <td>{{$doctor->city}}</td>
+                                <td>{{$doctor->province}} \ {{$doctor->city}}</td>
                                 <td>{{$doctor->hospital}}</td>
                                 <td>{{$doctor->dept}}</td>
                                 <td>{{$doctor->title}}</td>
