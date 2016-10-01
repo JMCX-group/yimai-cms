@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Business;
 
+use App\Doctor;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class DoctorController extends Controller
@@ -18,10 +17,11 @@ class DoctorController extends Controller
      */
     public function index()
     {
+        $doctors = Doctor::getDoctor();
         $page_title = "医生列表";
         $page_level = $this->page_level;
 
-        return view('doctors.index', compact('page_title', 'page_level'));
+        return view('doctors.index', compact('doctors', 'page_title', 'page_level'));
     }
 
     /**
