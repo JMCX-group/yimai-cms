@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Business;
 
+use App\Patient;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class PatientController extends Controller
@@ -18,10 +17,11 @@ class PatientController extends Controller
     
     public function index()
     {
+        $patients = Patient::paginate(15);
         $page_title = "患者列表";
         $page_level = $this->page_level;
 
-        return view('patients.index', compact('page_title', 'page_level'));
+        return view('patients.index', compact('patients', 'page_title', 'page_level'));
     }
 
     /**
