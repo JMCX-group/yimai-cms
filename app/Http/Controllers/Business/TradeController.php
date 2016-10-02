@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Business;
 
+use App\Appointment;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -27,10 +28,11 @@ class TradeController extends Controller
 
     public function pendingAppointment()
     {
+        $appointments = Appointment::getWait();
         $page_title = "待处理约诊";
         $page_level = $this->page_level;
 
-        return view('trades.index', compact('page_title', 'page_level'));
+        return view('trades.pending-appointment', compact('appointments', 'page_title', 'page_level'));
     }
 
     public function faceToFace()
