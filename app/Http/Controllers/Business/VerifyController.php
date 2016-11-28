@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Business;
 
+use App\Doctor;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -11,6 +12,8 @@ class VerifyController extends Controller
 {
     /**
      * Display a listing of the resource.
+     *
+     * completed：已认证；空：未认证；processing：认证中；fail：认证失败。
      *
      * @return \Illuminate\Http\Response
      */
@@ -27,34 +30,38 @@ class VerifyController extends Controller
 
     public function already()
     {
-        $page_title = "已认证医生";
+        $doctors = Doctor::getVerifyDoctor('completed');
+        $page_title = "已认证";
         $page_level = $this->page_level;
 
-        return view('verifys.already', compact('page_title', 'page_level'));
+        return view('verifys.already', compact('doctors', 'page_title', 'page_level'));
     }
 
     public function todo()
     {
-        $page_title = "待认证医生";
+        $doctors = Doctor::getVerifyDoctor('processing');
+        $page_title = "待审核";
         $page_level = $this->page_level;
 
-        return view('verifys.todo', compact('page_title', 'page_level'));
+        return view('verifys.todo', compact('doctors', 'page_title', 'page_level'));
     }
 
     public function not()
     {
-        $page_title = "未认证医生";
+        $doctors = Doctor::getVerifyDoctor('');
+        $page_title = "未认证";
         $page_level = $this->page_level;
 
-        return view('verifys.not', compact('page_title', 'page_level'));
+        return view('verifys.not', compact('doctors', 'page_title', 'page_level'));
     }
 
-    public function pending()
+    public function failed()
     {
-        $page_title = "待审核头像";
+        $doctors = Doctor::getVerifyDoctor('fail');
+        $page_title = "认证失败";
         $page_level = $this->page_level;
 
-        return view('verifys.pending', compact('page_title', 'page_level'));
+        return view('verifys.failed', compact('doctors', 'page_title', 'page_level'));
     }
 
     /**

@@ -62,13 +62,13 @@ Route::group(['namespace' => 'Business', 'middleware' => ['auth','Entrust']], fu
     Route::resource('patient', 'PatientController');
 
     /**
-     * 医生认证 : 已认证 | 待认证 | 未认证 | 待审核头像
+     * 医生认证 : 已认证 | 待审核 | 未认证 | 认证失败
      */
     Route::group(['prefix' => 'verify'], function () {
         Route::get('already', ['as' => 'verify.already', 'uses' => 'VerifyController@already']);
         Route::get('todo', ['as' => 'verify.todo', 'uses' => 'VerifyController@todo']);
         Route::get('not', ['as' => 'verify.not', 'uses' => 'VerifyController@not']);
-        Route::get('pending', ['as' => 'verify.pending', 'uses' => 'VerifyController@pending']);
+        Route::get('failed', ['as' => 'verify.failed', 'uses' => 'VerifyController@failed']);
     });
     Route::resource('verify', 'VerifyController'); // resource注册的路由需要放在自定义路由下方
 

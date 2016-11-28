@@ -102,7 +102,7 @@ class MenuTableSeeder extends Seeder
         Menu::create(["parent_id" => "13", "name" => "已认证", "url" => "verify.already", "description" => "已认证的医生列表"]);
         Menu::create(["parent_id" => "13", "name" => "待认证", "url" => "verify.todo", "description" => "待认证的医生列表"]);
         Menu::create(["parent_id" => "13", "name" => "未认证", "url" => "verify.not", "description" => "未认证的医生列表"]);
-        Menu::create(["parent_id" => "13", "name" => "待审核头像", "url" => "verify.pending", "description" => "有待审核头像的医生列表"]);
+        Menu::create(["parent_id" => "13", "name" => "待审核", "url" => "verify.pending", "description" => "有待审核的医生列表"]);
 
         Menu::create(["parent_id" => "0", "name" => "数据管理", "url" => "data.index", "description" => "数据管理"]); // id:18
         Menu::create(["parent_id" => "18", "name" => "医院", "url" => "hospital.index", "description" => "医院数据"]);
