@@ -46,6 +46,26 @@ class Doctor extends Model
     protected $table = 'doctors';
 
     /**
+     * @param $id
+     * @return mixed
+     */
+    public static function getOneDoctor($id)
+    {
+        return Doctor::select(
+            'doctors.*',
+            'provinces.name AS province', 'citys.name AS city',
+            'hospitals.name AS hospital', 'dept_standards.name AS dept',
+            'colleges.name AS college')
+            ->where('doctors.id', $id)
+            ->leftJoin('provinces', 'provinces.id', '=', 'doctors.province_id')
+            ->leftJoin('citys', 'citys.id', '=', 'doctors.city_id')
+            ->leftJoin('hospitals', 'hospitals.id', '=', 'doctors.hospital_id')
+            ->leftJoin('dept_standards', 'dept_standards.id', '=', 'doctors.dept_id')
+            ->leftJoin('colleges', 'colleges.id', '=', 'doctors.college_id')
+            ->first();
+    }
+
+    /**
      * 获得全部医生所有信息
      *
      * @return mixed

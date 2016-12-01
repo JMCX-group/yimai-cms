@@ -37,6 +37,7 @@
                             <th>医院</th>
                             <th>科室</th>
                             <th>头衔</th>
+                            <th>管理操作</th>
                         </tr>
                         @forelse($doctors as $doctor)
                             <tr>
@@ -52,6 +53,11 @@
                                 <td>{{$doctor->hospital}}</td>
                                 <td>{{$doctor->dept}}</td>
                                 <td>{{$doctor->title}}</td>
+                                <td>
+                                    <a class="btn btn-info" href="{{URL::to('verify/'.$doctor->id.'/edit')}}">
+                                        审核
+                                    </a>
+                                </td>
                             </tr>
                         @empty
                             <tr>

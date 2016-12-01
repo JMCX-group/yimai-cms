@@ -69,6 +69,7 @@ Route::group(['namespace' => 'Business', 'middleware' => ['auth','Entrust']], fu
         Route::get('todo', ['as' => 'verify.todo', 'uses' => 'VerifyController@todo']);
         Route::get('not', ['as' => 'verify.not', 'uses' => 'VerifyController@not']);
         Route::get('failed', ['as' => 'verify.failed', 'uses' => 'VerifyController@failed']);
+        Route::get('edit', ['as' => 'verify.edit', 'uses' => 'VerifyController@edit']);
     });
     Route::resource('verify', 'VerifyController'); // resource注册的路由需要放在自定义路由下方
 

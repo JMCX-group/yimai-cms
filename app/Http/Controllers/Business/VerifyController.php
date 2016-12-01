@@ -104,7 +104,13 @@ class VerifyController extends Controller
      */
     public function edit($id)
     {
-        //
+        $doctors = Doctor::getOneDoctor($id);
+        $doctors->auth_img = explode(',', $doctors->auth_img);
+
+        $page_title = "审核认证";
+        $page_level = $this->page_level;
+
+        return view('verifys.edit', compact('doctors', 'page_title', 'page_level'));
     }
 
     /**
