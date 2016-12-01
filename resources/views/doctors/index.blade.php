@@ -29,7 +29,7 @@
                 <div class="box-body table-responsive no-padding">
                     <table class="table table-hover">
                         <tr>
-                            <th>序号</th>
+                            <th>ID</th>
                             <th>姓名</th>
                             <th>手机号</th>
                             <th>性别</th>

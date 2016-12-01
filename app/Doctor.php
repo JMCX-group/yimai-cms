@@ -64,6 +64,7 @@ class Doctor extends Model
             ->leftJoin('hospitals', 'hospitals.id', '=', 'doctors.hospital_id')
             ->leftJoin('dept_standards', 'dept_standards.id', '=', 'doctors.dept_id')
             ->leftJoin('colleges', 'colleges.id', '=', 'doctors.college_id')
+            ->where('doctors.id', '>', '5')
             ->paginate(15);
     }
 
@@ -89,6 +90,7 @@ class Doctor extends Model
             ->leftJoin('dept_standards', 'dept_standards.id', '=', 'doctors.dept_id')
             ->leftJoin('colleges', 'colleges.id', '=', 'doctors.college_id')
             ->where('auth', $authStatus)
+            ->where('doctors.id', '>', '5')
             ->paginate(15);
     }
 }

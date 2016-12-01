@@ -29,7 +29,7 @@
                 <div class="box-body table-responsive no-padding">
                     <table class="table table-hover">
                         <tr>
-                            <th>序号</th>
+                            {{--<th>序号</th>--}}
                             <th>姓名</th>
                             <th>手机号</th>
                             <th>性别</th>
@@ -40,7 +40,7 @@
                         </tr>
                         @forelse($doctors as $doctor)
                             <tr>
-                                <td>{{$doctor->id}}</td>
+                                {{--<td>{{$doctor->id}}</td>--}}
                                 <td>{{$doctor->name}}</td>
                                 <td>{{$doctor->phone}}</td>
                                 @if($doctor->gender == 1)
