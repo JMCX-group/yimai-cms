@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Business;
 use App\Doctor;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class VerifyController extends Controller
@@ -77,7 +76,7 @@ class VerifyController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -88,7 +87,7 @@ class VerifyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -99,7 +98,7 @@ class VerifyController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -116,19 +115,51 @@ class VerifyController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
-        //
+        $doctors = Doctor::find($id);
+        $doctors->auth = 'completed';
+
+        try {
+            if ($doctors->save()) {
+                return redirect()->route('verify.todo')->withSuccess('通过成功');
+            } else {
+                return redirect()->back()->withErrors(array('error' => '更新数据失败'))->withInput();
+            }
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(array('error' => $e->getMessage()))->withInput();
+        }
+    }
+
+    /**
+     * 拒绝认证
+     *
+     * @param $id
+     * @return $this
+     */
+    public function refuse($id)
+    {
+        $doctors = Doctor::find($id);
+        $doctors->auth = 'fail';
+
+        try {
+            if ($doctors->save()) {
+                return redirect()->route('verify.todo')->withSuccess('拒绝成功');
+            } else {
+                return redirect()->back()->withErrors(array('error' => '更新数据失败'))->withInput();
+            }
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(array('error' => $e->getMessage()))->withInput();
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

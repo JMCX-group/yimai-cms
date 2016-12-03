@@ -79,7 +79,8 @@
                     </div>
                     <div class="box-footer">
                         <a class="btn btn-default" href="{{route('verify.todo')}}">返回</a>
-                        <button type="submit" class="btn btn-danger pull-right">通 过</button>
+                        <a class="btn btn-warning" href="{{URL::to('verify/refuse/'.$doctors->id)}}">拒绝</a>
+                        <button type="submit" class="btn btn-primary pull-right">通 过</button>
                     </div>
                 </form>
             </div>
