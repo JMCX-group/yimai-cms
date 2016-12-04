@@ -2,41 +2,28 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Requests;
+use App\Appointment;
+use App\Doctor;
 use App\Http\Controllers\Controller;
 
 class IndexController extends Controller
 {    
     public function index()
     {
-        $tasks = [
+        $page_title = "首页";
+        $data = [
             [
-                'name' => 'Design New Dashboard',
-                'progress' => '87',
-                'color' => 'danger'
-            ],
-            [
-                'name' => 'Create Home Page',
-                'progress' => '76',
-                'color' => 'warning'
-            ],
-            [
-                'name' => 'Some Other Task',
-                'progress' => '32',
+                'name' => '医生数量',
+                'progress' => Doctor::where('id', '>', '5')->count(),
                 'color' => 'success'
             ],
             [
-                'name' => 'Start Building Website',
-                'progress' => '56',
-                'color' => 'info'
-            ],
-            [
-                'name' => 'Develop an Awesome Algorithm',
-                'progress' => '10',
+                'name' => '订单数量',
+                'progress' => Appointment::count(),
                 'color' => 'success'
             ]
         ];
         
-        return view('index.index',compact('tasks'));
+        return view('index.index',compact( 'page_title', 'data'));
     }
 }

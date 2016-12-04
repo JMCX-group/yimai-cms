@@ -11,10 +11,10 @@
 
 @section("content")
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">Randomly Generated Tasks</h3>
+                <h3 class="box-title">基础数据</h3>
                 <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
                         <i class="fa fa-minus"></i>
@@ -25,21 +25,21 @@
                 </div>
             </div>
             <div class="box-body">
-                @foreach($tasks as $task)
+                @foreach($data as $datum)
                 <h5>
-                    {{ $task['name'] }}
-                    <small class="label label-{{$task['color']}} pull-right">{{$task['progress']}}%</small>
+                    {{ $datum['name'] }}
+                    <div class="label label-{{$datum['color']}} pull-right">{{$datum['progress']}}</div>
                 </h5>
-                <div class="progress progress-xxs">
-                    <div class="progress-bar progress-bar-{{$task['color']}}" style="width: {{$task['progress']}}%"></div>
-                </div>
+                {{--<div class="progress progress-xxs">--}}
+                    {{--<div class="progress-bar progress-bar-{{$datum['color']}}" style="width: {{$datum['progress']}}"></div>--}}
+                {{--</div>--}}
                 @endforeach
             </div>
-            <div class="box-footer">
-                <form action="#">
-                    <input type="text" placeholder="New task" class="form-control input-sm"/>
-                </form>
-            </div>
+            {{--<div class="box-footer">--}}
+                {{--<form action="#">--}}
+                    {{--<input type="text" placeholder="New task" class="form-control input-sm"/>--}}
+                {{--</form>--}}
+            {{--</div>--}}
         </div>
     </div>
     {{--<div class="col-md-6">--}}
