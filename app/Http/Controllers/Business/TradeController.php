@@ -45,18 +45,20 @@ class TradeController extends Controller
 
     public function appointmentIncomplete()
     {
+        $appointments = Appointment::getCloseAndCancel();
         $page_title = "约诊-未完成";
         $page_level = $this->page_level;
 
-        return view('trades.index', compact('page_title', 'page_level'));
+        return view('trades.appointment-incomplete', compact('appointments', 'page_title', 'page_level'));
     }
 
     public function appointmentCompleted()
     {
+        $appointments = Appointment::getCompleted();
         $page_title = "约诊-已完成";
         $page_level = $this->page_level;
 
-        return view('trades.index', compact('page_title', 'page_level'));
+        return view('trades.appointment-completed', compact('appointments', 'page_title', 'page_level'));
     }
 
     public function evaluate()
