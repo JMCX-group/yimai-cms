@@ -41,8 +41,8 @@
                             <th>医院名称</th>
                             <th>是否三甲</th>
                             <th>顶级科室数</th>
-                            <th>上线科室数</th>
-                            <th>上线医生数</th>
+                            {{--<th>上线科室数</th>--}}
+                            {{--<th>上线医生数</th>--}}
                             <th>状态</th>
                             <th>管理操作</th>
                         </tr>
@@ -53,8 +53,8 @@
                                 <td>{{$hospital->name}}</td>
                                 <td>{{$hospital->three_a}}</td>
                                 <td>{{$hospital->top_dept_num}}</td>
-                                <td></td>
-                                <td></td>
+                                {{--<td></td>--}}
+                                {{--<td></td>--}}
                                 <td>{{$hospital->status}}</td>
                                 <td>
                                     <a class="btn btn-info" href="{{URL::to('hospital/'.$hospital->id.'/edit')}}">

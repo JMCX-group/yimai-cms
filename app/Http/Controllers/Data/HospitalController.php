@@ -21,7 +21,7 @@ class HospitalController extends Controller
 
     public function index()
     {
-        $hospitals = Hospital::paginate(15);
+        $hospitals = Hospital::hospitalInfo();
         $page_title = "医院";
         $page_level = $this->page_level;
 
