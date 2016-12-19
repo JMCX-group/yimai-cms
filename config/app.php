@@ -154,6 +154,11 @@ return [
          * Custom
          */
         Zizaco\Entrust\EntrustServiceProvider::class,
+
+        /*
+         * UEditor baidu
+         */
+        Stevenyangecho\UEditor\UEditorServiceProvider::class
     ],
 
     /*
@@ -207,6 +212,11 @@ return [
          * Custom
          */
         'Entrust' => Zizaco\Entrust\EntrustFacade::class,
+
+        /*
+         * UEditor baidu
+         */
+        'UEditor' => Stevenyangecho\UEditor\UEditorServiceProvider::class
     ],
 
 ];
