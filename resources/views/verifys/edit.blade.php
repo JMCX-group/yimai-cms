@@ -36,7 +36,7 @@
                         <div class="form-group">
                             <label for="city" class="col-sm-3 control-label">头像</label>
                             <div class="col-sm-9">
-                                <img src="http://139.129.210.89{{$doctors->avatar}}" alt="image without thumbnail corners">
+                                <img src="{{$doctors->avatar}}" alt="image without thumbnail corners">
                             </div>
                         </div>
                         <div class="form-group">
@@ -71,7 +71,7 @@
                             <label for="city" class="col-sm-3 control-label">认证资料</label>
                             <div class="col-sm-9">
                                 @foreach($doctors->auth_img as $item)
-                                    <img src="http://139.129.210.89{{$item}}" width="250px" style="margin-bottom:10px;" alt="image without thumbnail corners">
+                                    <img src="{{$item}}" width="250px" style="margin-bottom:10px;" alt="image without thumbnail corners">
                                 @endforeach
                                 @include('layouts.message.tips',['field'=>'info'])
                             </div>
