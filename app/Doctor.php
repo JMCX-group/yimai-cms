@@ -113,4 +113,31 @@ class Doctor extends Model
             ->where('doctors.id', '>', '5')
             ->paginate(15);
     }
+
+    /**
+     * 获取申请名片的信息
+     *
+     * @param $status
+     * @return mixed
+     */
+    public static function getDoctorCardInfoList($status)
+    {
+        return Doctor::select(
+            'doctors.id', 'doctors.name', 'doctors.phone', 'doctors.gender', 'doctors.title', 'doctors.auth',
+            'doctors.province_id', 'doctors.city_id', 'doctors.hospital_id', 'doctors.dept_id', 'doctors.college_id',
+            'doctors.tag_list', 'doctors.profile',
+            'doctors.auth', 'doctors.auth_img',
+            'doctors.address', 'doctors.addressee', 'doctors.receive_phone',
+            'provinces.name AS province', 'citys.name AS city',
+            'hospitals.name AS hospital', 'dept_standards.name AS dept',
+            'colleges.name AS college')
+            ->leftJoin('provinces', 'provinces.id', '=', 'doctors.province_id')
+            ->leftJoin('citys', 'citys.id', '=', 'doctors.city_id')
+            ->leftJoin('hospitals', 'hospitals.id', '=', 'doctors.hospital_id')
+            ->leftJoin('dept_standards', 'dept_standards.id', '=', 'doctors.dept_id')
+            ->leftJoin('colleges', 'colleges.id', '=', 'doctors.college_id')
+            ->where('application_card', $status)
+            ->where('doctors.id', '>', '5')
+            ->paginate(15);
+    }
 }

@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -50,7 +49,6 @@ Route::group(['namespace' => 'Data', 'middleware' => ['auth','Entrust']], functi
     Route::resource('illness', 'IllnessController');
 });
 
-
 /**
  * 业务分组
  */
@@ -60,6 +58,16 @@ Route::group(['namespace' => 'Business', 'middleware' => ['auth','Entrust']], fu
      */
     Route::resource('doctor', 'DoctorController');
     Route::resource('patient', 'PatientController');
+
+    /**
+     * 名片申请
+     */
+    Route::group(['prefix' => 'card'], function () {
+        Route::get('todo', ['as' => 'card.todo', 'uses' => 'CardController@todo']);
+        Route::get('success', ['as' => 'card.success', 'uses' => 'CardController@success']);
+        Route::get('failed', ['as' => 'card.failed', 'uses' => 'CardController@failed']);
+    });
+    Route::resource('card', 'CardController');
 
     /**
      * 医生认证 : 已认证 | 待审核 | 未认证 | 认证失败 | 拒绝认证
