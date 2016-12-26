@@ -106,6 +106,21 @@ Route::group(['namespace' => 'Business', 'middleware' => ['auth','Entrust']], fu
     });
 
     /**
+     * 代约管理 : 平台代约 | 确认平台代约
+     */
+    Route::group(['prefix' => 'appointment'], function () {
+        Route::get('index', ['as' => 'appointment.index', 'uses' => 'AppointmentController@index']);
+        Route::get('view/{appointment}', ['as' => 'appointment.view', 'uses' => 'AppointmentController@view']);
+        Route::get('todo', ['as' => 'appointment.todo', 'uses' => 'AppointmentController@todo']);
+        Route::get('processing', ['as' => 'appointment.processing', 'uses' => 'AppointmentController@processing']);
+        Route::get('completed', ['as' => 'appointment.completed', 'uses' => 'AppointmentController@completed']);
+        Route::get('failed', ['as' => 'appointment.failed', 'uses' => 'AppointmentController@failed']);
+        Route::get('edit/{appointment}', ['as' => 'appointment.edit', 'uses' => 'AppointmentController@edit']);
+        Route::get('refuse/{appointment}', ['as' => 'appointment.refuse', 'uses' => 'AppointmentController@refuse']);
+    });
+    Route::resource('appointment', 'AppointmentController'); // resource注册的路由需要放在自定义路由下方
+
+    /**
      * 财务管理 : 收费设置 | 待结算 | 待报税 | 已结算 | 待提现 | 已提现 | 充值 | 资金报告 | 现金交易记录
      */
     Route::group(['prefix' => 'finance'], function () {
