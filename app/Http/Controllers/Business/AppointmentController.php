@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Business;
 
 use App\Appointment;
+use App\Doctor;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -174,6 +175,8 @@ class AppointmentController extends Controller
     public function update(Request $request, $id)
     {
         $appointments = Appointment::find($id);
+        $doctor = Doctor::find($appointments->doctor_id);
+        $appointments->price = $doctor->fee;
         $appointments->status = 'wait-1'; //待患者支付
 
         try {
