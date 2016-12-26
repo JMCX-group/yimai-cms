@@ -178,7 +178,7 @@ class AppointmentController extends Controller
 
         try {
             if ($appointments->save()) {
-                return redirect()->route('appointment.platform')->withSuccess('同意约诊');
+                return redirect()->route('appointment.todo')->withSuccess('同意约诊');
             } else {
                 return redirect()->back()->withErrors(array('error' => '更新数据失败'))->withInput();
             }
