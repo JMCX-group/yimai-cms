@@ -86,13 +86,13 @@ Route::group(['namespace' => 'Business', 'middleware' => ['auth','Entrust']], fu
      * 推送内容 : Banner | Share/fwd | 广播站 | 系统通知 | 服务协议 | 手动推送
      */
     Route::group(['prefix' => 'push'], function () {
-        Route::get('banner', ['as' => 'push.banner', 'uses' => 'PushController@banner']);
         Route::get('share-fwd', ['as' => 'push.share-fwd', 'uses' => 'PushController@shareFwd']);
         Route::get('broadcast', ['as' => 'push.broadcast', 'uses' => 'PushController@broadcast']);
         Route::get('sys-msg', ['as' => 'push.sys-msg', 'uses' => 'PushController@sysMsg']);
         Route::get('service-agreement', ['as' => 'push.service-agreement', 'uses' => 'PushController@serviceAgreement']);
         Route::get('manual', ['as' => 'push.manual', 'uses' => 'PushController@manual']);
     });
+    Route::resource('banner', 'BannerController');
 
     /**
      * 交易管理 : 待处理约诊 | 当面咨询 | 约诊-未完成 | 约诊-已完成 | 评价

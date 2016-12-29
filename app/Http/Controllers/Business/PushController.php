@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Business;
 
+use App\Banner;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -20,14 +21,6 @@ class PushController extends Controller
     public function index()
     {
         $page_title = "推送内容";
-        $page_level = $this->page_level;
-
-        return view('pushs.index', compact('page_title', 'page_level'));
-    }
-
-    public function banner()
-    {
-        $page_title = "Banner";
         $page_level = $this->page_level;
 
         return view('pushs.index', compact('page_title', 'page_level'));
