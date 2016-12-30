@@ -87,12 +87,12 @@ Route::group(['namespace' => 'Business', 'middleware' => ['auth','Entrust']], fu
      */
     Route::group(['prefix' => 'push'], function () {
         Route::get('share-fwd', ['as' => 'push.share-fwd', 'uses' => 'PushController@shareFwd']);
-        Route::get('broadcast', ['as' => 'push.broadcast', 'uses' => 'PushController@broadcast']);
         Route::get('sys-msg', ['as' => 'push.sys-msg', 'uses' => 'PushController@sysMsg']);
         Route::get('service-agreement', ['as' => 'push.service-agreement', 'uses' => 'PushController@serviceAgreement']);
         Route::get('manual', ['as' => 'push.manual', 'uses' => 'PushController@manual']);
     });
     Route::resource('banner', 'BannerController');
+    Route::resource('radio', 'RadioController');
 
     /**
      * 交易管理 : 待处理约诊 | 当面咨询 | 约诊-未完成 | 约诊-已完成 | 评价

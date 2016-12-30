@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers\Business;
 
-use App\Banner;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class PushController extends Controller
@@ -29,14 +26,6 @@ class PushController extends Controller
     public function shareFwd()
     {
         $page_title = "Share/fwd";
-        $page_level = $this->page_level;
-
-        return view('pushs.index', compact('page_title', 'page_level'));
-    }
-
-    public function broadcast()
-    {
-        $page_title = "广播站";
         $page_level = $this->page_level;
 
         return view('pushs.index', compact('page_title', 'page_level'));
