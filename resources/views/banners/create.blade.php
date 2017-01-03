@@ -35,7 +35,7 @@
                         <div class="form-group">
                             <label for="content" class="col-sm-3 control-label">内容</label>
                             <div class="col-sm-8">
-                                <div id="container" class="edui-default">
+                                <div id="container" name="container" class="edui-default">
                                     @include('UEditor::head')
                                 </div>
                             </div>
@@ -44,6 +44,7 @@
                             <label class="col-sm-3 control-label">位置</label>
                             <div class="col-sm-9">
                                 <select class="form-control select2" name="location">
+                                    <option value="">无</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -74,14 +75,14 @@
 
 @section('script')
     <!-- 加载编辑器的容器 -->
-    <script id="container" name="content" type="text/plain">
-
-    </script>
     <script>
         var ue=UE.getEditor("container");
         ue.ready(function(){
             //因为Laravel有防csrf防伪造攻击的处理所以加上此行
             ue.execCommand('serverparam','_token','{{ csrf_token() }}');
+        });
+        ue.addListener("ready", function () {
+            ue.setHeight('400'); //高度400
         });
     </script>
 @stop

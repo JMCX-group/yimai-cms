@@ -60,6 +60,16 @@ class BannerController extends Controller
 
         try {
             Banner::create($data);
+
+            /**
+             * 更新相应的医生/患者端的位置为空：
+             */
+            if($data['location'] != ''){
+                Banner::where('location', $data['location'])
+                    ->where('d_or_p', $data['d_or_p'])
+                    ->update(['location' => '']);
+            }
+
             return redirect()->route('banner.index')->withSuccess('新增Banner成功');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(array('error' => $e->getMessage()))->withInput();
@@ -110,6 +120,16 @@ class BannerController extends Controller
 
         try {
             $banner->save();
+
+            /**
+             * 更新相应的医生/患者端的位置为空：
+             */
+            if($request['location'] != ''){
+                Banner::where('location', $request['location'])
+                    ->where('d_or_p', $request['d_or_p'])
+                    ->update(['location' => '']);
+            }
+
             return redirect()->route('banner.index')->withSuccess('更新Banner成功');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(array('error' => $e->getMessage()))->withInput();

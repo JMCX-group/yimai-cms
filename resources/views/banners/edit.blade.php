@@ -36,7 +36,7 @@
                         <div class="form-group">
                             <label for="content" class="col-sm-3 control-label">内容</label>
                             <div class="col-sm-8">
-                                <div id="container" class="edui-default">
+                                <div id="container" name="container" class="edui-default">
                                     @include('UEditor::head')
                                 </div>
                             </div>
@@ -45,6 +45,7 @@
                             <label class="col-sm-3 control-label">位置</label>
                             <div class="col-sm-9">
                                 <select class="form-control select2" name="location">
+                                    <option value="1" @if($banner->location=="") selected @endif>无</option>
                                     <option value="1" @if($banner->location=="1") selected @endif>1</option>
                                     <option value="2" @if($banner->location=="2") selected @endif>2</option>
                                     <option value="3" @if($banner->location=="3") selected @endif>3</option>
@@ -75,14 +76,15 @@
 
 @section('script')
     <!-- 加载编辑器的容器 -->
-    <script id="container" name="content" type="text/plain">
-        还没
-    </script>
     <script>
         var ue=UE.getEditor("container");
         ue.ready(function(){
             //因为Laravel有防csrf防伪造攻击的处理所以加上此行
             ue.execCommand('serverparam','_token','{{ csrf_token() }}');
+        });
+        ue.addListener("ready", function () {
+            ue.setContent('{{$banner->content}}', false);
+            ue.setHeight('400'); //高度400
         });
     </script>
 @stop
