@@ -28,8 +28,17 @@
                         <div class="form-group">
                             <label for="img_url" class="col-sm-3 control-label">展示图</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="img_url" name="img_url" placeholder="展示图" value="{{old('img_url')}}">
-                                @include('layouts.message.tips',['field'=>'img_url'])
+                                {{--<input type="text" class="form-control" id="img_url" name="img_url" placeholder="展示图" value="{{old('img_url')}}">--}}
+                                {{--@include('layouts.message.tips',['field'=>'img_url'])--}}
+
+                                {{--<div id="focus_img">--}}
+                                {{--<div id="image-holder"></div>--}}
+                                {{--</div>--}}
+                                <div class="btn btn-default btn-file">
+                                    <i class="fa fa-paperclip" id="upload_focus_img_icon">上传展示图</i>
+                                    <input name="upload_focus_img" id="upload_focus_img" type="file" />
+                                </div>
+                                <p class="help-block">需要长750 * 400大小的图片</p>
                             </div>
                         </div>
                         <div class="form-group">
@@ -63,9 +72,6 @@
 
 @section('script')
     <!-- 加载编辑器的容器 -->
-    <script id="container" name="content" type="text/plain">
-
-    </script>
     <script>
         var ue=UE.getEditor("container");
         ue.ready(function(){
@@ -74,6 +80,25 @@
         });
         ue.addListener("ready", function () {
             ue.setHeight('400'); //高度400
+        });
+
+        $("#upload_focus_img").on('change', function () {
+            $("#upload_focus_img_icon").text($("#upload_focus_img").val()) ;
+
+//            if(typeof (FileReader)!="undefined"){
+//                var image_holder = $("#image-holder");
+//                image_holder.empty();
+//
+//                var reader = new FileReader();
+//                reader.onload = function (e) {
+//                    $("<img />", {
+//                        "src" : e.target.result,
+//                        "class" : "cover_small"
+//                    }).appendTo(image_holder);
+//                };
+//            }else{
+//                alert("您的浏览器不支持H5特性，无法看到图片预览");
+//            }
         });
     </script>
 @stop

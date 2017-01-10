@@ -95,11 +95,11 @@ Route::group(['namespace' => 'Business', 'middleware' => ['auth','Entrust']], fu
     /**
      * Banner
      */
-    Route::group(['prefix' => 'banner'], function () {
-        Route::post('upload', 'BannerController@upload');
-    });
     Route::resource('banner', 'BannerController');
 
+    /**
+     * Radio
+     */
     Route::resource('radio', 'RadioController');
 
     /**

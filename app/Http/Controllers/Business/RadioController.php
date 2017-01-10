@@ -52,7 +52,7 @@ class RadioController extends Controller
     {
         $data = [
             'title' => $request['title'],
-            'img_url' => $request['img_url'],
+            'img_url' => $this->upload($request->file('upload_focus_img')),
             'content' => $request['container'],
 //            'author' => $request['author'],
             'd_or_p' => $request['d_or_p'],
@@ -102,9 +102,19 @@ class RadioController extends Controller
      */
     public function update(Request $request, $id)
     {
+        /**
+         * 判断是否上传新的首图
+         */
+        $file = $request->file('upload_focus_img');
+        if ($file == null) {
+            $focusImgUrl = $request['img_url'];
+        } else {
+            $focusImgUrl = $this->upload($file);
+        }
+
         $radio = RadioStation::find($id);
         $radio->title = $request['title'];
-        $radio->img_url = $request['img_url'];
+        $radio->img_url = $focusImgUrl;
         $radio->content = $request['container'];
         $radio->d_or_p = $request['d_or_p'];
 
@@ -125,5 +135,49 @@ class RadioController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * 上传文件
+     *
+     * @param $file
+     * @return string
+     */
+    public function upload($file)
+    {
+        //文件是否上传成功
+        if ($file->isValid()) {    //判断文件是否上传成功
+//            $originalName = $file->getClientOriginalName(); //源文件名
+//            $ext = $file->getClientOriginalExtension();    //文件拓展名
+//            $type = $file->getClientMimeType(); //文件类型
+
+            $imgUrl = $this->saveImg($file);
+
+            return $imgUrl;
+        } else {
+            return '';
+        }
+    }
+
+    /**
+     * 保存图片
+     *
+     * @param $file
+     * @return string
+     */
+    public function saveImg($file)
+    {
+        $domain = \Config::get('constants.DOMAIN');
+        $destinationPath = \Config::get('constants.ARTICLE_PATH');
+        $filename = date('YmdHis') . '.jpg';  //新文件名
+
+        $file->move($destinationPath, $filename);
+
+        $fullPath = $destinationPath . $filename;
+        $newPath = str_replace('.jpg', '_thumb.jpg', $fullPath);
+
+        Image::make($fullPath)->encode('jpg', 50)->save($newPath);
+
+        return $domain . $newPath;
     }
 }
