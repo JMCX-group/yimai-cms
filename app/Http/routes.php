@@ -91,7 +91,15 @@ Route::group(['namespace' => 'Business', 'middleware' => ['auth','Entrust']], fu
         Route::get('service-agreement', ['as' => 'push.service-agreement', 'uses' => 'PushController@serviceAgreement']);
         Route::get('manual', ['as' => 'push.manual', 'uses' => 'PushController@manual']);
     });
+
+    /**
+     * Banner
+     */
+    Route::group(['prefix' => 'banner'], function () {
+        Route::post('upload', 'BannerController@upload');
+    });
     Route::resource('banner', 'BannerController');
+
     Route::resource('radio', 'RadioController');
 
     /**

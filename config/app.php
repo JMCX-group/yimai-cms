@@ -158,7 +158,9 @@ return [
         /*
          * UEditor baidu
          */
-        Stevenyangecho\UEditor\UEditorServiceProvider::class
+        Stevenyangecho\UEditor\UEditorServiceProvider::class,
+
+        Intervention\Image\ImageServiceProvider::class,
     ],
 
     /*
@@ -216,7 +218,9 @@ return [
         /*
          * UEditor baidu
          */
-        'UEditor' => Stevenyangecho\UEditor\UEditorServiceProvider::class
+        'UEditor' => Stevenyangecho\UEditor\UEditorServiceProvider::class,
+
+        'Image' => Intervention\Image\Facades\Image::class,
     ],
 
 ];

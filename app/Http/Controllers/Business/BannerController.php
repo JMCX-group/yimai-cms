@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Business;
 use App\Banner;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Intervention\Image\Facades\Image;
 
 class BannerController extends Controller
 {
@@ -45,14 +46,14 @@ class BannerController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $data = [
             'title' => $request['title'],
-            'focus_img_url' => $request['focus_img_url'],
+            'focus_img_url' => $this->upload($request->file('upload_focus_img')),
             'content' => $request['container'],
             'location' => $request['location'],
             'd_or_p' => $request['d_or_p']
@@ -64,7 +65,7 @@ class BannerController extends Controller
             /**
              * 更新相应的医生/患者端的位置为空：
              */
-            if($data['location'] != ''){
+            if ($data['location'] != '') {
                 Banner::where('location', $data['location'])
                     ->where('d_or_p', $data['d_or_p'])
                     ->update(['location' => '']);
@@ -79,7 +80,7 @@ class BannerController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -90,7 +91,7 @@ class BannerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -105,15 +106,28 @@ class BannerController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
+        /**
+         * 判断是否上传新的首图
+         */
+        $file = $request->file('upload_focus_img');
+        if ($file == null) {
+            $focusImgUrl = $request['focus_img_url'];
+        } else {
+            $focusImgUrl = $this->upload($file);
+        }
+
+        /**
+         * Update data.
+         */
         $banner = Banner::find($id);
         $banner->title = $request['title'];
-        $banner->focus_img_url = $request['focus_img_url'];
+        $banner->focus_img_url = $focusImgUrl;
         $banner->content = $request['container'];
         $banner->location = $request['location'];
         $banner->d_or_p = $request['d_or_p'];
@@ -124,7 +138,7 @@ class BannerController extends Controller
             /**
              * 更新相应的医生/患者端的位置为空：
              */
-            if($request['location'] != ''){
+            if ($request['location'] != '') {
                 Banner::where('location', $request['location'])
                     ->where('d_or_p', $request['d_or_p'])
                     ->update(['location' => '']);
@@ -139,11 +153,55 @@ class BannerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * 上传文件
+     *
+     * @param $file
+     * @return string
+     */
+    public function upload($file)
+    {
+        //文件是否上传成功
+        if ($file->isValid()) {    //判断文件是否上传成功
+//            $originalName = $file->getClientOriginalName(); //源文件名
+//            $ext = $file->getClientOriginalExtension();    //文件拓展名
+//            $type = $file->getClientMimeType(); //文件类型
+
+            $imgUrl = $this->saveImg($file);
+
+            return $imgUrl;
+        } else {
+            return '';
+        }
+    }
+
+    /**
+     * 保存图片
+     *
+     * @param $file
+     * @return string
+     */
+    public function saveImg($file)
+    {
+        $domain = \Config::get('constants.DOMAIN');
+        $destinationPath = \Config::get('constants.BANNER_PATH');
+        $filename = date('YmdHis') . '.jpg';  //新文件名
+
+        $file->move($destinationPath, $filename);
+
+        $fullPath = $destinationPath . $filename;
+        $newPath = str_replace('.jpg', '_thumb.jpg', $fullPath);
+
+        Image::make($fullPath)->encode('jpg', 50)->save($newPath);
+
+        return $domain . $newPath;
     }
 }
