@@ -38,7 +38,7 @@
                                     <i class="fa fa-paperclip" id="upload_focus_img_icon">上传展示图</i>
                                     <input name="upload_focus_img" id="upload_focus_img" type="file" />
                                 </div>
-                                <p class="help-block">需要长750 * 520大小的图片</p>
+                                <p class="help-block">需要长750 * 520大小的图片； 如果不上传将展示默认图片</p>
                             </div>
                         </div>
                         <div class="form-group">

@@ -51,9 +51,22 @@ class BannerController extends Controller
      */
     public function store(Request $request)
     {
+        /**
+         * 判断是否上传新的首图
+         */
+        $file = $request->file('upload_focus_img');
+        if ($file == null) {
+            $focusImgUrl = 'http://cms.medi-link.cn/uploads/banner/20161218205430.png'; //默认图片
+        } else {
+            $focusImgUrl = $this->upload($file);
+        }
+
+        /**
+         * 生成数据
+         */
         $data = [
             'title' => $request['title'],
-            'focus_img_url' => $this->upload($request->file('upload_focus_img')),
+            'focus_img_url' => $focusImgUrl,
             'content' => $request['container'],
             'location' => $request['location'],
             'd_or_p' => $request['d_or_p']

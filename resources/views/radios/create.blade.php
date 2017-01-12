@@ -19,6 +19,13 @@
                     </div>
                     <div class="box-body">
                         <div class="form-group">
+                            <label for="prompt" class="col-sm-3 control-label">提示</label>
+                            <div class="col-sm-9">
+                                <p class="help-block">广播将会进行全员推送，请慎重发出！！标题是手机顶部弹出提示的内容</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <label for="title" class="col-sm-3 control-label">标题</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="title" name="title" placeholder="标题" value="{{old('title')}}">
@@ -38,7 +45,7 @@
                                     <i class="fa fa-paperclip" id="upload_focus_img_icon">上传展示图</i>
                                     <input name="upload_focus_img" id="upload_focus_img" type="file" />
                                 </div>
-                                <p class="help-block">需要长750 * 400大小的图片</p>
+                                <p class="help-block">需要长750 * 400大小的图片； 如果不上传将展示默认图片</p>
                             </div>
                         </div>
                         <div class="form-group">

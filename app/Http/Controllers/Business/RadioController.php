@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Business;
 
 use App\RadioStation;
@@ -45,23 +44,44 @@ class RadioController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
+        /**
+         * 判断是否上传新的首图
+         */
+        $file = $request->file('upload_focus_img');
+        if ($file == null) {
+            $focusImgUrl = 'http://cms.medi-link.cn/uploads/article/1.png'; //默认图片
+        } else {
+            $focusImgUrl = $this->upload($file);
+        }
+
+        /**
+         * 生成数据
+         */
         $data = [
             'title' => $request['title'],
-            'img_url' => $this->upload($request->file('upload_focus_img')),
+            'img_url' => $focusImgUrl,
             'content' => $request['container'],
 //            'author' => $request['author'],
             'd_or_p' => $request['d_or_p'],
 //            'valid' => $request['valid']
         ];
 
+        /**
+         * 推送广播
+         */
+        $result = $this->sendNotification($data['title']);
+        if ($result['result'] == false) {
+            return redirect()->back()->withErrors(array('error' => $result['message']))->withInput();
+        }
+
         try {
             RadioStation::create($data);
-            return redirect()->route('radio.index')->withSuccess('新增广播成功');
+            return redirect()->route('radio.index')->withSuccess('新增广播成功；推送广播成功');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(array('error' => $e->getMessage()))->withInput();
         }
@@ -70,7 +90,7 @@ class RadioController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -81,7 +101,7 @@ class RadioController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -96,8 +116,8 @@ class RadioController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -129,7 +149,7 @@ class RadioController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -179,5 +199,18 @@ class RadioController extends Controller
         Image::make($fullPath)->encode('jpg', 50)->save($newPath);
 
         return $domain . $newPath;
+    }
+
+    /**
+     * 发送广播
+     *
+     * @param $title
+     * @return array
+     */
+    public function sendNotification($title)
+    {
+        require(dirname(dirname(dirname(__FILE__))) . '/Helper/UmengNotification/NotificationPush.php');
+        $pushDemo = new \NotificationPush('58073c2ae0f55a4ac00023e4', 'npypnjmmor5ufydocxyia3o6lwq1vh5n');
+        return $pushDemo->sendIOSBroadcast($title, 'radio');
     }
 }
