@@ -25,7 +25,14 @@ class NotificationPush
         $this->timestamp = strval(time());
     }
 
-    function sendAndroidBroadcast()
+    /**
+     * 安卓广播
+     *
+     * @param $title
+     * @param $action
+     * @return array
+     */
+    function sendAndroidBroadcast($title, $action)
     {
         try {
             $brocast = new AndroidBroadcast();
@@ -33,19 +40,19 @@ class NotificationPush
             $brocast->setPredefinedKeyValue("appkey", $this->appkey);
             $brocast->setPredefinedKeyValue("timestamp", $this->timestamp);
             $brocast->setPredefinedKeyValue("ticker", "Android broadcast ticker");
-            $brocast->setPredefinedKeyValue("title", "中文的title");
+            $brocast->setPredefinedKeyValue("title", $title);
             $brocast->setPredefinedKeyValue("text", "Android broadcast text");
             $brocast->setPredefinedKeyValue("after_open", "go_app");
             // Set 'production_mode' to 'false' if it's a test device.
             // For how to register a test device, please see the developer doc.
             $brocast->setPredefinedKeyValue("production_mode", "true");
             // [optional]Set extra fields
-            $brocast->setExtraField("test", "helloworld");
-            print("Sending broadcast notification, please wait...\r\n");
+            $brocast->setExtraField("action", $action);
             $brocast->send();
-            print("Sent SUCCESS\r\n");
+
+            return ['result' => true, 'message' => ''];
         } catch (Exception $e) {
-            print("Caught exception: " . $e->getMessage());
+            return ['result' => false, 'message' => $e->getMessage()];
         }
     }
 

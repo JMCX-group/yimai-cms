@@ -72,12 +72,20 @@ class RadioController extends Controller
         ];
 
         /**
-         * 推送广播
+         * 推送IOS广播
          */
-        $result = $this->sendNotification($data['d_or_p'], $request['e_or_a'], $data['title']);
+        $result = $this->sendNotification_IOS($data['d_or_p'], $request['e_or_a'], $data['title']);
         if ($result['result'] == false) {
             return redirect()->back()->withErrors(array('error' => $result['message']))->withInput();
         }
+
+        /**
+         * 推送安卓广播
+         */
+//        $result = $this->sendNotification_Android($data['d_or_p'], $data['title']);
+//        if ($result['result'] == false) {
+//            return redirect()->back()->withErrors(array('error' => $result['message']))->withInput();
+//        }
 
         try {
             RadioStation::create($data);
@@ -202,14 +210,14 @@ class RadioController extends Controller
     }
 
     /**
-     * 发送广播
+     * 发送广播-IOS
      *
      * @param $dOrP
      * @param $eOrA
      * @param $title
      * @return array
      */
-    public function sendNotification($dOrP, $eOrA, $title)
+    public function sendNotification_IOS($dOrP, $eOrA, $title)
     {
         require(dirname(dirname(dirname(__FILE__))) . '/Helper/UmengNotification/NotificationPush.php');
 
@@ -228,5 +236,25 @@ class RadioController extends Controller
         }
 
         return $push->sendIOSBroadcast($title, 'radio');
+    }
+
+    /**
+     * 发送广播-IOS
+     *
+     * @param $dOrP
+     * @param $title
+     * @return array
+     */
+    public function sendNotification_Android($dOrP, $title)
+    {
+        require(dirname(dirname(dirname(__FILE__))) . '/Helper/UmengNotification/NotificationPush.php');
+
+        if ($dOrP == 'd') { //医生端
+            $push = new \NotificationPush('58073c2ae0f55a4ac00023e4', 'npypnjmmor5ufydocxyia3o6lwq1vh5n');
+        } else { //患者端
+            $push = new \NotificationPush('58770533c62dca6297001b7b', 'mnbtm9nu5v2cw5neqbxo6grqsuhxg1o8');
+        }
+
+        return $push->sendAndroidBroadcast($title, 'radio');
     }
 }
