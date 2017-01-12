@@ -215,18 +215,18 @@ class RadioController extends Controller
 
         if ($dOrP == 'd') { //医生端
             if ($eOrA == 'enterprise') { //医生端企业版
-                $pushDemo = new \NotificationPush('58073c2ae0f55a4ac00023e4', 'npypnjmmor5ufydocxyia3o6lwq1vh5n');
+                $push = new \NotificationPush('58073c2ae0f55a4ac00023e4', 'npypnjmmor5ufydocxyia3o6lwq1vh5n');
             } else { //医生端AppStore
-                $pushDemo = new \NotificationPush('587704278f4a9d795e001f79', 'ajcvonw3kas06oyljq1xcujvuadqszcj');
+                $push = new \NotificationPush('587704278f4a9d795e001f79', 'ajcvonw3kas06oyljq1xcujvuadqszcj');
             }
         } else { //患者端
             if ($eOrA == 'enterprise') { //患者端企业版
-                $pushDemo = new \NotificationPush('58770533c62dca6297001b7b', 'mnbtm9nu5v2cw5neqbxo6grqsuhxg1o8');
+                $push = new \NotificationPush('58770533c62dca6297001b7b', 'mnbtm9nu5v2cw5neqbxo6grqsuhxg1o8');
             } else { //患者端AppStore
-                $pushDemo = new \NotificationPush('587704b3310c934edb002251', 'mngbtbi7lj0y8shlmdvvqdkek9k3hfin');
+                $push = new \NotificationPush('587704b3310c934edb002251', 'mngbtbi7lj0y8shlmdvvqdkek9k3hfin');
             }
         }
 
-        return $pushDemo->sendIOSBroadcast($title, 'radio');
+        return $push->sendIOSBroadcast($title, 'radio');
     }
 }
