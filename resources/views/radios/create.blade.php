@@ -66,6 +66,16 @@
                                 @include('layouts.message.tips',['field'=>'d_or_p'])
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">广播给企业版/AppStore</label>
+                            <div class="col-sm-9">
+                                <select class="form-control select2" name="e_or_a">
+                                    <option value="enterprise">企业版</option>
+                                    <option value="app">AppStore</option>
+                                </select>
+                                @include('layouts.message.tips',['field'=>'e_or_a'])
+                            </div>
+                        </div>
                     </div>
                     <div class="box-footer">
                         <a class="btn btn-default" href="{{route('radio.index')}}">返回</a>
