@@ -73,7 +73,7 @@ class BannerController extends Controller
         ];
 
         try {
-            Banner::create($data);
+            $retBanner = Banner::create($data);
 
             /**
              * 更新相应的医生/患者端的位置为空：
@@ -81,6 +81,7 @@ class BannerController extends Controller
             if ($data['location'] != '') {
                 Banner::where('location', $data['location'])
                     ->where('d_or_p', $data['d_or_p'])
+                    ->where('id', '!=', $retBanner->id)
                     ->update(['location' => '']);
             }
 
@@ -154,6 +155,7 @@ class BannerController extends Controller
             if ($request['location'] != '') {
                 Banner::where('location', $request['location'])
                     ->where('d_or_p', $request['d_or_p'])
+                    ->where('id', '!=', $id)
                     ->update(['location' => '']);
             }
 

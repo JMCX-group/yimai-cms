@@ -55,7 +55,7 @@
                             <label class="col-sm-3 control-label">位置</label>
                             <div class="col-sm-9">
                                 <select class="form-control select2" name="location">
-                                    <option value="1" @if($banner->location=="") selected @endif>无</option>
+                                    <option value="" @if($banner->location=="") selected @endif>无</option>
                                     <option value="1" @if($banner->location=="1") selected @endif>1</option>
                                     <option value="2" @if($banner->location=="2") selected @endif>2</option>
                                     <option value="3" @if($banner->location=="3") selected @endif>3</option>

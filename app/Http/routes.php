@@ -60,6 +60,12 @@ Route::group(['namespace' => 'Business', 'middleware' => ['auth','Entrust']], fu
     Route::resource('patient', 'PatientController');
 
     /**
+     * 推送管理：Banner | Radio
+     */
+    Route::resource('banner', 'BannerController');
+    Route::resource('radio', 'RadioController');
+
+    /**
      * 名片申请
      */
     Route::group(['prefix' => 'card'], function () {
@@ -81,26 +87,6 @@ Route::group(['namespace' => 'Business', 'middleware' => ['auth','Entrust']], fu
         Route::get('refuse/{verify}', ['as' => 'verify.refuse', 'uses' => 'VerifyController@refuse']);
     });
     Route::resource('verify', 'VerifyController'); // resource注册的路由需要放在自定义路由下方
-
-    /**
-     * 推送内容 : Banner | Share/fwd | 广播站 | 系统通知 | 服务协议 | 手动推送
-     */
-    Route::group(['prefix' => 'push'], function () {
-        Route::get('share-fwd', ['as' => 'push.share-fwd', 'uses' => 'PushController@shareFwd']);
-        Route::get('sys-msg', ['as' => 'push.sys-msg', 'uses' => 'PushController@sysMsg']);
-        Route::get('service-agreement', ['as' => 'push.service-agreement', 'uses' => 'PushController@serviceAgreement']);
-        Route::get('manual', ['as' => 'push.manual', 'uses' => 'PushController@manual']);
-    });
-
-    /**
-     * Banner
-     */
-    Route::resource('banner', 'BannerController');
-
-    /**
-     * Radio
-     */
-    Route::resource('radio', 'RadioController');
 
     /**
      * 交易管理 : 待处理约诊 | 当面咨询 | 约诊-未完成 | 约诊-已完成 | 评价

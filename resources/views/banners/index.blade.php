@@ -40,7 +40,7 @@
                             <th>标题</th>
                             <th>头图</th>
                             <th>医/患</th>
-                            <th>状态</th>
+                            <th>位置序号</th>
                             <th>管理操作</th>
                         </tr>
                         @forelse($banners as $banner)
@@ -49,7 +49,7 @@
                                 <td>{{$banner->title}}</td>
                                 <td><img src="{{$banner->focus_img_url}}" style="width: 150px;"></td>
                                 <td>{{$banner->d_or_p}}</td>
-                                <td>{{$banner->status}}</td>
+                                <td>{{$banner->location}}</td>
                                 <td>
                                     <a class="btn btn-info" href="{{URL::to('banner/'.$banner->id.'/edit')}}">
                                         编辑
