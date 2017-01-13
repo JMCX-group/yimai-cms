@@ -24,11 +24,11 @@ class TaxController extends Controller
      */
     public function index()
     {
-        $banners = SettlementRecord::paginate(15);
+        $settlements = SettlementRecord::paginate(15);
         $page_title = "待缴税";
         $page_level = $this->page_level;
 
-        return view('Taxs.index', compact('banners', 'page_title', 'page_level'));
+        return view('Taxs.index', compact('settlements', 'page_title', 'page_level'));
     }
 
     /**
