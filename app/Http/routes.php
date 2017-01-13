@@ -115,19 +115,14 @@ Route::group(['namespace' => 'Business', 'middleware' => ['auth','Entrust']], fu
     Route::resource('appointment', 'AppointmentController'); // resource注册的路由需要放在自定义路由下方
 
     /**
-     * 财务管理 : 收费设置 | 待结算 | 待报税 | 已结算 | 待提现 | 已提现 | 充值 | 资金报告 | 现金交易记录
+     * 财务管理 : 税务管理（待缴税） / 结算管理（已结算） / 提现管理（申请提现/已提现）
      */
-    Route::group(['prefix' => 'finance'], function () {
-        Route::get('setting', ['as' => 'finance.setting', 'uses' => 'FinanceController@setting']);
-        Route::get('pending-settlement', ['as' => 'finance.pending-settlement', 'uses' => 'FinanceController@pendingSettlement']);
-        Route::get('pending-tax', ['as' => 'finance.pending-tax', 'uses' => 'FinanceController@pendingTax']);
-        Route::get('settled', ['as' => 'finance.settled', 'uses' => 'FinanceController@settled']);
-        Route::get('pending-withdrawals', ['as' => 'finance.pending-withdrawals', 'uses' => 'FinanceController@pendingWithdrawals']);
-        Route::get('completed-withdrawals', ['as' => 'finance.completed-withdrawals', 'uses' => 'FinanceController@completedWithdrawals']);
-        Route::get('recharge', ['as' => 'finance.recharge', 'uses' => 'FinanceController@recharge']);
-        Route::get('report', ['as' => 'finance.report', 'uses' => 'FinanceController@report']);
-        Route::get('cash-record', ['as' => 'finance.cash-record', 'uses' => 'FinanceController@cashRecord']);
+    Route::resource('tax', 'TaxController');
+    Route::resource('settlement', 'SettlementController');
+    Route::group(['prefix' => 'withdraw'], function () {
+        Route::get('completed', ['as' => 'withdraw.completed', 'uses' => 'WithdrawController@completed']);
     });
+    Route::resource('withdraw', 'WithdrawController');
 
     /**
      * 用户反馈 : 订单投诉 | 使用反馈
