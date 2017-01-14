@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Business;
 
+use App\Doctor;
 use App\SettlementRecord;
 use Illuminate\Http\Request;
 
@@ -24,11 +25,11 @@ class TaxController extends Controller
      */
     public function index()
     {
-        $settlements = SettlementRecord::paginate(15);
+        $settlements = SettlementRecord::getSettlementRecord();
         $page_title = "待缴税";
         $page_level = $this->page_level;
 
-        return view('Taxs.index', compact('settlements', 'page_title', 'page_level'));
+        return view('taxs.index', compact('settlements', 'page_title', 'page_level'));
     }
 
     /**
@@ -71,7 +72,12 @@ class TaxController extends Controller
      */
     public function edit($id)
     {
-        //
+        $settlement = SettlementRecord::find($id);
+        $doctors = Doctor::getOneDoctor($settlement['attributes']['doctor_id']);
+        $page_title = "申报缴税";
+        $page_level = $this->page_level;
+
+        return view('Taxs.edit', compact('settlement', 'doctors', 'page_title', 'page_level'));
     }
 
     /**
@@ -79,11 +85,24 @@ class TaxController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {
-        //
+        $settlement = SettlementRecord::find($id);
+        $settlement->tax_payment = $request['tax-payment'];
+        $settlement->tax_time = date('Y-m-d H:i:s');
+        $settlement->status = 1; //结算状态； 0：未缴税；1：已完成结算，可提现
+
+        try {
+            if ($settlement->save()) {
+                return redirect()->route('tax.index')->withSuccess('报税成功');
+            } else {
+                return redirect()->back()->withErrors(array('error' => '更新数据失败'))->withInput();
+            }
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(array('error' => $e->getMessage()))->withInput();
+        }
     }
 
     /**

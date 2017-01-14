@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col-md-6">
             <div class="box box-info">
-                <form class="form-horizontal" action="{{URL::to('tax/'.$settlement->id)}}" method="post" enctype="multipart/form-data">
+                <form class="form-horizontal" action="{{URL::to('withdraw/'.$settlement->id)}}" method="post" enctype="multipart/form-data">
                     <div class="box-header with-border">
                         <h3 class="box-title">{{$page_title or "page_title"}}</h3>
                         <input type="hidden" name="_token" value="{{csrf_token()}}">
@@ -20,7 +20,7 @@
                     </div>
                     <div class="box-body">
                         <ul class="breadcrumb">
-                            <li><a href="#">收入税务信息</a> <span class="divider"></span></li>
+                            <li><a href="#">提现信息</a> <span class="divider"></span></li>
                         </ul>
 
                         <div class="form-group">
@@ -40,8 +40,33 @@
                         <div class="form-group">
                             <label for="tax-payment" class="col-sm-3 control-label">应交税费</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="tax-payment" name="tax-payment" placeholder="财务计算完毕后填入" value="{{$settlement->tax_payment}}">
+                                <input type="text" disabled="disabled" class="form-control" id="tax-payment" name="tax-payment" placeholder="无" value="{{$settlement->tax_payment}}">
                                 @include('layouts.message.tips',['field'=>'tax-payment'])
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="withdrawal-amount" class="col-sm-3 control-label">提现金额</label>
+                            <div class="col-sm-9">
+                                <input type="text" disabled="disabled" class="form-control" id="withdrawal-amount" name="withdrawal-amount" placeholder="无" value="{{($settlement->total - $settlement->tax_payment)}}">
+                                @include('layouts.message.tips',['field'=>'withdrawal-amount'])
+                            </div>
+                        </div>
+
+                        <ul class="breadcrumb">
+                            <li><a href="#">银行卡信息</a> <span class="divider"></span></li>
+                        </ul>
+                        <div class="form-group">
+                            <label for="bank-name" class="col-sm-3 control-label">银行名称</label>
+                            <div class="col-sm-9">
+                                <input type="text" disabled="disabled" class="form-control" id="bank-name" name="bank-name" placeholder="无" value="{{$bank->bank_name}}">
+                                @include('layouts.message.tips',['field'=>'bank-name'])
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="bank-no" class="col-sm-3 control-label">银行卡号</label>
+                            <div class="col-sm-9">
+                                <input type="text" disabled="disabled" class="form-control" id="bank-no" name="bank-no" placeholder="无" value="{{$bank->bank_no}}">
+                                @include('layouts.message.tips',['field'=>'bank-no'])
                             </div>
                         </div>
 
@@ -98,7 +123,7 @@
                         </div>
                     </div>
                     <div class="box-footer">
-                        <a class="btn btn-default" href="{{route('tax.index')}}">返回</a>
+                        <a class="btn btn-default" href="{{route('withdraw.index')}}">返回</a>
                         <button type="submit" class="btn btn-primary pull-right">提 交</button>
                     </div>
                 </form>

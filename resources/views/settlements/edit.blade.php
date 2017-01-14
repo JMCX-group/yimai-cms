@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col-md-6">
             <div class="box box-info">
-                <form class="form-horizontal" action="{{URL::to('tax/'.$settlement->id)}}" method="post" enctype="multipart/form-data">
+                <form class="form-horizontal" action="{{URL::to('settlement/'.$settlement->id)}}" method="post" enctype="multipart/form-data">
                     <div class="box-header with-border">
                         <h3 class="box-title">{{$page_title or "page_title"}}</h3>
                         <input type="hidden" name="_token" value="{{csrf_token()}}">
@@ -98,7 +98,7 @@
                         </div>
                     </div>
                     <div class="box-footer">
-                        <a class="btn btn-default" href="{{route('tax.index')}}">返回</a>
+                        <a class="btn btn-default" href="{{route('settlement.index')}}">返回</a>
                         <button type="submit" class="btn btn-primary pull-right">提 交</button>
                     </div>
                 </form>

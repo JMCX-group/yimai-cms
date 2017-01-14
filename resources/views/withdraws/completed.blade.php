@@ -13,7 +13,7 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">结算列表</h3>
+                    <h3 class="box-title">已提现列表</h3>
                     <div class="box-tools pull-right">
                         <div class="input-group input-group-sm" style="width: 150px;">
                             <input type="text" name="table_search" class="form-control pull-right" placeholder="快速查询">
@@ -33,7 +33,10 @@
                             <th>医生姓名</th>
                             <th>收入时间段（年 / 月）</th>
                             <th>月收入总额</th>
-                            <th>管理操作</th>
+                            <th>已缴纳税额</th>
+                            <th>提现金额</th>
+                            <th>申请时间</th>
+                            <th>完成时间</th>
                         </tr>
                         @forelse($settlements as $settlement)
                             <tr>
@@ -41,11 +44,10 @@
                                 <td>{{$settlement->doctor}}</td>
                                 <td>{{$settlement->year . ' / '. $settlement->month}}</td>
                                 <td>{{$settlement->total}}</td>
-                                <td>
-                                    <a class="btn btn-info" href="{{URL::to('tax/'.$settlement->id.'/edit')}}">
-                                        报税
-                                    </a>
-                                </td>
+                                <td>{{$settlement->tax_payment}}</td>
+                                <td>{{($settlement->total - $settlement->tax_payment)}}</td>
+                                <td>{{$settlement->withdraw_request_date}}</td>
+                                <td>{{$settlement->withdraw_confirm_date}}</td>
                             </tr>
                         @empty
                             <tr>
