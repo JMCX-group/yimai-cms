@@ -43,6 +43,7 @@ class SettlementRecord extends Model
         return SettlementRecord::select('settlement_records.*', 'doctors.name AS doctor')
             ->leftJoin('doctors', 'doctors.id', '=', 'settlement_records.doctor_id')
             ->where('settlement_records.status', $status)//结算状态； 0：未缴税；1：已完成结算，可提现
+            ->where('settlement_records.withdraw_status', 0)//提现状态：是否已提现；0为未提现，1为申请提现，9为成功
             ->where('doctors.auth', 'completed')//医生认证状态：completed：已认证；空：未认证；processing：认证中；fail：认证失败。
             ->paginate(15);
     }
