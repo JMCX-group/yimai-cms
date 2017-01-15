@@ -253,11 +253,11 @@ class RadioController extends Controller
     {
         require(dirname(dirname(dirname(__FILE__))) . '/Helper/UmengNotification/NotificationPush.php');
 
-//        if ($dOrP == 'd') { //医生端
+        if ($dOrP == 'd') { //医生端
             $push = new \NotificationPush('58073313e0f55a4825002a47', '0hmugthtu84nyou6egw3kmdsf6v4zmom');
-//        } else { //患者端
-//            $push = new \NotificationPush('58770533c62dca6297001b7b', 'mnbtm9nu5v2cw5neqbxo6grqsuhxg1o8');
-//        }
+        } else { //患者端
+            $push = new \NotificationPush('587b786af43e4833800004cb', 'oth53caymcr5zxc2edhi0ghuoyuxbov3');
+        }
 
         return $push->sendAndroidBroadcast($title, 'radio', $radioId);
     }
