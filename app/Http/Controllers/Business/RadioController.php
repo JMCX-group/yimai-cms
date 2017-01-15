@@ -71,24 +71,26 @@ class RadioController extends Controller
 //            'valid' => $request['valid']
         ];
 
-        /**
-         * 推送IOS广播
-         */
-        $result = $this->sendNotification_IOS($data['d_or_p'], $request['e_or_a'], $data['title']);
-        if ($result['result'] == false) {
-            return redirect()->back()->withErrors(array('error' => $result['message']))->withInput();
-        }
-
-        /**
-         * 推送安卓广播
-         */
-        $result = $this->sendNotification_Android($data['d_or_p'], $data['title']);
-        if ($result['result'] == false) {
-            return redirect()->back()->withErrors(array('error' => $result['message']))->withInput();
-        }
-
         try {
-            RadioStation::create($data);
+            $radioId = RadioStation::create($data);
+            $radioId = $radioId->id;
+
+            /**
+             * 推送IOS广播
+             */
+            $result = $this->sendNotification_IOS($data['d_or_p'], $request['e_or_a'], $data['title'], $radioId);
+            if ($result['result'] == false) {
+                return redirect()->back()->withErrors(array('error' => $result['message']))->withInput();
+            }
+
+            /**
+             * 推送安卓广播
+             */
+            $result = $this->sendNotification_Android($data['d_or_p'], $data['title'], $radioId);
+            if ($result['result'] == false) {
+                return redirect()->back()->withErrors(array('error' => $result['message']))->withInput();
+            }
+
             return redirect()->route('radio.index')->withSuccess('新增广播成功；推送广播成功');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(array('error' => $e->getMessage()))->withInput();
@@ -215,9 +217,10 @@ class RadioController extends Controller
      * @param $dOrP
      * @param $eOrA
      * @param $title
+     * @param $radioId
      * @return array
      */
-    public function sendNotification_IOS($dOrP, $eOrA, $title)
+    public function sendNotification_IOS($dOrP, $eOrA, $title, $radioId)
     {
         require(dirname(dirname(dirname(__FILE__))) . '/Helper/UmengNotification/NotificationPush.php');
 
@@ -235,7 +238,7 @@ class RadioController extends Controller
             }
         }
 
-        return $push->sendIOSBroadcast($title, 'radio');
+        return $push->sendIOSBroadcast($title, 'radio', $radioId);
     }
 
     /**
@@ -243,9 +246,10 @@ class RadioController extends Controller
      *
      * @param $dOrP
      * @param $title
+     * @param $radioId
      * @return array
      */
-    public function sendNotification_Android($dOrP, $title)
+    public function sendNotification_Android($dOrP, $title, $radioId)
     {
         require(dirname(dirname(dirname(__FILE__))) . '/Helper/UmengNotification/NotificationPush.php');
 
@@ -255,6 +259,6 @@ class RadioController extends Controller
 //            $push = new \NotificationPush('58770533c62dca6297001b7b', 'mnbtm9nu5v2cw5neqbxo6grqsuhxg1o8');
 //        }
 
-        return $push->sendAndroidBroadcast($title, 'radio');
+        return $push->sendAndroidBroadcast($title, 'radio', $radioId);
     }
 }
