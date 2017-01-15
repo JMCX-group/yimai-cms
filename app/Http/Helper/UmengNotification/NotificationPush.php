@@ -231,7 +231,15 @@ class NotificationPush
         }
     }
 
-    function sendIOSUnicast()
+    /**
+     * IOS单播
+     *
+     * @param $deviceToken
+     * @param $alert
+     * @param $action
+     * @return array
+     */
+    function sendIOSUnicast($deviceToken, $alert, $action)
     {
         try {
             $unicast = new IOSUnicast();
@@ -239,19 +247,20 @@ class NotificationPush
             $unicast->setPredefinedKeyValue("appkey", $this->appkey);
             $unicast->setPredefinedKeyValue("timestamp", $this->timestamp);
             // Set your device tokens here
-            $unicast->setPredefinedKeyValue("device_tokens", "xx");
-            $unicast->setPredefinedKeyValue("alert", "IOS 单播测试");
+            $unicast->setPredefinedKeyValue("device_tokens", $deviceToken);
+            $unicast->setPredefinedKeyValue("alert", $alert);
             $unicast->setPredefinedKeyValue("badge", 0);
             $unicast->setPredefinedKeyValue("sound", "chime");
             // Set 'production_mode' to 'true' if your app is under production mode
             $unicast->setPredefinedKeyValue("production_mode", "false");
             // Set customized fields
-            $unicast->setCustomizedField("test", "helloworld");
+            $unicast->setCustomizedField("action", $action);
             print("Sending unicast notification, please wait...\r\n");
             $unicast->send();
-            print("Sent SUCCESS\r\n");
+
+            return ['result' => true, 'message' => ''];
         } catch (Exception $e) {
-            print("Caught exception: " . $e->getMessage());
+            return ['result' => false, 'message' => $e->getMessage()];
         }
     }
 
