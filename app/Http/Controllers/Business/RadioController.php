@@ -82,10 +82,10 @@ class RadioController extends Controller
         /**
          * 推送安卓广播
          */
-//        $result = $this->sendNotification_Android($data['d_or_p'], $data['title']);
-//        if ($result['result'] == false) {
-//            return redirect()->back()->withErrors(array('error' => $result['message']))->withInput();
-//        }
+        $result = $this->sendNotification_Android($data['d_or_p'], $data['title']);
+        if ($result['result'] == false) {
+            return redirect()->back()->withErrors(array('error' => $result['message']))->withInput();
+        }
 
         try {
             RadioStation::create($data);
@@ -239,7 +239,7 @@ class RadioController extends Controller
     }
 
     /**
-     * 发送广播-IOS
+     * 发送广播-Android
      *
      * @param $dOrP
      * @param $title
@@ -249,11 +249,11 @@ class RadioController extends Controller
     {
         require(dirname(dirname(dirname(__FILE__))) . '/Helper/UmengNotification/NotificationPush.php');
 
-        if ($dOrP == 'd') { //医生端
-            $push = new \NotificationPush('58073c2ae0f55a4ac00023e4', 'npypnjmmor5ufydocxyia3o6lwq1vh5n');
-        } else { //患者端
-            $push = new \NotificationPush('58770533c62dca6297001b7b', 'mnbtm9nu5v2cw5neqbxo6grqsuhxg1o8');
-        }
+//        if ($dOrP == 'd') { //医生端
+            $push = new \NotificationPush('58073313e0f55a4825002a47', '0hmugthtu84nyou6egw3kmdsf6v4zmom');
+//        } else { //患者端
+//            $push = new \NotificationPush('58770533c62dca6297001b7b', 'mnbtm9nu5v2cw5neqbxo6grqsuhxg1o8');
+//        }
 
         return $push->sendAndroidBroadcast($title, 'radio');
     }
