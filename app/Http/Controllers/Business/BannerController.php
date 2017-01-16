@@ -67,7 +67,7 @@ class BannerController extends Controller
         $data = [
             'title' => $request['title'],
             'focus_img_url' => $focusImgUrl,
-            'content' => $request['container'],
+            'content' => $request['content'],
             'location' => $request['location'],
             'd_or_p' => $request['d_or_p']
         ];
@@ -142,7 +142,7 @@ class BannerController extends Controller
         $banner = Banner::find($id);
         $banner->title = $request['title'];
         $banner->focus_img_url = $focusImgUrl;
-        $banner->content = $request['container'];
+        $banner->content = $request['content'];
         $banner->location = $request['location'];
         $banner->d_or_p = $request['d_or_p'];
 

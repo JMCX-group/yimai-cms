@@ -46,9 +46,7 @@
                         <div class="form-group">
                             <label for="content" class="col-sm-3 control-label">内容</label>
                             <div class="col-sm-8">
-                                <div id="container" name="container" class="edui-default">
-                                    @include('UEditor::head')
-                                </div>
+                                <div id="container" name="content" class="edui-default"></div>
                             </div>
                         </div>
                         <div class="form-group">
@@ -86,17 +84,22 @@
 
 @section('script')
     <!-- 加载编辑器的容器 -->
-    <script>
-        var ue=UE.getEditor("container");
+    @include('UEditor::head')
+    <script type="text/javascript">
+        var ue = UE.getEditor('container', {
+            initialFrameWidth : 600,
+            initialFrameHeight : 450
+        });
         ue.ready(function(){
             //因为Laravel有防csrf防伪造攻击的处理所以加上此行
             ue.execCommand('serverparam','_token','{{ csrf_token() }}');
         });
         ue.addListener("ready", function () {
-            ue.setContent('{{$banner->content}}', false);
-            ue.setHeight('400'); //高度400
+            ue.setContent('{!! $banner->content !!}', false);
         });
+    </script>
 
+    <script>
         $("#upload_focus_img").on('change', function () {
             $("#upload_focus_img_icon").text($("#upload_focus_img").val()) ;
             $("#focus_img").hide();

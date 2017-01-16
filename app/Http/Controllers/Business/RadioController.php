@@ -65,7 +65,7 @@ class RadioController extends Controller
         $data = [
             'title' => $request['title'],
             'img_url' => $focusImgUrl,
-            'content' => $request['container'],
+            'content' => $request['content'],
 //            'author' => $request['author'],
             'd_or_p' => $request['d_or_p'],
 //            'valid' => $request['valid']
@@ -145,7 +145,7 @@ class RadioController extends Controller
         $radio = RadioStation::find($id);
         $radio->title = $request['title'];
         $radio->img_url = $focusImgUrl;
-        $radio->content = $request['container'];
+        $radio->content = $request['content'];
         $radio->d_or_p = $request['d_or_p'];
 
         try {
