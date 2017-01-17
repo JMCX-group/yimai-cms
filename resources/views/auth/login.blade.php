@@ -3,17 +3,20 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | Log in</title>
+    <title>医脉 - 医生工作室 | Log in</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link href="{{ asset("/assets/css/app.css") }}" rel="stylesheet" type="text/css"/>
 </head>
-<body class="hold-transition login-page">
+{{--<body class="hold-transition login-page">--}}
+<body class="hold-transition">
+
 <div class="login-box">
     <div class="login-logo">
-        <b>Admin</b>CMS
+        <img src="../images/logo.png" alt="">
+        {{--<b>医者仁心 脉脉相连</b>--}}
     </div>
     <div class="login-box-body">
-        <p class="login-box-msg">Happy Working</p>
+        <a href="http://www.medi-link.cn"><p class="login-box-msg">医者仁心 脉脉相连</p></a>
 
         <form action="{{URL::to('/auth/login')}}" method="post" enctype="multipart/form-data">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
