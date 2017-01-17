@@ -42,7 +42,6 @@ class MsgAndNotification
         AppointmentMsg::create($msgData);
     }
 
-
     /**
      * 给患者推送约诊信息
      *
@@ -70,7 +69,7 @@ class MsgAndNotification
         }
 
         /**
-         * 如果出错，则记录信息
+         * 如果出错，则记录日志
          */
         if ($pushResult['result'] == false) {
             Log::info('push-appointment-patient', ['context' => $pushResult['message']]);
