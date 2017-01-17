@@ -222,7 +222,7 @@ class RadioController extends Controller
      */
     public function sendNotification_IOS($dOrP, $eOrA, $title, $radioId)
     {
-        require(dirname(dirname(dirname(__FILE__))) . '/Helper/UmengNotification/NotificationPush.php');
+        require_once(dirname(dirname(dirname(__FILE__))) . '/Helper/UmengNotification/NotificationPush.php');
 
         if ($dOrP == 'd') { //医生端
             if ($eOrA == 'enterprise') { //医生端企业版
@@ -251,7 +251,7 @@ class RadioController extends Controller
      */
     public function sendNotification_Android($dOrP, $title, $radioId)
     {
-        require(dirname(dirname(dirname(__FILE__))) . '/Helper/UmengNotification/NotificationPush.php');
+        require_once(dirname(dirname(dirname(__FILE__))) . '/Helper/UmengNotification/NotificationPush.php');
 
         if ($dOrP == 'd') { //医生端
             $push = new \NotificationPush('58073313e0f55a4825002a47', '0hmugthtu84nyou6egw3kmdsf6v4zmom');
