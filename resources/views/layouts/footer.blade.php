@@ -9,7 +9,10 @@
 
 <footer class="main-footer">
     <div class="pull-right hidden-xs">
-        Anything you want
+        医者仁心 脉脉相连
     </div>
-    <strong>Copyright © {{date('Y')}} <a href="#">Company</a>.</strong> All rights reserved.
+    <strong>Copyright © {{date('Y')}}
+        <a href="http://www.medi-link.cn">medi-link.cn </a>
+    </strong>
+        All rights reserved.
 </footer>

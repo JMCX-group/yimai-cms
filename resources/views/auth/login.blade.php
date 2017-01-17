@@ -12,11 +12,12 @@
 
 <div class="login-box">
     <div class="login-logo">
-        <img src="../images/logo.png" alt="">
-        {{--<b>医者仁心 脉脉相连</b>--}}
+        <img class="" src="../images/logo.png">
     </div>
     <div class="login-box-body">
-        <a href="http://www.medi-link.cn"><p class="login-box-msg">医者仁心 脉脉相连</p></a>
+        <a href="http://www.medi-link.cn">
+            <p class="login-box-msg">医者仁心 脉脉相连</p>
+        </a>
 
         <form action="{{URL::to('/auth/login')}}" method="post" enctype="multipart/form-data">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
