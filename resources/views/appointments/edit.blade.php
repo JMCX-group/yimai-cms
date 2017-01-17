@@ -10,7 +10,7 @@
 @extends('layouts.main')
 @section('content')
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-8">
             <div class="box box-info">
                 <form class="form-horizontal" action="{{URL::to('appointment/'.$appointments->id)}}" method="post" enctype="multipart/form-data">
                     <div class="box-header with-border">
@@ -135,18 +135,27 @@
                             </div>
                         </div>
 
-                        {{--<div class="form-group">--}}
-                            {{--<label for="refuse_info" class="col-sm-3 control-label">拒绝原因</label>--}}
-                            {{--<div class="col-sm-9">--}}
-                                {{--<input type="text" class="form-control" id="refuse_info" name="refuse_info" placeholder="输入拒绝原因，该信息会提示用户" value="">--}}
-                                {{--@include('layouts.message.tips',['field'=>'refuse_info'])--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
+                        <ul class="breadcrumb">
+                            <li><a href="#">其他信息</a> <span class="divider"></span></li>
+                        </ul>
+                        <div class="form-group">
+                            <label for="focus_img_url" class="col-sm-3 control-label"></label>
+                            <div class="col-sm-9">
+                                <p class="help-block"><strong style="color:red">注意：输入拒绝原因，提交将会拒绝此单内容。</strong>不输入直接提交则为同意。</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="refuse_info" class="col-sm-3 control-label" style="color:red">拒绝原因</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="refuse_info" name="refuse_info" placeholder="输入拒绝原因，该信息会提示用户" value="">
+                                @include('layouts.message.tips',['field'=>'refuse_info'])
+                            </div>
+                        </div>
                     </div>
                     <div class="box-footer">
                         <a class="btn btn-default" href="{{route('appointment.todo')}}">返回</a>
-                        <a class="btn btn-warning" href="{{URL::to('appointment/refuse/'.$appointments->id)}}">拒绝</a>
-                        <button type="submit" class="btn btn-primary pull-right">同 意</button>
+                        {{--<a class="btn btn-warning" href="{{URL::to('appointment/refuse/'.$appointments->id)}}">拒绝</a>--}}
+                        <button type="submit" class="btn btn-primary pull-right">提 交</button>
                     </div>
                 </form>
             </div>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Business;
 
 use App\Appointment;
 use App\Doctor;
+use App\Http\Helper\MsgAndNotification;
+use App\Patient;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -175,13 +177,29 @@ class AppointmentController extends Controller
     public function update(Request $request, $id)
     {
         $appointments = Appointment::find($id);
-        $doctor = Doctor::find($appointments->doctor_id);
-        $appointments->price = $doctor->fee;
-        $appointments->status = 'wait-1'; //待患者支付
+        if(!isset($request['refuse_info']) || $request['refuse_info'] == '' || $request['refuse_info'] == null){
+            $appointments->price = Doctor::find($appointments->doctor_id)->first()->fee;
+            $appointments->status = 'wait-1'; //待患者支付
+        }else {
+            $appointments->status = 'close-3'; //医生拒绝接诊
+            $appointments->refusal_reason = $request['refuse_info']; //医生拒绝接诊
+        }
 
         try {
             if ($appointments->save()) {
-                return redirect()->route('appointment.todo')->withSuccess('同意约诊');
+                MsgAndNotification::sendAppointmentsMsg($appointments);  //推送消息记录
+
+                /**
+                 * 用友盟向患者端推送消息
+                 */
+                $patient = Patient::where('phone', $appointments->patient_phone)->first();
+                if (isset($patient->id)) {
+                    if ($patient->device_token != '' && $patient->device_token != null) {
+                        MsgAndNotification::pushMsg($patient->device_token, $appointments->id); //向患者端推送消息
+                    }
+                }
+
+                return redirect()->route('appointment.todo')->withSuccess('完成处理');
             } else {
                 return redirect()->back()->withErrors(array('error' => '更新数据失败'))->withInput();
             }
