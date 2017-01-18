@@ -1,7 +1,11 @@
 <?php
 namespace App\Http\Controllers\Business;
 
+use App\Doctor;
+use App\DoctorRadioRead;
 use App\Http\Helper\MsgAndNotification;
+use App\Patient;
+use App\PatientRadioRead;
 use App\RadioStation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -80,6 +84,11 @@ class RadioController extends Controller
              * 给IOS和Android推送消息
              */
             MsgAndNotification::pushBroadcast($data['d_or_p'], $data['title'], 'radio', $radioId);
+
+            /**
+             * 部署未读状态
+             */
+            $this->deployUnread($data['d_or_p'], $radioId);
 
             return redirect()->route('radio.index')->withSuccess('新增广播成功；推送广播成功');
         } catch (\Exception $e) {
@@ -199,5 +208,44 @@ class RadioController extends Controller
         Image::make($fullPath)->encode('jpg', 50)->save($newPath);
 
         return $domain . $newPath;
+    }
+
+    /**
+     * 部署未读状态
+     *
+     * @param $recipient
+     * @param $radioId
+     */
+    public function deployUnread($recipient, $radioId)
+    {
+        if ($recipient == 'd' || $recipient == 'all') {
+            $doctorIdCount = Doctor::count();
+            $data = array();
+            for ($id = 6; $id <= $doctorIdCount; $id++) {
+                $tmp = [
+                    'user_id' => $id,
+                    'radio_station_id' => $radioId,
+                    'value' => 1
+                ];
+                array_push($data, $tmp);
+            }
+
+            DoctorRadioRead::insert($data);
+        }
+
+        if ($recipient == 'p' || $recipient == 'all') {
+            $patientIdCount = Patient::count();
+            $data = array();
+            for ($id = 1; $id <= $patientIdCount; $id++) {
+                $tmp = [
+                    'user_id' => $id,
+                    'radio_station_id' => $radioId,
+                    'value' => 1
+                ];
+                array_push($data, $tmp);
+            }
+
+            PatientRadioRead::insert($data);
+        }
     }
 }
