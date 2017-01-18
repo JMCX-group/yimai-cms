@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Business;
 
+use App\Http\Helper\MsgAndNotification;
 use App\RadioStation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -76,20 +77,9 @@ class RadioController extends Controller
             $radioId = $radioId->id;
 
             /**
-             * 推送IOS广播
+             * 给IOS和Android推送消息
              */
-            $result = $this->sendNotification_IOS($data['d_or_p'], $request['e_or_a'], $data['title'], $radioId);
-            if ($result['result'] == false) {
-                return redirect()->back()->withErrors(array('error' => $result['message']))->withInput();
-            }
-
-            /**
-             * 推送安卓广播
-             */
-            $result = $this->sendNotification_Android($data['d_or_p'], $data['title'], $radioId);
-            if ($result['result'] == false) {
-                return redirect()->back()->withErrors(array('error' => $result['message']))->withInput();
-            }
+            MsgAndNotification::pushBroadcast($data['d_or_p'], $data['title'], 'radio', $radioId);
 
             return redirect()->route('radio.index')->withSuccess('新增广播成功；推送广播成功');
         } catch (\Exception $e) {
@@ -209,56 +199,5 @@ class RadioController extends Controller
         Image::make($fullPath)->encode('jpg', 50)->save($newPath);
 
         return $domain . $newPath;
-    }
-
-    /**
-     * 发送广播-IOS
-     *
-     * @param $dOrP
-     * @param $eOrA
-     * @param $title
-     * @param $radioId
-     * @return array
-     */
-    public function sendNotification_IOS($dOrP, $eOrA, $title, $radioId)
-    {
-        require_once(dirname(dirname(dirname(__FILE__))) . '/Helper/UmengNotification/NotificationPush.php');
-
-        if ($dOrP == 'd') { //医生端
-            if ($eOrA == 'enterprise') { //医生端企业版
-                $push = new \NotificationPush('58073c2ae0f55a4ac00023e4', 'npypnjmmor5ufydocxyia3o6lwq1vh5n');
-            } else { //医生端AppStore
-                $push = new \NotificationPush('587704278f4a9d795e001f79', 'ajcvonw3kas06oyljq1xcujvuadqszcj');
-            }
-        } else { //患者端
-            if ($eOrA == 'enterprise') { //患者端企业版
-                $push = new \NotificationPush('58770533c62dca6297001b7b', 'mnbtm9nu5v2cw5neqbxo6grqsuhxg1o8');
-            } else { //患者端AppStore
-                $push = new \NotificationPush('587704b3310c934edb002251', 'mngbtbi7lj0y8shlmdvvqdkek9k3hfin');
-            }
-        }
-
-        return $push->sendIOSBroadcast($title, 'radio', $radioId);
-    }
-
-    /**
-     * 发送广播-Android
-     *
-     * @param $dOrP
-     * @param $title
-     * @param $radioId
-     * @return array
-     */
-    public function sendNotification_Android($dOrP, $title, $radioId)
-    {
-        require_once(dirname(dirname(dirname(__FILE__))) . '/Helper/UmengNotification/NotificationPush.php');
-
-        if ($dOrP == 'd') { //医生端
-            $push = new \NotificationPush('58073313e0f55a4825002a47', '0hmugthtu84nyou6egw3kmdsf6v4zmom');
-        } else { //患者端
-            $push = new \NotificationPush('587b786af43e4833800004cb', 'oth53caymcr5zxc2edhi0ghuoyuxbov3');
-        }
-
-        return $push->sendAndroidBroadcast($title, 'radio', $radioId);
     }
 }

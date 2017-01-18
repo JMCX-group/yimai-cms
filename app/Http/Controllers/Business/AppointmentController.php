@@ -195,7 +195,7 @@ class AppointmentController extends Controller
                 $patient = Patient::where('phone', $appointments->patient_phone)->first();
                 if (isset($patient->id)) {
                     if ($patient->device_token != '' && $patient->device_token != null) {
-                        MsgAndNotification::pushMsg($patient->device_token, $appointments->id); //向患者端推送消息
+                        MsgAndNotification::pushAppointmentMsg($patient->device_token, $appointments->status, $appointments->id); //向患者端推送消息
                     }
                 }
 

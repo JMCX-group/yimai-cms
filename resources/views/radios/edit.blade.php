@@ -10,7 +10,7 @@
 @extends('layouts.main')
 @section('content')
     <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-12">
             <div class="box box-info">
                 <form class="form-horizontal" action="{{URL::to('radio/'.$radio->id)}}" method="post" enctype="multipart/form-data">
                     <div class="box-header with-border">
@@ -20,15 +20,15 @@
                     </div>
                     <div class="box-body">
                         <div class="form-group">
-                            <label for="name" class="col-sm-3 control-label">标题</label>
-                            <div class="col-sm-9">
+                            <label for="name" class="col-sm-1 control-label">标题</label>
+                            <div class="col-sm-8">
                                 <input type="text" class="form-control" id="name" name="name" placeholder="标题" value="{{$radio->name}}">
                                 @include('layouts.message.tips',['field'=>'name'])
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="img_url" class="col-sm-3 control-label">展示图</label>
-                            <div class="col-sm-9">
+                            <label for="img_url" class="col-sm-1 control-label">展示图</label>
+                            <div class="col-sm-8">
                                 <input type="text" style="display:none" class="form-control" id="img_url" name="img_url" placeholder="展示图" value="{{$radio->img_url}}">
                                 @include('layouts.message.tips',['field'=>'img_url'])
 
@@ -44,15 +44,16 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="content" class="col-sm-3 control-label">内容</label>
-                            <div class="col-sm-8">
+                            <label for="content" class="col-sm-1 control-label">内容</label>
+                            <div class="col-sm-11">
                                 <div id="container" name="content" class="edui-default"></div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">所属APP</label>
-                            <div class="col-sm-9">
+                            <label class="col-sm-1 control-label">所属APP</label>
+                            <div class="col-sm-8">
                                 <select class="form-control select2" name="d_or_p">
+                                    <option value="all @if($radio->d_or_p=="all") selected @endif>">全体</option>
                                     <option value="d" @if($radio->d_or_p=="d") selected @endif>医生端</option>
                                     <option value="p" @if($radio->d_or_p=="p") selected @endif>患者端</option>
                                 </select>
@@ -75,7 +76,7 @@
     @include('UEditor::head')
     <script type="text/javascript">
         var ue = UE.getEditor('container', {
-            initialFrameWidth : 600,
+            initialFrameWidth : 960,
             initialFrameHeight : 450
         });
         ue.ready(function(){

@@ -10,7 +10,7 @@
 @extends('layouts.main')
 @section('content')
     <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-12">
             <div class="box box-info">
                 <form class="form-horizontal" action="{{URL::to('radio')}}" method="post" enctype="multipart/form-data">
                     <div class="box-header with-border">
@@ -19,22 +19,22 @@
                     </div>
                     <div class="box-body">
                         <div class="form-group">
-                            <label for="prompt" class="col-sm-3 control-label">提示</label>
-                            <div class="col-sm-9">
-                                <p class="help-block">广播将会进行全员推送，请慎重发出！！标题是手机顶部弹出提示的内容</p>
+                            <label for="prompt" class="col-sm-1 control-label">提示</label>
+                            <div class="col-sm-8">
+                                <p class="help-block"><strong style="color:red;">广播将会进行全员推送，请慎重发出！！标题是手机顶部弹出提示的内容</strong></p>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="title" class="col-sm-3 control-label">标题</label>
-                            <div class="col-sm-9">
+                            <label for="title" class="col-sm-1 control-label">标题</label>
+                            <div class="col-sm-8">
                                 <input type="text" class="form-control" id="title" name="title" placeholder="标题" value="{{old('title')}}">
                                 @include('layouts.message.tips',['field'=>'title'])
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="img_url" class="col-sm-3 control-label">展示图</label>
-                            <div class="col-sm-9">
+                            <label for="img_url" class="col-sm-1 control-label">展示图</label>
+                            <div class="col-sm-8">
                                 {{--<input type="text" class="form-control" id="img_url" name="img_url" placeholder="展示图" value="{{old('img_url')}}">--}}
                                 {{--@include('layouts.message.tips',['field'=>'img_url'])--}}
 
@@ -49,29 +49,20 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="content" class="col-sm-3 control-label">内容</label>
-                            <div class="col-sm-8">
+                            <label for="content" class="col-sm-1 control-label">内容</label>
+                            <div class="col-sm-11">
                                 <div id="container" name="content" class="edui-default"></div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">所属APP</label>
-                            <div class="col-sm-9">
+                            <label class="col-sm-1 control-label">所属APP</label>
+                            <div class="col-sm-8">
                                 <select class="form-control select2" name="d_or_p">
+                                    <option value="all">全体</option>
                                     <option value="d">医生端</option>
                                     <option value="p">患者端</option>
                                 </select>
                                 @include('layouts.message.tips',['field'=>'d_or_p'])
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">广播给企业版/AppStore</label>
-                            <div class="col-sm-9">
-                                <select class="form-control select2" name="e_or_a">
-                                    <option value="enterprise">企业版</option>
-                                    <option value="app">AppStore</option>
-                                </select>
-                                @include('layouts.message.tips',['field'=>'e_or_a'])
                             </div>
                         </div>
                     </div>
@@ -90,7 +81,7 @@
     @include('UEditor::head')
     <script type="text/javascript">
         var ue = UE.getEditor('container', {
-            initialFrameWidth : 600,
+            initialFrameWidth : 960,
             initialFrameHeight : 450
         });
         ue.ready(function() {

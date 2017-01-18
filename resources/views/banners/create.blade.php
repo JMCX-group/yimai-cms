@@ -10,7 +10,7 @@
 @extends('layouts.main')
 @section('content')
     <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-12">
             <div class="box box-info">
                 <form class="form-horizontal" action="{{URL::to('banner')}}" method="post" enctype="multipart/form-data">
                     <div class="box-header with-border">
@@ -19,15 +19,15 @@
                     </div>
                     <div class="box-body">
                         <div class="form-group">
-                            <label for="title" class="col-sm-3 control-label">标题</label>
-                            <div class="col-sm-9">
+                            <label for="title" class="col-sm-1 control-label">标题</label>
+                            <div class="col-sm-8">
                                 <input type="text" class="form-control" id="title" name="title" placeholder="标题" value="{{old('title')}}">
                                 @include('layouts.message.tips',['field'=>'title'])
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="focus_img_url" class="col-sm-3 control-label">展示图</label>
-                            <div class="col-sm-9">
+                            <label for="focus_img_url" class="col-sm-1 control-label">展示图</label>
+                            <div class="col-sm-8">
                                 {{--<input type="text" class="form-control" id="focus_img_url" name="focus_img_url" placeholder="展示图" value="{{old('focus_img_url')}}">--}}
                                 {{--@include('layouts.message.tips',['field'=>'focus_img_url'])--}}
 
@@ -42,14 +42,14 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="content" class="col-sm-3 control-label">内容</label>
-                            <div class="col-sm-8">
+                            <label for="content" class="col-sm-1 control-label">内容</label>
+                            <div class="col-sm-11">
                                 <div id="container" name="content" class="edui-default"></div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">位置</label>
-                            <div class="col-sm-9">
+                            <label class="col-sm-1 control-label">位置</label>
+                            <div class="col-sm-8">
                                 <select class="form-control select2" name="location">
                                     <option value="">无</option>
                                     <option value="1">1</option>
@@ -60,8 +60,8 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">所属APP</label>
-                            <div class="col-sm-9">
+                            <label class="col-sm-1 control-label">所属APP</label>
+                            <div class="col-sm-8">
                                 <select class="form-control select2" name="d_or_p">
                                     <option value="d">医生端</option>
                                     <option value="p">患者端</option>
@@ -85,7 +85,7 @@
     @include('UEditor::head')
     <script type="text/javascript">
         var ue = UE.getEditor('container', {
-            initialFrameWidth : 600,
+            initialFrameWidth : 960,
             initialFrameHeight : 450
         });
         ue.ready(function() {
