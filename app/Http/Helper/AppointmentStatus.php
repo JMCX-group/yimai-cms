@@ -7,6 +7,8 @@
  */
 namespace App\Http\Helper;
 
+use App\Appointment;
+
 /**
  * 约诊状态翻译
  *
@@ -17,91 +19,79 @@ class AppointmentStatus
 {
     /**
      * 约诊消息推送文案
+     * 给代约/约诊医生看的
      *
-     * @param $data
-     * @return bool|string
+     * @param $status
+     * @param $doctor
+     * @param $patient
+     * @param $id
+     * @return string
      */
-    public static function appointmentMsgContent($data)
+    public static function appointmentMsgContent($status, $doctor, $patient, $id)
     {
-        switch ($data->status) {
-            /**
-             * wait:
-             * wait-0: 待代约医生确认
-             * wait-1: 待患者付款
-             * wait-2: 患者已付款，待医生确认
-             * wait-3: 医生确认接诊，待面诊
-             * wait-4: 医生改期，待患者确认
-             * wait-5: 患者确认改期，待面诊
-             */
+        /**
+         * Wait:
+         * wait-0: 待代约医生确认
+         * wait-1: 待患者付款
+         * wait-2: 患者已付款，待医生确认
+         * wait-3: 医生确认接诊，待面诊
+         * wait-4: 医生改期，待患者确认
+         * wait-5: 患者确认改期，待面诊
+         *
+         * Close:
+         * close-1: 待患者付款
+         * close-2: 医生过期未接诊,约诊关闭
+         * close-3: 医生拒绝接诊
+         *
+         * Cancel:
+         * cancel-1: 患者取消约诊; 未付款
+         * cancel-2: 医生取消约诊
+         * cancel-3: 患者取消约诊; 已付款后
+         * cancel-4: 医生改期之后,医生取消约诊;
+         * cancel-5: 医生改期之后,患者取消约诊;
+         * cancel-6: 医生改期之后,患者确认之后,患者取消约诊;
+         * cancel-7: 医生改期之后,患者确认之后,医生取消约诊;
+         *
+         * Completed:
+         * completed-1:最简正常流程
+         * completed-2:改期后完成
+         */
+
+        switch ($status) {
             case 'wait-0':
-                $retText = '患者' . $data['patient_name'] . '请求您代约';
+                $retText = '患者' . $patient . '请求您代约。';
                 break;
-
             case 'wait-1':
-                $retText = '您替' . $data['patient_name'] . '约诊' . $data['doctor_name'] . '医生的信息已发送至' . $data['patient_name'] . '，等待确认及支付。若12小时内未完成支付则约诊失效。';
+                $retText = '您替' . $patient . '约诊' . $doctor . '医生的信息已发送，等待确认及支付。若12小时内未完成支付则约诊失效。';
                 break;
-
-            case 'wait-2':
-                $retText = '患者' . $data['patient_name'] . '已付款。';
-                break;
-
-            case 'wait-3':
-                break;
-
-            case 'wait-4':
-                break;
-
-            case 'wait-5':
-                break;
-
-            /**
-             * close:
-             * close-1: 待患者付款
-             * close-2: 医生过期未接诊,约诊关闭
-             * close-3: 医生拒绝接诊
-             */
             case 'close-1':
+                $retText = '患者' . $patient . '逾期未确认您代约' . $doctor . '的约诊（预约号' . $id . '），约诊过期。';
                 break;
 
             case 'close-2':
+                $retText = '医生' . $doctor . '过期未接诊，约诊关闭。（预约号' . $id . '）';
                 break;
 
             case 'close-3':
-                $retText = '医生' . $data['doctor_name'] . '拒绝了接诊。';
+                $retText = $doctor . '医生拒绝了您替患者' . $patient . '发起的约诊请求（预约号' . $id . '），原因为' . Appointment::find($id)->first()->refusal_reason . '，约诊关闭。';
                 break;
 
-            /**
-             * cancel:
-             * cancel-1: 患者取消约诊; 未付款
-             * cancel-2: 医生取消约诊
-             * cancel-3: 患者取消约诊; 已付款后
-             * cancel-4: 医生改期之后,医生取消约诊;
-             * cancel-5: 医生改期之后,患者取消约诊;
-             * cancel-6: 医生改期之后,患者确认之后,患者取消约诊;
-             * cancel-7: 医生改期之后,患者确认之后,医生取消约诊;
-             */
             case 'cancel-2':
             case 'cancel-4':
             case 'cancel-7':
-                $retText = '医生' . $data['doctor_name'] . '取消了约诊请求。';
+                $retText = '医生' . $doctor . '取消了约诊请求。（预约号' . $id . '）';
                 break;
 
             case 'cancel-1':
             case 'cancel-3':
             case 'cancel-5':
             case 'cancel-6':
-                $retText = '患者' . $data['patient_name'] . '取消了约诊请求。';
+                $retText = '患者' . $patient . '取消了约诊请求。（预约号' . $id . '）';
                 break;
 
-            /**
-             * completed:
-             * completed-1:最简正常流程
-             * completed-2:改期后完成
-             */
             case 'completed-1':
-                break;
-
             case 'completed-2':
+                $retText = '您替患者' . $patient . '向' . $doctor . '医生发起的预约（预约号' . $id . '）已完成面诊。';
                 break;
 
             default:
@@ -114,91 +104,55 @@ class AppointmentStatus
 
     /**
      * 接诊消息推送文案
+     * 给接诊医生看的
      *
-     * @param $data
+     * @param $status
+     * @param $locums
+     * @param $patient
+     * @param $id
      * @return bool|string
      */
-    public static function admissionsMsgContent($data)
+    public static function admissionsMsgContent($status, $locums, $patient, $id)
     {
-        switch ($data->status) {
-            /**
-             * wait:
-             * wait-0: 待代约医生确认
-             * wait-1: 待患者付款
-             * wait-2: 患者已付款，待医生确认
-             * wait-3: 医生确认接诊，待面诊
-             * wait-4: 医生改期，待患者确认
-             * wait-5: 患者确认改期，待面诊
-             */
-            case 'wait-0':
-                $retText = '患者' . $data['patient_name'] . '请求您代约。';
-                break;
-
-            case 'wait-1':
-                break;
-
+        /**
+         * Wait:
+         * wait-0: 待代约医生确认
+         * wait-1: 待患者付款
+         * wait-2: 患者已付款，待医生确认
+         * wait-3: 医生确认接诊，待面诊
+         * wait-4: 医生改期，待患者确认
+         * wait-5: 患者确认改期，待面诊
+         *
+         * Close:
+         * close-1: 待患者付款
+         * close-2: 医生过期未接诊,约诊关闭
+         * close-3: 医生拒绝接诊
+         *
+         * Cancel:
+         * cancel-1: 患者取消约诊; 未付款
+         * cancel-2: 医生取消约诊
+         * cancel-3: 患者取消约诊; 已付款后
+         * cancel-4: 医生改期之后,医生取消约诊;
+         * cancel-5: 医生改期之后,患者取消约诊;
+         * cancel-6: 医生改期之后,患者确认之后,患者取消约诊;
+         * cancel-7: 医生改期之后,患者确认之后,医生取消约诊;
+         *
+         * Completed:
+         * completed-1:最简正常流程
+         * completed-2:改期后完成
+         */
+        switch ($status) {
             case 'wait-2':
-                $retText = '您收到一条'.$data['locums_name'].'替患者'.$data['patient_name'].'发起的约诊请求（预约号'.$data['appointment_id'].'），请在48小时内处理.';
+                $retText = '您收到一条' . $locums . '替患者' . $patient . '发起的约诊请求（预约号' . $id . '），请在48小时内处理。';
                 break;
-
-            case 'wait-3':
-                $retText = '患者' . $data['patient_name'] . '已付款。';
-                break;
-
-            case 'wait-4':
-                break;
-
             case 'wait-5':
+                $retText = '患者' . $patient . '已确认您将原定的约诊时间改为：' . Appointment::find($id)->first()->rescheduled_time . '。（预约号' . $id . '）';
                 break;
-
-            /**
-             * close:
-             * close-1: 待患者付款
-             * close-2: 医生过期未接诊,约诊关闭
-             * close-3: 医生拒绝接诊
-             */
-            case 'close-1':
-                break;
-
-            case 'close-2':
-                break;
-
-            case 'close-3':
-                break;
-
-            /**
-             * cancel:
-             * cancel-1: 患者取消约诊; 未付款
-             * cancel-2: 医生取消约诊
-             * cancel-3: 患者取消约诊; 已付款后
-             * cancel-4: 医生改期之后,医生取消约诊;
-             * cancel-5: 医生改期之后,患者取消约诊;
-             * cancel-6: 医生改期之后,患者确认之后,患者取消约诊;
-             * cancel-7: 医生改期之后,患者确认之后,医生取消约诊;
-             */
-            case 'cancel-2':
-            case 'cancel-4':
-            case 'cancel-7':
-                break;
-
-            case 'cancel-1':
             case 'cancel-3':
             case 'cancel-5':
             case 'cancel-6':
-                $retText = '患者' . $data['patient_name'] . '取消了约诊请求。';
+                $retText = '患者' . $patient . '取消了约诊请求。';
                 break;
-
-            /**
-             * completed:
-             * completed-1:最简正常流程
-             * completed-2:改期后完成
-             */
-            case 'completed-1':
-                break;
-
-            case 'completed-2':
-                break;
-
             default:
                 $retText = false;
                 break;
