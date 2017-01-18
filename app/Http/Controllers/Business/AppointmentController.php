@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Business;
 use App\Appointment;
 use App\Doctor;
 use App\Http\Helper\MsgAndNotification;
+use App\Http\Helper\AppointmentStatus;
 use App\Patient;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -62,7 +63,7 @@ class AppointmentController extends Controller
     {
         $appointments = Appointment::getPlatform('wait-0');
         foreach ($appointments as &$appointment) {
-            $appointment->status = $this->appointmentStatus($appointment->status);
+            $appointment->status = AppointmentStatus::content($appointment->status);
         }
         $page_title = "请求代约";
         $page_level = $this->page_level;
@@ -77,7 +78,7 @@ class AppointmentController extends Controller
     {
         $appointments = Appointment::getPlatform_processing();
         foreach ($appointments as &$appointment) {
-            $appointment->status = $this->appointmentStatus($appointment->status);
+            $appointment->status = AppointmentStatus::content($appointment->status);
         }
         $page_title = "代约进行中";
         $page_level = $this->page_level;
@@ -92,7 +93,7 @@ class AppointmentController extends Controller
     {
         $appointments = Appointment::getPlatform_completed();
         foreach ($appointments as &$appointment) {
-            $appointment->status = $this->appointmentStatus($appointment->status);
+            $appointment->status = AppointmentStatus::content($appointment->status);
         }
         $page_title = "代约完成";
         $page_level = $this->page_level;
@@ -107,7 +108,7 @@ class AppointmentController extends Controller
     {
         $appointments = Appointment::getPlatform('close-3');
         foreach ($appointments as &$appointment) {
-            $appointment->status = $this->appointmentStatus($appointment->status);
+            $appointment->status = AppointmentStatus::content($appointment->status);
         }
         $page_title = "拒绝代约";
         $page_level = $this->page_level;
@@ -124,7 +125,7 @@ class AppointmentController extends Controller
     public function edit($id)
     {
         $appointments = Appointment::getAllDetail($id);
-        $appointments->status = $this->appointmentStatus($appointments->status);
+        $appointments->status = AppointmentStatus::content($appointments->status);
         if ($appointments->doctor_auth == 'completed') {
             $appointments->doctor_auth = '已认证';
         } elseif ($appointments->doctor_auth == 'processing') {
@@ -150,7 +151,7 @@ class AppointmentController extends Controller
     public function view($id)
     {
         $appointments = Appointment::getAllDetail($id);
-        $appointments->status = $this->appointmentStatus($appointments->status);
+        $appointments->status = AppointmentStatus::content($appointments->status);
         if ($appointments->doctor_auth == 'completed') {
             $appointments->doctor_auth = '已认证';
         } elseif ($appointments->doctor_auth == 'processing') {
@@ -239,81 +240,5 @@ class AppointmentController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    /**
-     * 约诊状态翻译
-     *
-     * @param $status
-     * @return string
-     */
-    public function appointmentStatus($status)
-    {
-
-        switch ($status) {
-            case 'wait-0':
-                $retData = '待代约医生确认';
-                break;
-            case 'wait-1':
-                $retData = '待患者付款';
-                break;
-            case 'wait-2':
-                $retData = '患者已付款，待医生确认';
-                break;
-            case 'wait-3':
-                $retData = '医生确认接诊，待面诊';
-                break;
-            case 'wait-4':
-                $retData = '医生改期，待患者确认';
-                break;
-            case 'wait-5':
-                $retData = '患者确认改期，待面诊';
-                break;
-
-            case 'close-1':
-                $retData = '待患者付款';
-                break;
-            case 'close-2':
-                $retData = '医生过期未接诊,约诊关闭';
-                break;
-            case 'close-3':
-                $retData = '医生拒绝接诊';
-                break;
-
-            case 'cancel-1':
-                $retData = '患者取消约诊; 未付款';
-                break;
-            case 'cancel-2':
-                $retData = '医生取消约诊';
-                break;
-            case 'cancel-3':
-                $retData = '患者取消约诊; 已付款后';
-                break;
-            case 'cancel-4':
-                $retData = '医生改期之后,医生取消约诊';
-                break;
-            case 'cancel-5':
-                $retData = '医生改期之后,患者取消约诊';
-                break;
-            case 'cancel-6':
-                $retData = '医生改期之后,患者确认之后,患者取消约诊';
-                break;
-            case 'cancel-7':
-                $retData = '医生改期之后,患者确认之后,医生取消约诊';
-                break;
-
-            case 'completed-1':
-                $retData = '已完成';
-                break;
-            case 'completed-2':
-                $retData = '改期后完成';
-                break;
-
-            default:
-                $retData = '';
-                break;
-        }
-
-        return $retData;
     }
 }
