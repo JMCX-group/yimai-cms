@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class Appointment extends Model
 {
@@ -30,12 +31,22 @@ class Appointment extends Model
         'patient_imgs',
         'doctor_id',
         'patient_id',
+        'patient_demand_doctor_name',
+        'patient_demand_hospital',
+        'patient_demand_dept',
+        'patient_demand_title',
+        'request_mode',
+        'platform_or_doctor',
         'doctor_or_patient',
         'expect_visit_date',
         'expect_am_pm',
         'visit_time',
         'am_pm',
+        'supplement',
         'remark',
+        'refusal_reason',
+        'deposit',
+        'price',
         'transaction_id',
         'confirm_admissions_time',
         'completed_rescheduled_time',
@@ -43,8 +54,98 @@ class Appointment extends Model
         'new_visit_time',
         'new_am_pm',
         'confirm_rescheduled_time',
+        'is_pay',
         'status'
     ];
+
+    /**
+     * 查询过期（12小时）未支付的
+     *
+     * @return mixed
+     */
+    public static function getOverduePaymentList()
+    {
+        return Appointment::where('is_pay', '0')
+            ->where('status', 'wait-1')
+            ->where('updated_at', '<', date('Y-m-d H:i:s', time() - 12 * 3600))
+            ->get();
+    }
+
+    /**
+     * 查询过期（48小时）未接诊的
+     *
+     * @return mixed
+     */
+    public static function getOverdueNotAdmissionsList()
+    {
+        return Appointment::where('status', 'wait-2')
+            ->where('updated_at', '<', date('Y-m-d H:i:s', time() - 48 * 3600))
+            ->get();
+    }
+
+    /**
+     * 获取全部待缴费状态的id list。
+     *
+     * @param $id
+     * @param $phone
+     * @return mixed
+     */
+    public static function getAllWait1AppointmentIdList($id, $phone)
+    {
+        return DB::select(
+            "select `id` from `appointments` where ((`patient_id`='$id' OR `patient_phone`='$phone') AND `status`='wait-1')"
+        );
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public static function getMyDoctors($id)
+    {
+        /**
+         * 获取约诊成功的医生列表：
+         */
+        $ret = DB::select(
+            "select distinct `doctor_id` from `appointments` where `patient_id` = '$id' AND (`status`='completed-1' OR `status`='completed-2')"
+        );
+
+        /**
+         * 获取扫码添加的医生列表：
+         */
+        $patientMyDoctors = Patient::select('my_doctors')->where('id', $id)->get()->toArray();
+
+        /**
+         * 去重：
+         */
+        $myDoctors = explode(',', $patientMyDoctors[0]['my_doctors']);
+        $tmpIdArr = array();
+        foreach ($ret as $item) {
+            if (!in_array($item->doctor_id, $myDoctors)) {
+                array_push($tmpIdArr, $item->doctor_id);
+            }
+        }
+        $retArr = array_merge($tmpIdArr, $myDoctors);
+
+        return $retArr;
+    }
+
+    /**
+     * 获取约单数量最多的十名医生ID
+     *
+     * @return mixed
+     */
+    public static function getTop10()
+    {
+        return Appointment::select(DB::raw('count(*) as count, doctor_id'))
+            ->where('doctor_id', '!=', '')
+            ->groupBy('doctor_id')
+            ->orderBy('count', 'desc')
+            ->take(10)
+            ->get()
+            ->lists('doctor_id')
+            ->toArray();
+    }
 
     /**
      * 获得wait的
