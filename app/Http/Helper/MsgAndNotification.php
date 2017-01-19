@@ -48,7 +48,7 @@ class MsgAndNotification
             /**
              * 生成推送消息
              */
-            array_push($appointmentMsgList, self::generateAppointmentsMsg($appointment));
+            array_push($appointmentMsgList, self::generateAppointmentsMsg($appointment, $status));
 
             /**
              * 符合条件的患者device_token
@@ -67,7 +67,7 @@ class MsgAndNotification
                 ->update(['status' => $status]); //close-1: 待患者付款，
 
             if ($result) {
-                AppointmentMsg::create($appointmentMsgList); //批量插入推送消息
+                AppointmentMsg::insert($appointmentMsgList); //批量插入推送消息
 
                 foreach ($deviceTokens as $deviceToken) {
                     self::pushAppointmentMsg($deviceToken['device_token'], $status, $deviceToken['id']); //向患者端推送消息
@@ -84,18 +84,19 @@ class MsgAndNotification
      * 生成约诊推送信息内容
      *
      * @param $appointments
+     * @param string $status
      * @return array
      */
-    public static function generateAppointmentsMsg($appointments)
+    public static function generateAppointmentsMsg($appointments, $status='')
     {
         return [
             'appointment_id' => $appointments->id,
-            'status' => $appointments->status, //根据上面流程赋值
+            'status' => ($status == '') ? $appointments->status : $status, //有表示是新状态的，没有则表示通知当前状态
             'locums_id' => $appointments->locums_id, //代理医生ID
-            'locums_name' => Doctor::find($appointments->locums_id)->first()->name, //代理医生姓名
+            'locums_name' => ($appointments->locums_id == 0) ? '无' : Doctor::find($appointments->locums_id)->first()->name, //代理医生姓名
             'patient_name' => $appointments->patient_name,
             'doctor_id' => $appointments->doctor_id,
-            'doctor_name' => Doctor::find($appointments->doctor_id)->first()->name, //医生姓名
+            'doctor_name' => ($appointments->doctor_id == '') ? '无' : Doctor::find($appointments->doctor_id)->first()->name, //医生姓名
         ];
     }
 
