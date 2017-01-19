@@ -79,7 +79,15 @@ class Appointment extends Model
     {
         return Appointment::where('is_pay', '0')
             ->where('status', 'wait-1')
-            ->where('updated_at', '<', date('Y-m-d H:i:s', time() - 12 * 3600))
+            ->where(function ($query) {
+                $query->where(function ($query) {
+                    $query->where('locums_id', '0')
+                        ->where('created_at', '<', date('Y-m-d H:i:s', time() - 12 * 3600));
+                })
+                    ->orWhere(function ($query) {
+                        $query->where('updated_at', '<', date('Y-m-d H:i:s', time() - 12 * 3600));
+                    });
+            })
             ->get();
     }
 
@@ -96,17 +104,15 @@ class Appointment extends Model
     }
 
     /**
-     * 获取全部待缴费状态的id list。
+     * 获取全部wait-1和已支付状态的订单
      *
-     * @param $id
-     * @param $phone
      * @return mixed
      */
-    public static function getAllWait1AppointmentIdList($id, $phone)
+    public static function getPaidNoCallbackList()
     {
-        return DB::select(
-            "select `id` from `appointments` where ((`patient_id`='$id' OR `patient_phone`='$phone') AND `status`='wait-1')"
-        );
+        return Appointment::where('status', 'wait-1')
+            ->where('is_pay', '1')
+            ->get();
     }
 
     /**
