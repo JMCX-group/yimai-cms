@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Business;
 
 use App\Banner;
+use App\Http\Helper\SaveImage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Intervention\Image\Facades\Image;
 
 class BannerController extends Controller
 {
@@ -58,7 +58,7 @@ class BannerController extends Controller
         if ($file == null) {
             $focusImgUrl = 'http://cms.medi-link.cn/uploads/banner/20161218205430.png'; //默认图片
         } else {
-            $focusImgUrl = $this->upload($file);
+            $focusImgUrl = SaveImage::banner($file);
         }
 
         /**
@@ -133,7 +133,7 @@ class BannerController extends Controller
         if ($file == null) {
             $focusImgUrl = $request['focus_img_url'];
         } else {
-            $focusImgUrl = $this->upload($file);
+            $focusImgUrl = SaveImage::banner($file);
         }
 
         /**
@@ -174,49 +174,5 @@ class BannerController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    /**
-     * 上传文件
-     *
-     * @param $file
-     * @return string
-     */
-    public function upload($file)
-    {
-        //文件是否上传成功
-        if ($file->isValid()) {    //判断文件是否上传成功
-//            $originalName = $file->getClientOriginalName(); //源文件名
-//            $ext = $file->getClientOriginalExtension();    //文件拓展名
-//            $type = $file->getClientMimeType(); //文件类型
-
-            $imgUrl = $this->saveImg($file);
-
-            return $imgUrl;
-        } else {
-            return '';
-        }
-    }
-
-    /**
-     * 保存图片
-     *
-     * @param $file
-     * @return string
-     */
-    public function saveImg($file)
-    {
-        $domain = \Config::get('constants.DOMAIN');
-        $destinationPath = \Config::get('constants.BANNER_PATH');
-        $filename = date('YmdHis') . '.jpg';  //新文件名
-
-        $file->move($destinationPath, $filename);
-
-        $fullPath = $destinationPath . $filename;
-        $newPath = str_replace('.jpg', '_thumb.jpg', $fullPath);
-
-        Image::make($fullPath)->encode('jpg', 50)->save($newPath);
-
-        return $domain . $newPath;
     }
 }

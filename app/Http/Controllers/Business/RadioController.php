@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Business;
 use App\Doctor;
 use App\DoctorRadioRead;
 use App\Http\Helper\MsgAndNotification;
+use App\Http\Helper\SaveImage;
 use App\Patient;
 use App\PatientRadioRead;
 use App\RadioStation;
@@ -61,7 +62,7 @@ class RadioController extends Controller
         if ($file == null) {
             $focusImgUrl = 'http://cms.medi-link.cn/uploads/article/1.png'; //默认图片
         } else {
-            $focusImgUrl = $this->upload($file);
+            $focusImgUrl = SaveImage::radio($file);
         }
 
         /**
@@ -138,7 +139,7 @@ class RadioController extends Controller
         if ($file == null) {
             $focusImgUrl = $request['img_url'];
         } else {
-            $focusImgUrl = $this->upload($file);
+            $focusImgUrl = SaveImage::radio($file);
         }
 
         $radio = RadioStation::find($id);
@@ -164,50 +165,6 @@ class RadioController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    /**
-     * 上传文件
-     *
-     * @param $file
-     * @return string
-     */
-    public function upload($file)
-    {
-        //文件是否上传成功
-        if ($file->isValid()) {    //判断文件是否上传成功
-//            $originalName = $file->getClientOriginalName(); //源文件名
-//            $ext = $file->getClientOriginalExtension();    //文件拓展名
-//            $type = $file->getClientMimeType(); //文件类型
-
-            $imgUrl = $this->saveImg($file);
-
-            return $imgUrl;
-        } else {
-            return '';
-        }
-    }
-
-    /**
-     * 保存图片
-     *
-     * @param $file
-     * @return string
-     */
-    public function saveImg($file)
-    {
-        $domain = \Config::get('constants.DOMAIN');
-        $destinationPath = \Config::get('constants.ARTICLE_PATH');
-        $filename = date('YmdHis') . '.jpg';  //新文件名
-
-        $file->move($destinationPath, $filename);
-
-        $fullPath = $destinationPath . $filename;
-        $newPath = str_replace('.jpg', '_thumb.jpg', $fullPath);
-
-        Image::make($fullPath)->encode('jpg', 50)->save($newPath);
-
-        return $domain . $newPath;
     }
 
     /**
