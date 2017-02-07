@@ -15,7 +15,7 @@ class RechargeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public $page_level = "充值记录";
+    public $page_level = "财务管理";
 
     /**
      * Display a listing of the resource.
@@ -25,7 +25,7 @@ class RechargeController extends Controller
     public function index()
     {
         $records = PatientRechargeRecord::getRecords();
-        $page_title = "患者充值";
+        $page_title = "充值记录";
         $page_level = $this->page_level;
 
         return view('recharges.index', compact('records', 'page_title', 'page_level'));
