@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Business;
 
+use App\AppointmentFee;
 use App\Doctor;
 use App\DoctorBank;
-use App\Order;
 use App\SettlementRecord;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -104,8 +104,8 @@ class WithdrawController extends Controller
                 /**
                  * 更新已提现的订单状态：
                  */
-                $settlementIdList = Order::allPending($settlement->doctor_id, $settlement->year, $settlement->month);
-                Order::whereIn('id', $settlementIdList)
+                $settlementIdList = AppointmentFee::allPending($settlement->doctor_id, $settlement->year, $settlement->month);
+                AppointmentFee::whereIn('id', $settlementIdList)
                     ->update(['settlement_status' => '已提现']); //settlement_status：结算状态:待结算、可提现、已提现
 
                 return redirect()->route('withdraw.index')->withSuccess('转账信息更新成功');

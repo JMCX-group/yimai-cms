@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers\Business;
 
+use App\AppointmentFee;
 use App\Doctor;
-use App\Order;
 use App\SettlementRecord;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class TaxController extends Controller
@@ -100,9 +98,9 @@ class TaxController extends Controller
                 /**
                  * 更新可提现的订单状态：
                  */
-                $settlementIdList = Order::allPending($settlement->doctor_id, $settlement->year, $settlement->month);
-                Order::whereIn('id', $settlementIdList)
-                    ->update(['settlement_status' => '可提现']); //settlement_status：结算状态:待结算、可提现
+                $settlementIdList = AppointmentFee::allPending($settlement->doctor_id, $settlement->year, $settlement->month);
+                AppointmentFee::whereIn('id', $settlementIdList)
+                    ->update(['settlement_status' => '可提现']); //settlement_status：结算状态:待结算、可提现、已提现
 
                 return redirect()->route('tax.index')->withSuccess('报税成功');
             } else {

@@ -77,4 +77,21 @@ class AppointmentFee extends Model
     {
         return self::getTotalFees($patientId, 'paid');
     }
+
+    /**
+     * 查询所有进入代缴税列表的id list，用于更新状态
+     *
+     * @param $doctorId
+     * @param $year
+     * @param $month
+     * @return mixed
+     */
+    public static function allPending($doctorId, $year, $month)
+    {
+        return DB::select("
+        SELECT id
+        FROM `appointment_fees` 
+        WHERE doctor_id=$doctorId AND status='completed' AND date_format(`time_expire`, '%Y')=$year AND date_format(`time_expire`, '%m')=$month;
+        ");
+    }
 }
