@@ -120,7 +120,7 @@ Route::group(['namespace' => 'Business', 'middleware' => ['auth','Entrust']], fu
     Route::resource('appointment', 'AppointmentController'); // resource注册的路由需要放在自定义路由下方
 
     /**
-     * 财务管理 : 税务管理（待缴税） / 结算管理（已结算） / 提现管理（申请提现/已提现）
+     * 财务管理 : 税务管理（待缴税） / 结算管理（已结算） / 提现管理（申请提现/已提现） / 充值记录（患者）
      */
     Route::resource('tax', 'TaxController');
     Route::resource('settlement', 'SettlementController');
@@ -128,6 +128,7 @@ Route::group(['namespace' => 'Business', 'middleware' => ['auth','Entrust']], fu
         Route::get('completed', ['as' => 'withdraw.completed', 'uses' => 'WithdrawController@completed']);
     });
     Route::resource('withdraw', 'WithdrawController');
+    Route::resource('recharge', 'RechargeController');
 
     /**
      * 用户反馈 : 订单投诉 | 使用反馈
