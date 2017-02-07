@@ -94,4 +94,22 @@ class AppointmentFee extends Model
         WHERE doctor_id=$doctorId AND status='completed' AND date_format(`time_expire`, '%Y')=$year AND date_format(`time_expire`, '%m')=$month;
         ");
     }
+
+    /**
+     * 总收入
+     *
+     * @return mixed
+     */
+    public static function getRevenues()
+    {
+        return AppointmentFee::where(function ($query) {
+            $query->where('status', 'completed')
+                ->where('platform_fee', '>', 0);
+        })
+            ->orWhere(function ($query) {
+                $query->where('status', 'cancelled')
+                    ->where('default_fee', '>', 0);
+            })
+            ->paginate(15);
+    }
 }

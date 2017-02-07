@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Business;
 
-use App\PatientRechargeRecord;
+use App\AppointmentFee;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class RechargeController extends Controller
+class RevenueController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,11 +22,11 @@ class RechargeController extends Controller
      */
     public function index()
     {
-        $records = PatientRechargeRecord::getRecords();
-        $page_title = "充值记录";
+        $revenues = AppointmentFee::getRevenues();
+        $page_title = "平台收入";
         $page_level = $this->page_level;
 
-        return view('recharges.index', compact('records', 'page_title', 'page_level'));
+        return view('revenues.index', compact('revenues', 'page_title', 'page_level'));
     }
 
     /**

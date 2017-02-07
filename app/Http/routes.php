@@ -129,6 +129,7 @@ Route::group(['namespace' => 'Business', 'middleware' => ['auth','Entrust']], fu
     });
     Route::resource('withdraw', 'WithdrawController');
     Route::resource('recharge', 'RechargeController');
+    Route::resource('revenue', 'RevenueController');
 
     /**
      * 用户反馈 : 订单投诉 | 使用反馈
