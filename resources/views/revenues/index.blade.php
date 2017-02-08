@@ -44,7 +44,7 @@
                                 @else
                                     <td>已取消</td>
                                     <td>违约金</td>
-                                    <td>{{$revenue->default_fee}}</td>
+                                    <td>{{$revenue->platform_fee}}</td>
                                 @endif
                             </tr>
                         @empty

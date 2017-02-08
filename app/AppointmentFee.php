@@ -29,7 +29,7 @@ class AppointmentFee extends Model
         'platform_fee',
         'intermediary_fee',
         'guide_fee',
-        'default_fee',
+        'default_fee_rate',
         'status',
         'time_expire',
         'settlement_status'
@@ -61,7 +61,7 @@ class AppointmentFee extends Model
     public static function getDefaultFees($patientId)
     {
         return DB::select("
-            SELECT SUM(`default_fee`) AS fee
+            SELECT SUM(`total_fee`) AS fee
             FROM `appointment_fees` 
             WHERE patient_id=$patientId AND `status`='cancelled';
         ");
@@ -108,7 +108,7 @@ class AppointmentFee extends Model
         })
             ->orWhere(function ($query) {
                 $query->where('status', 'cancelled')
-                    ->where('default_fee', '>', 0);
+                    ->where('platform_fee', '>', 0);
             })
             ->paginate(15);
     }
