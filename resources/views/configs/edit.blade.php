@@ -127,7 +127,7 @@
                             <li><a href="#">违约扣费费率</a> <span class="divider"></span></li>
                         </ul>
                         <div class="form-group">
-                            <label for="patient-less-than-24h" class="col-sm-4 control-label">24小时内扣费比例</label>
+                            <label for="patient-less-than-24h" class="col-sm-4 control-label">距离面诊时间24小时内扣费比例</label>
                             <div class="col-sm-4">
                                 <input type="text" class="form-control" id="patient-less-than-24h" name="patient-less-than-24h" placeholder="无" value="{{$config->patient_less_than_24h}}">
                                 @include('layouts.message.tips',['field'=>'patient-less-than-24h'])
@@ -135,7 +135,7 @@
                             <label class="control-label">%</label>
                         </div>
                         <div class="form-group">
-                            <label for="patient-more-than-24h" class="col-sm-4 control-label">24小时外扣费比例</label>
+                            <label for="patient-more-than-24h" class="col-sm-4 control-label">距离面诊时间24小时外扣费比例</label>
                             <div class="col-sm-4">
                                 <input type="text" class="form-control" id="patient-more-than-24h" name="patient-more-than-24h" placeholder="无" value="{{$config->patient_more_than_24h}}">
                                 @include('layouts.message.tips',['field'=>'patient-more-than-24h'])
