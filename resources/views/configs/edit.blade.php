@@ -19,65 +19,65 @@
                         <input type="hidden" name="_method" value="put">
                     </div>
                     <div class="box-body">
-                        <ul class="breadcrumb">
-                            <li><a href="#">接诊费设置</a> <span class="divider"></span></li>
-                        </ul>
-                        <div class="form-group">
-                            <label for="top-director" class="col-sm-4 control-label">顶级科室 - 主任医师</label>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control" id="top-director" name="top-director" placeholder="无" value="{{$config->top_director}}">
-                                @include('layouts.message.tips',['field'=>'top-director'])
-                            </div>
-                            <label class="control-label">元</label>
-                        </div>
-                        <div class="form-group">
-                            <label for="top-deputy-director" class="col-sm-4 control-label">顶级科室 - 副主任医师</label>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control" id="top-deputy-director" name="top-deputy-director" placeholder="无" value="{{$config->top_deputy_director}}">
-                                @include('layouts.message.tips',['field'=>'top-deputy-director'])
-                            </div>
-                            <label class="control-label">元</label>
-                        </div>
-                        <div class="form-group">
-                            <label for="bsg-3a-director" class="col-sm-4 control-label">北上广三甲 - 主任医师</label>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control" id="bsg-3a-director" name="bsg-3a-director" placeholder="无" value="{{$config->bsg_3a_director}}">
-                                @include('layouts.message.tips',['field'=>'bsg-3a-director'])
-                            </div>
-                            <label class="control-label">元</label>
-                        </div>
-                        <div class="form-group">
-                            <label for="bsg-3a-deputy-director" class="col-sm-4 control-label">北上广三甲 - 副主任医师</label>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control" id="bsg-3a-deputy-director" name="bsg-3a-deputy-director" placeholder="无" value="{{$config->bsg_3a_deputy_director}}">
-                                @include('layouts.message.tips',['field'=>'bsg-3a-deputy_director'])
-                            </div>
-                            <label class="control-label">元</label>
-                        </div>
-                        <div class="form-group">
-                            <label for="other-3a-director" class="col-sm-4 control-label">三甲 - 主任医师</label>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control" id="other-3a-director" name="other-3a-director" placeholder="无" value="{{$config->other_3a_director}}">
-                                @include('layouts.message.tips',['field'=>'other-3a-director'])
-                            </div>
-                            <label class="control-label">元</label>
-                        </div>
-                        <div class="form-group">
-                            <label for="other-3a-deputy-director" class="col-sm-4 control-label">三甲 - 副主任医师</label>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control" id="other-3a-deputy-director" name="other-3a-deputy-director" placeholder="无" value="{{$config->other_3a_deputy_director}}">
-                                @include('layouts.message.tips',['field'=>'other-3a-deputy-director'])
-                            </div>
-                            <label class="control-label">元</label>
-                        </div>
-                        <div class="form-group">
-                            <label for="other-doctor" class="col-sm-4 control-label">其他 - 各种医师</label>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control" id="other-doctor" name="other-doctor" placeholder="无" value="{{$config->other_doctor}}">
-                                @include('layouts.message.tips',['field'=>'other-doctor'])
-                            </div>
-                            <label class="control-label">元</label>
-                        </div>
+                        {{--<ul class="breadcrumb">--}}
+                            {{--<li><a href="#">接诊费设置</a> <span class="divider"></span></li>--}}
+                        {{--</ul>--}}
+                        {{--<div class="form-group">--}}
+                            {{--<label for="top-director" class="col-sm-4 control-label">顶级科室 - 主任医师</label>--}}
+                            {{--<div class="col-sm-4">--}}
+                                {{--<input type="text" class="form-control" id="top-director" name="top-director" placeholder="无" value="{{$config->top_director}}">--}}
+                                {{--@include('layouts.message.tips',['field'=>'top-director'])--}}
+                            {{--</div>--}}
+                            {{--<label class="control-label">元</label>--}}
+                        {{--</div>--}}
+                        {{--<div class="form-group">--}}
+                            {{--<label for="top-deputy-director" class="col-sm-4 control-label">顶级科室 - 副主任医师</label>--}}
+                            {{--<div class="col-sm-4">--}}
+                                {{--<input type="text" class="form-control" id="top-deputy-director" name="top-deputy-director" placeholder="无" value="{{$config->top_deputy_director}}">--}}
+                                {{--@include('layouts.message.tips',['field'=>'top-deputy-director'])--}}
+                            {{--</div>--}}
+                            {{--<label class="control-label">元</label>--}}
+                        {{--</div>--}}
+                        {{--<div class="form-group">--}}
+                            {{--<label for="bsg-3a-director" class="col-sm-4 control-label">北上广三甲 - 主任医师</label>--}}
+                            {{--<div class="col-sm-4">--}}
+                                {{--<input type="text" class="form-control" id="bsg-3a-director" name="bsg-3a-director" placeholder="无" value="{{$config->bsg_3a_director}}">--}}
+                                {{--@include('layouts.message.tips',['field'=>'bsg-3a-director'])--}}
+                            {{--</div>--}}
+                            {{--<label class="control-label">元</label>--}}
+                        {{--</div>--}}
+                        {{--<div class="form-group">--}}
+                            {{--<label for="bsg-3a-deputy-director" class="col-sm-4 control-label">北上广三甲 - 副主任医师</label>--}}
+                            {{--<div class="col-sm-4">--}}
+                                {{--<input type="text" class="form-control" id="bsg-3a-deputy-director" name="bsg-3a-deputy-director" placeholder="无" value="{{$config->bsg_3a_deputy_director}}">--}}
+                                {{--@include('layouts.message.tips',['field'=>'bsg-3a-deputy_director'])--}}
+                            {{--</div>--}}
+                            {{--<label class="control-label">元</label>--}}
+                        {{--</div>--}}
+                        {{--<div class="form-group">--}}
+                            {{--<label for="other-3a-director" class="col-sm-4 control-label">三甲 - 主任医师</label>--}}
+                            {{--<div class="col-sm-4">--}}
+                                {{--<input type="text" class="form-control" id="other-3a-director" name="other-3a-director" placeholder="无" value="{{$config->other_3a_director}}">--}}
+                                {{--@include('layouts.message.tips',['field'=>'other-3a-director'])--}}
+                            {{--</div>--}}
+                            {{--<label class="control-label">元</label>--}}
+                        {{--</div>--}}
+                        {{--<div class="form-group">--}}
+                            {{--<label for="other-3a-deputy-director" class="col-sm-4 control-label">三甲 - 副主任医师</label>--}}
+                            {{--<div class="col-sm-4">--}}
+                                {{--<input type="text" class="form-control" id="other-3a-deputy-director" name="other-3a-deputy-director" placeholder="无" value="{{$config->other_3a_deputy_director}}">--}}
+                                {{--@include('layouts.message.tips',['field'=>'other-3a-deputy-director'])--}}
+                            {{--</div>--}}
+                            {{--<label class="control-label">元</label>--}}
+                        {{--</div>--}}
+                        {{--<div class="form-group">--}}
+                            {{--<label for="other-doctor" class="col-sm-4 control-label">其他 - 各种医师</label>--}}
+                            {{--<div class="col-sm-4">--}}
+                                {{--<input type="text" class="form-control" id="other-doctor" name="other-doctor" placeholder="无" value="{{$config->other_doctor}}">--}}
+                                {{--@include('layouts.message.tips',['field'=>'other-doctor'])--}}
+                            {{--</div>--}}
+                            {{--<label class="control-label">元</label>--}}
+                        {{--</div>--}}
 
                         <ul class="breadcrumb">
                             <li><a href="#">费率设置</a> <span class="divider"></span></li>
@@ -114,13 +114,33 @@
                             </div>
                             <label class="control-label">%</label>
                         </div>
+                        {{--<div class="form-group">--}}
+                            {{--<label for="patient-to-platform-appointment-specify" class="col-sm-4 control-label">患者发送平台代约请求（指定专家）</label>--}}
+                            {{--<div class="col-sm-4">--}}
+                                {{--<input type="text" class="form-control" id="patient-to-platform-appointment-specify" name="patient-to-platform-appointment-specify" placeholder="无" value="{{$config->patient_to_platform_appointment_specify}}">--}}
+                                {{--@include('layouts.message.tips',['field'=>'patient-to-platform-appointment-specify'])--}}
+                            {{--</div>--}}
+                            {{--<label class="control-label">%</label>--}}
+                        {{--</div>--}}
+
+                        <ul class="breadcrumb">
+                            <li><a href="#">违约扣费费率</a> <span class="divider"></span></li>
+                        </ul>
                         <div class="form-group">
-                            <label for="patient-to-platform-appointment-specify" class="col-sm-4 control-label">患者发送平台代约请求（指定专家）</label>
+                            <label for="patient-less-than-24h" class="col-sm-4 control-label">24小时内扣费比例</label>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control" id="patient-to-platform-appointment-specify" name="patient-to-platform-appointment-specify" placeholder="无" value="{{$config->patient_to_platform_appointment_specify}}">
-                                @include('layouts.message.tips',['field'=>'patient-to-platform-appointment-specify'])
+                                <input type="text" class="form-control" id="patient-less-than-24h" name="patient-less-than-24h" placeholder="无" value="{{$config->patient_less_than_24h}}">
+                                @include('layouts.message.tips',['field'=>'patient-less-than-24h'])
                             </div>
-                            <label class="control-label">%</label>
+                            <label class="control-label">元</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="patient-more-than-24h" class="col-sm-4 control-label">24小时外扣费比例</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="patient-more-than-24h" name="patient-more-than-24h" placeholder="无" value="{{$config->patient_more_than_24h}}">
+                                @include('layouts.message.tips',['field'=>'patient-more-than-24h'])
+                            </div>
+                            <label class="control-label">元</label>
                         </div>
                     </div>
                     <div class="box-footer">
