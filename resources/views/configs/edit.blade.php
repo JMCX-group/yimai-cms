@@ -132,7 +132,7 @@
                                 <input type="text" class="form-control" id="patient-less-than-24h" name="patient-less-than-24h" placeholder="无" value="{{$config->patient_less_than_24h}}">
                                 @include('layouts.message.tips',['field'=>'patient-less-than-24h'])
                             </div>
-                            <label class="control-label">元</label>
+                            <label class="control-label">%</label>
                         </div>
                         <div class="form-group">
                             <label for="patient-more-than-24h" class="col-sm-4 control-label">24小时外扣费比例</label>
@@ -140,7 +140,7 @@
                                 <input type="text" class="form-control" id="patient-more-than-24h" name="patient-more-than-24h" placeholder="无" value="{{$config->patient_more_than_24h}}">
                                 @include('layouts.message.tips',['field'=>'patient-more-than-24h'])
                             </div>
-                            <label class="control-label">元</label>
+                            <label class="control-label">%</label>
                         </div>
                     </div>
                     <div class="box-footer">
