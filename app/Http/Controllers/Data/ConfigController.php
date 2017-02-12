@@ -26,6 +26,32 @@ class ConfigController extends Controller
     {
         $configs = Config::find(1);
         $data = json_decode($configs->json, true);
+        if($data == null){
+            /**
+             * 没有就初始化参数：
+             */
+            $data = [
+                'top_director' => '1500',
+                'top_deputy_director' => '1000',
+                'bsg_3a_director' => '800',
+                'bsg_3a_deputy_director' => '550',
+                'other_3a_director' => '400',
+                'other_3a_deputy_director' => '300',
+                'other_doctor' => '150',
+
+                'doctor_to_appointment' => '10',
+                'patient_to_appointment' => '10',
+                'patient_to_admissions' => '10',
+                'patient_to_platform_appointment' => '20',
+                'patient_to_platform_appointment_specify' => '30',
+
+                'patient_less_than_24h' => '50',
+                'patient_more_than_24h' => '80',
+            ];
+            $configs->json = json_encode($data);
+            $configs->save();
+        }
+
         $config = [
             'id' => $configs->id,
             'top_director' => $data['top_director'],
