@@ -46,7 +46,7 @@ class ConfigController extends Controller
                 'patient_to_platform_appointment_specify' => '30',
 
                 'patient_less_than_24h' => '50',
-                'patient_more_than_24h' => '80',
+                'patient_more_than_24h' => '80'
             ];
             $configs->json = json_encode($data);
             $configs->save();
@@ -69,7 +69,7 @@ class ConfigController extends Controller
             'patient_to_platform_appointment_specify' => $data['patient_to_platform_appointment_specify'],
 
             'patient_less_than_24h' => $data['patient_less_than_24h'],
-            'patient_more_than_24h' => $data['patient_more_than_24h'],
+            'patient_more_than_24h' => $data['patient_more_than_24h']
         ];
         $config = (object)$config;
         $page_title = "费率设置";
@@ -146,7 +146,7 @@ class ConfigController extends Controller
             'patient_to_platform_appointment_specify' => $request['patient-to-platform-appointment-specify'],
 
             'patient_less_than_24h' => $request['patient-less-than-24h'],
-            'patient_more_than_24h' => $request['patient-more-than-24h'],
+            'patient_more_than_24h' => $request['patient-more-than-24h']
         ];
 
         $config = Config::find($id);
