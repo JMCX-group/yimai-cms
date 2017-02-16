@@ -68,6 +68,13 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label for="title" class="col-sm-3 control-label">头衔</label>
+                            <div class="col-sm-9">
+                                <input type="text" disabled="disabled" class="form-control" id="title" name="title" placeholder="无" value="{{$doctors->title}}">
+                                @include('layouts.message.tips',['field'=>'title'])
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label for="city" class="col-sm-3 control-label">认证资料</label>
                             <div class="col-sm-9">
                                 @foreach($doctors->auth_img as $item)
