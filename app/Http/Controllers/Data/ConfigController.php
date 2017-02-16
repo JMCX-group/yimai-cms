@@ -15,7 +15,7 @@ class ConfigController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public $page_level = "配置管理";
+    public $page_level = "财务管理";
 
     /**
      * Display a listing of the resource.
