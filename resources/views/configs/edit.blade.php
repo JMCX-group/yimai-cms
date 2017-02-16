@@ -142,6 +142,42 @@
                             </div>
                             <label class="control-label">%</label>
                         </div>
+
+                        <ul class="breadcrumb">
+                            <li><a href="#">合作专区奖励金额</a> <span class="divider"></span></li>
+                        </ul>
+                        <div class="form-group">
+                            <label for="chief-physician" class="col-sm-4 control-label">主任医师</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="chief-physician" name="chief-physician" placeholder="无" value="{{$config->chief_physician}}">
+                                @include('layouts.message.tips',['field'=>'chief-physician'])
+                            </div>
+                            <label class="control-label">%</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="deputy-chief-physician" class="col-sm-4 control-label">副主任医师</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="deputy-chief-physician" name="deputy-chief-physician" placeholder="无" value="{{$config->deputy_chief_physician}}">
+                                @include('layouts.message.tips',['field'=>'deputy-chief-physician'])
+                            </div>
+                            <label class="control-label">%</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="attending-doctor" class="col-sm-4 control-label">主治医师</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="attending-doctor" name="attending-doctor" placeholder="无" value="{{$config->attending_doctor}}">
+                                @include('layouts.message.tips',['field'=>'attending-doctor'])
+                            </div>
+                            <label class="control-label">%</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="resident-doctor" class="col-sm-4 control-label">住院医师</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="resident-doctor" name="resident-doctor" placeholder="无" value="{{$config->resident_doctor}}">
+                                @include('layouts.message.tips',['field'=>'resident-doctor'])
+                            </div>
+                            <label class="control-label">%</label>
+                        </div>
                     </div>
                     <div class="box-footer">
                         <a class="btn btn-default" href="{{route('config.index')}}">返回</a>

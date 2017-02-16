@@ -26,7 +26,7 @@ class ConfigController extends Controller
     {
         $configs = Config::find(1);
         $data = json_decode($configs->json, true);
-        if($data == null){
+        if ($data == null) {
             /**
              * 没有就初始化参数：
              */
@@ -46,7 +46,12 @@ class ConfigController extends Controller
                 'patient_to_platform_appointment_specify' => '30',
 
                 'patient_less_than_24h' => '50',
-                'patient_more_than_24h' => '80'
+                'patient_more_than_24h' => '80',
+
+                'chief_physician' => '200', //主任医师,副主任医师,主治医师,住院医师;奖励金额
+                'deputy_chief_physician' => '150',
+                'attending_doctor' => '100',
+                'resident_doctor' => '50'
             ];
             $configs->json = json_encode($data);
             $configs->save();
@@ -69,7 +74,13 @@ class ConfigController extends Controller
             'patient_to_platform_appointment_specify' => $data['patient_to_platform_appointment_specify'],
 
             'patient_less_than_24h' => $data['patient_less_than_24h'],
-            'patient_more_than_24h' => $data['patient_more_than_24h']
+            'patient_more_than_24h' => $data['patient_more_than_24h'],
+
+            //主任医师,副主任医师,主治医师,住院医师;奖励金额
+            'chief_physician' => isset($data['chief_physician']) ? $data['chief_physician'] : '200',
+            'deputy_chief_physician' => isset($data['deputy_chief_physician']) ? $data['deputy_chief_physician'] : '150',
+            'attending_doctor' => isset($data['attending_doctor']) ? $data['attending_doctor'] : '100',
+            'resident_doctor' => isset($data['resident_doctor']) ? $data['resident_doctor'] : '50'
         ];
         $config = (object)$config;
         $page_title = "费率设置";
@@ -146,7 +157,13 @@ class ConfigController extends Controller
             'patient_to_platform_appointment_specify' => $request['patient-to-platform-appointment-specify'],
 
             'patient_less_than_24h' => $request['patient-less-than-24h'],
-            'patient_more_than_24h' => $request['patient-more-than-24h']
+            'patient_more_than_24h' => $request['patient-more-than-24h'],
+
+            //主任医师,副主任医师,主治医师,住院医师;奖励金额
+            'chief_physician' => $request['chief-physician'],
+            'deputy_chief_physician' => $request['deputy-chief-physician'],
+            'attending_doctor' => $request['attending-doctor'],
+            'resident_doctor' => $request['resident-doctor']
         ];
 
         $config = Config::find($id);
