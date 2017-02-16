@@ -141,29 +141,53 @@ class ConfigController extends Controller
      */
     public function update(Request $request, $id)
     {
+        /**
+         * 'top_director' => '1500',
+         * 'top_deputy_director' => '1000',
+         * 'bsg_3a_director' => '800',
+         * 'bsg_3a_deputy_director' => '550',
+         * 'other_3a_director' => '400',
+         * 'other_3a_deputy_director' => '300',
+         * 'other_doctor' => '150',
+         *
+         * 'doctor_to_appointment' => '10',
+         * 'patient_to_appointment' => '10',
+         * 'patient_to_admissions' => '10',
+         * 'patient_to_platform_appointment' => '20',
+         * 'patient_to_platform_appointment_specify' => '30',
+         *
+         * 'patient_less_than_24h' => '50',
+         * 'patient_more_than_24h' => '80',
+         *
+         * 'chief_physician' => '200', //主任医师,副主任医师,主治医师,住院医师;奖励金额
+         * 'deputy_chief_physician' => '150',
+         * 'attending_doctor' => '100',
+         * 'resident_doctor' => '50'
+         */
+
         $data = [
-            'top_director' => $request['top-director'],
-            'top_deputy_director' => $request['top-deputy-director'],
-            'bsg_3a_director' => $request['bsg-3a-director'],
-            'bsg_3a_deputy_director' => $request['bsg-3a-deputy-director'],
-            'other_3a_director' => $request['other-3a-director'],
-            'other_3a_deputy_director' => $request['other-3a-deputy-director'],
-            'other_doctor' => $request['other-doctor'],
+            'top_director' => isset($request['top-director']) && $request['top-director'] != '' ? $request['top-director'] : 1500,
+            'top_deputy_director' => isset($request['top-deputy-director']) && $request['top-deputy-director'] != '' ? $request['top-deputy-director'] : 1000,
+            'bsg_3a_director' => isset($request['bsg-3a-director']) && $request['bsg-3a-director'] != '' ? $request['bsg-3a-director'] : 800,
+            'bsg_3a_deputy_director' => isset($request['bsg-3a-deputy-director']) && $request['bsg-3a-deputy-director'] != '' ? $request['bsg-3a-deputy-director'] : 550,
+            'other_3a_director' => isset($request['other-3a-director']) && $request['other-3a-director'] != '' ? $request['other-3a-director'] : 400,
+            'other_3a_deputy_director' => isset($request['other-3a-deputy-director']) && $request['other-3a-deputy-director'] != '' ? $request['other-3a-deputy-director'] : 300,
+            'other_doctor' => isset($request['other-doctor']) && $request['other-doctor'] != '' ? $request['other-doctor'] : 150,
 
-            'doctor_to_appointment' => $request['doctor-to-appointment'],
-            'patient_to_appointment' => $request['patient-to-appointment'],
-            'patient_to_admissions' => $request['patient-to-admissions'],
-            'patient_to_platform_appointment' => $request['patient-to-platform-appointment'],
-            'patient_to_platform_appointment_specify' => $request['patient-to-platform-appointment-specify'],
+            'doctor_to_appointment' => isset($request['doctor-to-appointment']) && $request['doctor-to-appointment'] != '' ? $request['doctor-to-appointment'] : 10,
+            'patient_to_appointment' => isset($request['patient-to-appointment']) && $request['patient-to-appointment'] != '' ? $request['patient-to-appointment'] : 10,
+            'patient_to_admissions' => isset($request['patient-to-admissions']) && $request['patient-to-admissions'] != '' ? $request['patient-to-admissions'] : 10,
+            'patient_to_platform_appointment' => isset($request['patient-to-platform-appointment']) && $request['patient-to-platform-appointment'] != '' ? $request['patient-to-platform-appointment'] : 20,
+            'patient_to_platform_appointment_specify' => isset($request['patient-to-platform-appointment-specify']) && $request['patient-to-platform-appointment-specify'] != '' ? $request['patient-to-platform-appointment-specify'] : 30,
 
-            'patient_less_than_24h' => $request['patient-less-than-24h'],
-            'patient_more_than_24h' => $request['patient-more-than-24h'],
+            'patient_less_than_24h' => isset($request['patient-less-than-24h']) && $request['patient-less-than-24h'] != '' ? $request['patient-less-than-24h'] : 50,
+            'patient_more_than_24h' => isset($request['patient-more-than-24h']) && $request['patient-more-than-24h'] != '' ? $request['patient-more-than-24h'] : 80,
 
             //主任医师,副主任医师,主治医师,住院医师;奖励金额
-            'chief_physician' => $request['chief-physician'],
-            'deputy_chief_physician' => $request['deputy-chief-physician'],
-            'attending_doctor' => $request['attending-doctor'],
-            'resident_doctor' => $request['resident-doctor']
+            'chief_physician' => isset($request['chief-physician']) && $request['chief-physician'] != '' ? $request['chief-physician'] : 200,
+            'deputy_chief_physician' => isset($request['deputy-chief-physician']) && $request['deputy-chief-physician'] != '' ? $request['deputy-chief-physician'] : 150,
+            'attending_doctor' => isset($request['attending-doctor']) && $request['attending-doctor'] != '' ? $request['attending-doctor'] : 100,
+            'resident_doctor' => isset($request['resident-doctor']) && $request['resident-doctor'] != '' ? $request['resident-doctor'] : 50
         ];
 
         $config = Config::find($id);
