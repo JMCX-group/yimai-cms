@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Business;
 
+use App\Config;
 use App\Doctor;
+use App\InvitedDoctor;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
@@ -125,12 +127,46 @@ class VerifyController extends Controller
 
         try {
             if ($doctors->save()) {
+                $this->invitedProcess($doctors);
+
                 return redirect()->route('verify.todo')->withSuccess('通过成功');
             } else {
                 return redirect()->back()->withErrors(array('error' => '更新数据失败'))->withInput();
             }
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(array('error' => $e->getMessage()))->withInput();
+        }
+    }
+
+    /**
+     * 发放邀请奖励
+     *
+     * @param $doctor
+     */
+    public function invitedProcess($doctor)
+    {
+        $configs = Config::find(1);
+        $data = json_decode($configs->json, true);
+
+        $invitedDoctor = InvitedDoctor::where('doctor_id', $doctor->id)->first();
+        if (!empty($invitedDoctor)) {
+            $invitedDoctor->status = 'completed'; //processing：认证中；completed：完成认证
+            switch ($doctor->title) {
+                //主任医师,副主任医师,主治医师,住院医师
+                case '主任医师':
+                    $invitedDoctor->bonus = $data['chief_physician'];
+                    break;
+                case '副主任医师':
+                    $invitedDoctor->bonus = $data['deputy_chief_physician'];
+                    break;
+                case '主治医师':
+                    $invitedDoctor->bonus = $data['attending_doctor'];
+                    break;
+                default: //住院医师
+                    $invitedDoctor->bonus = $data['resident_doctor'];
+                    break;
+            }
+            $invitedDoctor->save();
         }
     }
 
