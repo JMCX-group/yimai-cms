@@ -17,7 +17,7 @@ class ZoneController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public $page_level = "提现管理";
+    public $page_level = "合作专区";
 
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class ZoneController extends Controller
     public function index()
     {
         $records = PatientWithdrawRecord::application();
-        $page_title = "已申请提现";
+        $page_title = "申请提现";
         $page_level = $this->page_level;
 
         return view('zones.index', compact('records', 'page_title', 'page_level'));
@@ -128,7 +128,7 @@ class ZoneController extends Controller
     public function completed()
     {
         $records = PatientWithdrawRecord::completed();
-        $page_title = "已提现列表";
+        $page_title = "已提现";
         $page_level = $this->page_level;
 
         return view('zones.completed', compact('records', 'page_title', 'page_level'));

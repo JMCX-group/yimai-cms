@@ -36,8 +36,8 @@ class PatientController extends Controller
         foreach ($patients as $patient){
             $patient->total = InvitedDoctor::sumTotal($patient->id)[0]->total;
         }
+        $page_level = "合作专区";
         $page_title = "合作伙伴";
-        $page_level = $this->page_level;
 
         return view('patients.zone', compact('patients', 'page_title', 'page_level'));
     }
