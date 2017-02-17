@@ -103,4 +103,21 @@ class Patient extends Model
             ->leftJoin('citys', 'citys.id', '=', 'patients.city_id')
             ->paginate(15);
     }
+
+    /**
+     * Get join zone patients.
+     *
+     * @return mixed
+     */
+    public static function getZonePatients()
+    {
+        return Patient::select(
+            'patients.id', 'patients.name', 'patients.phone', 'patients.gender', 'patients.code',
+            'patients.province_id', 'patients.city_id',
+            'provinces.name AS province', 'citys.name AS city', 'citys.code AS city_code')
+            ->leftJoin('provinces', 'provinces.id', '=', 'patients.province_id')
+            ->leftJoin('citys', 'citys.id', '=', 'patients.city_id')
+            ->where('patients.code', '!=', 'null')
+            ->paginate(15);
+    }
 }

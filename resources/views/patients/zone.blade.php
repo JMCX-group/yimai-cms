@@ -13,7 +13,7 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">患者列表</h3>
+                    <h3 class="box-title">{{ $page_title }}</h3>
                     <div class="box-tools pull-right">
                         <div class="input-group input-group-sm" style="width: 150px;">
                             <input type="text" name="table_search" class="form-control pull-right" placeholder="快速查询">
@@ -29,23 +29,25 @@
                 <div class="box-body table-responsive no-padding">
                     <table class="table table-hover">
                         <tr>
-                            <th>序号</th>
+                            <th>健康合作码</th>
                             <th>姓名</th>
                             <th>手机号</th>
+                            <th>总收入</th>
                             <th>性别</th>
                             <th>省市</th>
                         </tr>
                         @forelse($patients as $patient)
                             <tr>
-                                <td>{{$patient->id}}</td>
+                                <td>{{str_pad($patient->city_code, 4, '0', STR_PAD_LEFT) . str_pad($patient->code, 3, '0', STR_PAD_LEFT)}}</td>
                                 <td>{{$patient->name}}</td>
                                 <td>{{$patient->phone}}</td>
+                                <td>{{$patient->total . '元'}}</td>
                                 @if($patient->gender == 1)
                                     <td>男</td>
                                 @else
                                     <td>女</td>
                                 @endif
-                                <td>{{$patient->province}} \ {{$patient->city}}</td>
+                                <td>{{(($patient->province) ? $patient->province . ' \ ' : '') . $patient->city}}</td>
                             </tr>
                         @empty
                             <tr>

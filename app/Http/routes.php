@@ -62,6 +62,9 @@ Route::group(['namespace' => 'Business', 'middleware' => ['auth','Entrust']], fu
      * 用户管理 : 医生列表 | 患者列表
      */
     Route::resource('doctor', 'DoctorController');
+    Route::group(['prefix' => 'patient'], function () {
+        Route::get('zone', ['as' => 'patient.zone', 'uses' => 'PatientController@zone']);
+    });
     Route::resource('patient', 'PatientController');
 
     /**
