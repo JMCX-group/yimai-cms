@@ -135,6 +135,14 @@ Route::group(['namespace' => 'Business', 'middleware' => ['auth','Entrust']], fu
     Route::resource('revenue', 'RevenueController');
 
     /**
+     * 合作专区
+     */
+    Route::group(['prefix' => 'zone'], function () {
+        Route::get('completed', ['as' => 'zone.completed', 'uses' => 'ZoneController@completed']);
+    });
+    Route::resource('zone', 'ZoneController');
+
+    /**
      * 用户反馈 : 订单投诉 | 使用反馈
      */
     Route::group(['prefix' => 'feedback'], function () {

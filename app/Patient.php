@@ -120,4 +120,19 @@ class Patient extends Model
             ->where('patients.code', '!=', 'null')
             ->paginate(15);
     }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public static function getOnePatient($id)
+    {
+        return Patient::select(
+            'patients.*',
+            'provinces.name AS province', 'citys.name AS city')
+            ->where('patients.id', $id)
+            ->leftJoin('provinces', 'provinces.id', '=', 'patients.province_id')
+            ->leftJoin('citys', 'citys.id', '=', 'patients.city_id')
+            ->first();
+    }
 }
