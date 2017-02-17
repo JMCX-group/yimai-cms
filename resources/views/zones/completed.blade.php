@@ -38,8 +38,8 @@
                         @forelse($records as $record)
                             <tr>
                                 <td>{{$record->id}}</td>
-                                <td>{{$record->patient_name}}</td>]
-                                <td>{{$record->total}}</td>\
+                                <td>{{$record->patient_name}}</td>
+                                <td>{{$record->total}}</td>
                                 <td>{{$record->withdraw_request_date}}</td>
                                 <td>{{$record->withdraw_confirm_date}}</td>
                             </tr>
