@@ -41,7 +41,7 @@
                                 <td>{{str_pad($patient->city_code, 4, '0', STR_PAD_LEFT) . str_pad($patient->code, 3, '0', STR_PAD_LEFT)}}</td>
                                 <td>{{$patient->name}}</td>
                                 <td>{{$patient->phone}}</td>
-                                <td>{{$patient->total . '元'}}</td>
+                                <td>{{empty($patient->total) ? 0 : $patient->total . '元'}}</td>
                                 @if($patient->gender == 1)
                                     <td>男</td>
                                 @else
