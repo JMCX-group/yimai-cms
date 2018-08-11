@@ -1,3 +1,8 @@
+# 医脉
+
+承接“慧天为医疗”的医脉项目。
+
+
 ## Laravel PHP Framework
 
 [![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
