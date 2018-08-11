@@ -5,6 +5,8 @@
 此为其中CMS内容管理系统的代码。
 
 
+![Logo](logo.jpeg)
+
 
 ## Laravel PHP Framework
 
